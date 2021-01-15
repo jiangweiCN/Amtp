@@ -1,0 +1,395 @@
+syntax = "proto3";
+
+package amtpap;
+
+enum MsgType
+{
+	PUBLIC = 0;
+	PRIVATE = 1;
+}
+
+//Enum Naming Rules:	<type name>_V<version number>
+//Enum Value Rules:	fixed 4 Bytes(High two bytes: Msg Type;		Low two bytes:Msg Version)
+enum MsgID
+{
+	RESERVE							=	0;
+	
+	LOGIN_V1						=	0x00010001;
+	LOGIN_V2						=	0x00010002;//Just for example Now
+	LOGIN_RESP_V1					=	0x00020001;
+	LOGOUT_V1						=	0x00030001;
+	LOGOUT_RESP_V1					=	0x00040001;
+	CONFIG_V1						=	0x00050001;
+	CONFIG_RESP_V1					=	0x00060001;
+	REPORT_EVENT_V1					=	0x00070001;
+	REPORT_EVENT_RESP_V1			=	0x00080001;
+	ALARM_V1						=	0x00090001;
+	ALARM_RESP_V1					=	0x000A0001;
+	ALARM_CLEAR_V1					=	0x000B0001;
+	ALARM_CLEAR_RESP_V1				=	0x000C0001;
+	GPS_INFO_V1						=	0x000D0001;
+	GPS_INFO_RESP_V1				=	0x000E0001;
+	STATUS_INFO_V1					=	0x000F0001;
+	STATUS_INFO_RESP_V1				=	0x00100001;
+	CONFIG_DATA_V1					=	0x00110001;
+	CONFIG_DATA_RESP_V1				=	0x00120001;
+	CONFIG_NOTIFY_V1				=	0x00130001;
+	CONFIG_NOTIFY_RESP_V1			=	0x00140001;
+	UPLOAD_FILE_V1					=	0x00150001;
+	UPLOAD_FILE_RESP_V1				=	0x00160001;
+	UPLOAD_EOF_V1					=	0x00170001;
+	UPLOAD_EOF_RESP_V1				=	0x00180001;
+	RESTART_CMD_V1					=	0x00190001;
+	RESTART_CMD_RESP_V1				=	0x001A0001;
+	QUERY_DATA_V1					=	0x001B0001;
+	QUERY_DATA_RESP_V1				=	0x001C0001;
+	UPLOAD_FILE_DATA_V1				=	0x001D0001;
+	UPLOAD_FILE_DATA_RESP_V1		=	0x001E0001;
+	MODULE_CONF_V1					= 	0x001F0001;
+	MODULE_CONF_RESP_V1				= 	0x00200001;
+}
+
+message CmdPrimitive//Protocol Command Primitive
+{
+	MsgType	type = 1;
+	fixed32	serial_number = 2;//Sequence Number
+	MsgID	msg_id = 3;//Refer to enum MsgID
+	bool	direction = 4;	//0:Downlink(Server to Client)	1:uplink(Client to Server)
+	bytes	payload_data = 5;//[bytes] Refer to Defination of CmdPrimitive.payload_data
+}
+
+//--- Defination of CmdPrimitive.payload_data Start ---
+message	LoginV1
+{
+	//SDK Internal parameters
+	//External Interface Parameters
+	string		box_id = 1;
+	string		pwd = 2;
+	string		manufactor = 3;
+	uint64		begin_time = 4;//seconds from 1970-1-1
+	uint64		end_time = 5;
+	uint32		release_id = 6;
+	string		jwumq_id = 7;
+//	uint32		conf_version = 8;
+}
+
+message LoginRespV1
+{
+	//SDK Internal parameters
+	bytes	token = 1;//refer to "message Token"
+	//External Interface Parameters
+	string	manufactor = 2;
+	int32	result = 3;
+}
+
+message LogoutV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+}
+
+message LogoutRespV1
+{
+	//SDK Internal parameters
+	bytes	token = 1;//[bytes] refer to Element "message Token"
+	
+	//External Interface Parameters
+	int32	result = 2;
+}
+
+message ConfigV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string		atuid_version = 2;//version number of current applied config
+}
+
+message ConfigRespV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	
+	//External Interface Parameters
+	string		atuid_version = 2;//version number from server
+	int32		result = 3;
+	bool		update = 4;//true:need to update
+	int32		packet_count = 5;//if update = false packet = 0;else .....
+	string		md5 = 6;//if update = false md5 is 0;else .....
+}
+
+message ConfigNotifyV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string		atuid_version = 2;//version number from server
+	int32		packet_count = 3;//if update = false packet = 0;else .....
+	string		md5 = 4;//if update = false md5 is 0;else .....
+}
+message ConfigNotifyRespV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string		atuid_version = 2;
+	int32		result = 3;
+}
+
+message ConfigDataV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string		atuid_version = 2;//version number from server
+	int32		packet_count = 3;
+	int32		packet_no = 4;
+	uint32		data_length = 5;
+	bytes		config_data = 6;
+}
+
+message ConfigDataRespV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string		atuid_version = 2;//version number from server
+	int32		packet_no = 3;
+	int32		result = 4;
+}
+
+message ReportEventV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	
+	//External Interface Parameters
+	uint32	ts_sec = 2;//UTC Second
+	uint32	ts_usec = 3;//microsecond
+	uint32	module = 4;
+	uint32	event_code = 5;
+}
+
+message ReportEventRespV1
+{
+	//SDK Internal parameters
+	bytes	token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	int32	result = 2;
+}
+
+message AlarmV1
+{
+	//SDK Internal parameters
+	bytes		token 	= 1;//[bytes] refer to Element "message Token"
+	
+	//External Interface Parameters
+	uint32	module = 2;
+	uint32	seq 	= 3;//Terminal unique, used for AlarmClear
+	uint32	alarm_code = 4;//Enum (To Be Done)
+	uint32	reason_code = 5;//Enum (To Be Done)
+	uint32	ts_sec = 6;//UTC Second
+	uint32	ts_usec = 7;//microsecond
+}
+
+message AlarmRespV1
+{
+	//SDK Internal parameters
+	bytes	token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	int32	result = 2;
+}
+
+message AlarmClearV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	uint32		module = 2;
+	uint32		seq 	= 3;//Terminal unique, used for AlarmClear
+	uint32		alarm_code = 4;//Enum (To Be Done)
+	uint32		ts_sec = 5;//UTC Second
+	uint32		ts_usec = 6;//microsecond
+}
+
+message AlarmClearRespV1
+{
+	//SDK Internal parameters
+	bytes	token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	int32	result = 2;
+}
+
+message GPSInfoV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	float	longitude = 2;
+	float	latitude = 3;
+	float	altitude = 4;
+	float	speed = 5;
+	float	heading = 6;
+	uint32	ts_sec = 7;//UTC Second
+	uint32	ts_usec = 8;//microsecond
+}
+
+message GPSInfoRespV1
+{
+	//SDK Internal parameters
+	bytes	token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	int32	result = 2;
+}
+
+message StatusInfoV1
+{
+	//SDK Internal parameters
+	bytes	token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	uint32	power_mode = 2;
+	uint32	files_letf = 3;//number of files to be upload
+	float	temperature = 4;
+	float	disk_space = 5;//Disk free space(MB)
+	uint32	ts_sec = 6;//UTC Second
+	uint32	ts_usec = 7;//microsecond
+}
+
+message StatusInfoRespV1
+{
+	//SDK Internal parameters
+	bytes	token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	int32	result = 2;
+}
+
+message UploadFileV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string		file_name = 2;
+	bool		retransmit = 3;
+	uint32		module = 4;
+}
+
+message UploadFileRespV1
+{
+	//SDK Internal parameters
+	bytes			token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string			file_name = 2;
+	uint32			file_id = 3;
+	uint32			file_size = 4;
+	uint32			module = 5;
+	int32			result = 6;
+}
+
+message UploadEofV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string		file_name = 2;
+	uint32		file_id = 3;
+	uint32		packet_count = 4;
+	uint32		total_size = 5;
+	uint32		module = 6;
+	string		md5 = 7;
+}
+
+message UploadEofRespV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string		file_name = 2;
+	uint32		file_id = 3;
+	uint32		packet_count = 4;
+	uint32		module = 5;
+	int32		result = 6;
+}
+
+message UploadFileDataV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	uint32		file_id = 2;
+	uint32		packet_no = 3;
+	uint32		piece_len = 4;
+	uint32		data_len = 5;
+	bytes		data = 6;
+}
+
+message UploadFileDataRespV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	uint32		file_id = 2;
+	uint32		packet_no = 3;
+	int32		result = 4;
+}
+
+message QueryDataV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	string		file_name = 2;
+	uint32		file_id = 3;
+	uint32		packet_no = 4;
+}
+
+message QueryDataRespV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	int32		result = 2;
+}
+
+message ReatartCmdV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	uint32		ts_sec = 2;//UTC Second
+	uint32		ts_usec = 3;//microsecond
+}
+
+message ReatartRespV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	int32		result = 2;
+}
+
+message ModuleConfV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	uint32		module_type = 2;
+	uint32		chip_manufacturer = 3;
+	string		chip_type = 4;
+	string		icd_version = 5;
+	string		imei = 6;
+	string		phone_number = 7;
+	string		network_operator = 8;
+//	uint32		channel_num = 9;
+}
+
+message ModuleConfRespV1
+{
+	//SDK Internal parameters
+	bytes		token = 1;//[bytes] refer to Element "message Token"
+	//External Interface Parameters
+	int32		result = 2;
+}
+
+
+

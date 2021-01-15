@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package license_msg;
+
+enum LicenseType
+{
+	dev = 0;
+	atu = 1;
+}
+
+message	License
+{
+	LicenseType type = 1;
+	uint32		check = 2;
+	uint32		info_len = 3;
+	bytes		info = 4;
+}
+
+message	LicenseInfo
+{
+	string		cmd_ip = 1;
+	uint32		cmd_port = 2;
+	string		data_ip = 3;
+	uint32		data_port = 4;
+	string		box_id = 5;
+	string		pwd = 6;
+	string		manufactor = 7;
+	uint64		begin_time = 8;//seconds from 1970-1-1
+	uint64		end_time = 9;
+	uint32		release_id = 10;
+	string		jwumq_id = 11;
+}
+
+

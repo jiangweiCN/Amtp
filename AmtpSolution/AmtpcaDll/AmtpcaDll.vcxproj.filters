@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{d867ed0f-ee30-4efc-a2ba-595147b72086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\libamtpa">
+      <UniqueIdentifier>{48429c3d-2a83-4565-bd4f-d3aa0f4490d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\libamtpa\client_access">
+      <UniqueIdentifier>{b9c73c8d-6649-4a17-b4f9-baab739571ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\jwumq">
+      <UniqueIdentifier>{60bc51cb-c356-4719-83df-8dbfa54195e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\jlog">
+      <UniqueIdentifier>{eeb3a14e-4c16-4312-b9f5-94a6cf1c1a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\include">
+      <UniqueIdentifier>{ad626f4d-952b-4654-93d5-be5ed63dd3ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\include\glog">
+      <UniqueIdentifier>{21fd84e9-4c02-4679-a466-808209d7f1b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\license">
+      <UniqueIdentifier>{18e7fde9-7a3e-43a5-afed-5d86a1cd629a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\libjwumq">
+      <UniqueIdentifier>{dc584016-45c0-4d32-b1aa-1d6312f1a53d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\amtpa_protocol">
+      <UniqueIdentifier>{c582697d-f450-44db-bd31-bc98c224bd9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\libamtpa\client_access\message">
+      <UniqueIdentifier>{b2566947-45b3-4d57-9ca5-8dd052b5ee2c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\libamtpca.hpp">
+      <Filter>source\libamtpa\client_access</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\libamtpa_define.h">
+      <Filter>source\libamtpa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\amtpca.hpp">
+      <Filter>source\libamtpa\client_access</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\amtpca_define.h">
+      <Filter>source\libamtpa\client_access</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\jwumq\jwumq_define.h">
+      <Filter>source\jwumq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\jlog\jLog.h">
+      <Filter>source\jlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\glog_win\log_severity.h">
+      <Filter>source\include\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\glog_win\logging.h">
+      <Filter>source\include\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\glog_win\raw_logging.h">
+      <Filter>source\include\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\glog_win\stl_logging.h">
+      <Filter>source\include\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\glog_win\vlog_is_on.h">
+      <Filter>source\include\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\license\libamtpa_license.hpp">
+      <Filter>source\license</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\license\license_msg.pb.h">
+      <Filter>source\license</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\jwumq\jwumq_message.hpp">
+      <Filter>source\jwumq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\jwumq\jwumq_message.pb.h">
+      <Filter>source\jwumq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libjwumq\libjwumq.hpp">
+      <Filter>source\libjwumq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\jwumq\jwumq_base.hpp">
+      <Filter>source\jwumq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\jwumq\jwumq_dealer.hpp">
+      <Filter>source\jwumq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\amtpa_protocol\amtpap_msg.pb.h">
+      <Filter>source\amtpa_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_login_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_login.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_logout.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_logout_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_alarm.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_alarm_clear.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_event.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_config_data_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_gps_info.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_config.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_config_data.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_restart_cmd.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_status_info.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_restart_cmd_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_upload_eof.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_upload_eof_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_upload_file.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_upload_file_data_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_upload_file_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_module_conf.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_module_conf_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_query_data.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_query_data_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_event_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_config_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_alarm_clear_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_alarm_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_status_info_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_gps_info_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_config_notify_resp.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_config_notify.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libamtpa\client_access\message\amtp_upload_file_data.hpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\libamtpca.cpp">
+      <Filter>source\libamtpa\client_access</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\amtpca.cpp">
+      <Filter>source\libamtpa\client_access</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\jlog\jLog.cpp">
+      <Filter>source\jlog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\license\libamtpa_license.cpp">
+      <Filter>source\license</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\license\license_msg.pb.cpp">
+      <Filter>source\license</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\jwumq\jwumq_message.cpp">
+      <Filter>source\jwumq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\jwumq\jwumq_message.pb.cpp">
+      <Filter>source\jwumq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libjwumq\libjwumq.cpp">
+      <Filter>source\libjwumq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\jwumq\jwumq_base.cpp">
+      <Filter>source\jwumq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\jwumq\jwumq_dealer.cpp">
+      <Filter>source\jwumq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\amtpa_protocol\amtpap_msg.pb.cpp">
+      <Filter>source\amtpa_protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_login_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_login.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_logout.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_logout_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_alarm_clear.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_event.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_alarm.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_config_data_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_gps_info.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_config.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_config_data.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_restart_cmd.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_status_info.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_restart_cmd_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_upload_eof.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_upload_eof_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_upload_file.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_upload_file_data_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_upload_file_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_module_conf.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_module_conf_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_query_data.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_query_data_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_event_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_config_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_alarm_clear_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_alarm_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_status_info_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_gps_info_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_config_notify_resp.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_config_notify.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libamtpa\client_access\message\amtp_upload_file_data.cpp">
+      <Filter>source\libamtpa\client_access\message</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

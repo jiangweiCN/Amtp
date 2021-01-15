@@ -1,0 +1,2500 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8309E20D2480A85A002AA809 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8309E20C2480A859002AA809 /* main.cpp */; };
+		8309E20F2480A864002AA809 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8309E20E2480A864002AA809 /* main.cpp */; };
+		8314D3A12499A2A6004CAAAD /* libjwumqa_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8314D39F2499A2A6004CAAAD /* libjwumqa_factory.cpp */; };
+		8314D3A9249B1B7C004CAAAD /* libjwumqa_session.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8314D3A7249B1B7C004CAAAD /* libjwumqa_session.cpp */; };
+		8314D3AF249B225C004CAAAD /* libjwumqa_destination.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8314D3AD249B225C004CAAAD /* libjwumqa_destination.cpp */; };
+		8315DB1A24A0974B00F7D6B7 /* access_unit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8315DB1824A0974A00F7D6B7 /* access_unit.cpp */; };
+		8322947C24F88B5500F50E7E /* libamtpa_license.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8322947A24F88B5500F50E7E /* libamtpa_license.cpp */; };
+		8322948024F88F8E00F50E7E /* amtpa_lic_generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8322947F24F88F8E00F50E7E /* amtpa_lic_generator.cpp */; };
+		8327AC6223B591F4009AD7C0 /* test_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8327AC6123B591F4009AD7C0 /* test_main.cpp */; };
+		832BC8D4246CED2A00743697 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 832BC8D3246CED2A00743697 /* main.cpp */; };
+		8333BDB7247363140036B737 /* monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8333BDB5247363140036B737 /* monitor.cpp */; };
+		8333BDBA247364D50036B737 /* amtp_monitor_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8333BDB8247364D50036B737 /* amtp_monitor_config.cpp */; };
+		83341F532410AC4A000A7948 /* amtp_config_notify.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83341F512410AC4A000A7948 /* amtp_config_notify.cpp */; };
+		83341F562410B015000A7948 /* amtp_config_notify_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83341F542410B015000A7948 /* amtp_config_notify_resp.cpp */; };
+		83341F592410F7E1000A7948 /* amtp_restart_cmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83341F572410F7E1000A7948 /* amtp_restart_cmd.cpp */; };
+		83341F5C2410FFB7000A7948 /* amtp_restart_cmd_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83341F5A2410FFB7000A7948 /* amtp_restart_cmd_resp.cpp */; };
+		8335EAFD2411EB8F0099A1F8 /* amtp_upload_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8335EAFB2411EB8F0099A1F8 /* amtp_upload_file.cpp */; };
+		8335EB002411EE840099A1F8 /* amtp_upload_file_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8335EAFE2411EE840099A1F8 /* amtp_upload_file_resp.cpp */; };
+		8335EB032411FB8F0099A1F8 /* amtp_upload_eof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8335EB012411FB8F0099A1F8 /* amtp_upload_eof.cpp */; };
+		8335EB062411FD8E0099A1F8 /* amtp_upload_eof_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8335EB042411FD8E0099A1F8 /* amtp_upload_eof_resp.cpp */; };
+		8335EB0924120A8C0099A1F8 /* amtp_query_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8335EB0724120A8C0099A1F8 /* amtp_query_data.cpp */; };
+		8335EB0C241211720099A1F8 /* amtp_query_data_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8335EB0A241211720099A1F8 /* amtp_query_data_resp.cpp */; };
+		83450EEB24A1B03E000FB9A9 /* queue_center.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83450EE924A1B03E000FB9A9 /* queue_center.cpp */; };
+		83450EEE24A1C8CC000FB9A9 /* queue_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83450EEC24A1C8CC000FB9A9 /* queue_base.cpp */; };
+		83450EF224A1D674000FB9A9 /* pool_connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83450EF024A1D674000FB9A9 /* pool_connection.cpp */; };
+		8346C841240CAE27000AD219 /* amtp_logout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C83F240CAE27000AD219 /* amtp_logout.cpp */; };
+		8346C847240CC07C000AD219 /* amtp_logout_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C845240CC07C000AD219 /* amtp_logout_resp.cpp */; };
+		8346C84A240CF37F000AD219 /* amtp_event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C848240CF37F000AD219 /* amtp_event.cpp */; };
+		8346C84D240CFB0E000AD219 /* amtp_event_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C84B240CFB0E000AD219 /* amtp_event_resp.cpp */; };
+		8346C850240D01A2000AD219 /* amtp_alarm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C84E240D01A2000AD219 /* amtp_alarm.cpp */; };
+		8346C853240D01B4000AD219 /* amtp_alarm_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C851240D01B4000AD219 /* amtp_alarm_resp.cpp */; };
+		8346C856240E044B000AD219 /* amtp_alarm_clear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C854240E044B000AD219 /* amtp_alarm_clear.cpp */; };
+		8346C859240E075A000AD219 /* amtp_alarm_clear_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C857240E075A000AD219 /* amtp_alarm_clear_resp.cpp */; };
+		8346C85C240E07EF000AD219 /* amtp_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C85A240E07EF000AD219 /* amtp_config.cpp */; };
+		8346C85F240E0858000AD219 /* amtp_config_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8346C85D240E0858000AD219 /* amtp_config_resp.cpp */; };
+		83472810240F682B001D4C10 /* amtp_config_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8347280E240F682B001D4C10 /* amtp_config_data.cpp */; };
+		83472813240F77D4001D4C10 /* amtp_config_data_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83472811240F77D4001D4C10 /* amtp_config_data_resp.cpp */; };
+		8347BAF924A8545B0004B119 /* JTextMessageImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8347BAF724A8545B0004B119 /* JTextMessageImpl.cpp */; };
+		8347BAFC24A85CCF0004B119 /* JBytesMessageImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8347BAFA24A85CCF0004B119 /* JBytesMessageImpl.cpp */; };
+		834DC010249C5D50005CDDFF /* libjwumqa_connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834DC00E249C5D50005CDDFF /* libjwumqa_connection.cpp */; };
+		834DC013249C868E005CDDFF /* libjwumqa_part_pipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834DC011249C868E005CDDFF /* libjwumqa_part_pipe.cpp */; };
+		834DC016249C917F005CDDFF /* factory_connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834DC014249C917F005CDDFF /* factory_connection.cpp */; };
+		834DC019249CB9B0005CDDFF /* jwumq_router_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834DC017249CB9B0005CDDFF /* jwumq_router_server.cpp */; };
+		83558EAC23CC0FD200E2F82A /* amtpap_msg.proto in Sources */ = {isa = PBXBuildFile; fileRef = 83558EAB23CC0FD200E2F82A /* amtpap_msg.proto */; };
+		83558EB823CD58B300E2F82A /* amtpsa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83558EB623CD58B300E2F82A /* amtpsa.cpp */; };
+		8362D2D624FC9624000F5EFF /* system_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8362D2D424FC9624000F5EFF /* system_info.cpp */; };
+		8362D2D924FC963B000F5EFF /* linux_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8362D2D724FC963B000F5EFF /* linux_info.cpp */; };
+		8362D2DC24FC9653000F5EFF /* win_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8362D2DA24FC9653000F5EFF /* win_info.cpp */; };
+		8367042824E2251B00829049 /* queue_producer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8367042624E2251B00829049 /* queue_producer.cpp */; };
+		836D264C24077C0E00ACAC54 /* amtpca.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 836D264A24077C0E00ACAC54 /* amtpca.cpp */; };
+		836FFA7824F4FB9300E20CEC /* amtp_module_conf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 836FFA7624F4FB9300E20CEC /* amtp_module_conf.cpp */; };
+		836FFA7B24F4FBB900E20CEC /* amtp_module_conf_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 836FFA7924F4FBB900E20CEC /* amtp_module_conf_resp.cpp */; };
+		83716DD824AB2086005E6F8D /* libjwumqa_c.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83716DD724AB2086005E6F8D /* libjwumqa_c.cpp */; };
+		837C74EC24E0DCFF0074ACBA /* libjwumqa_part_producer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 837C74EA24E0DCFF0074ACBA /* libjwumqa_part_producer.cpp */; };
+		837C74EF24E0DD400074ACBA /* libjwumqa_part_consumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 837C74ED24E0DD400074ACBA /* libjwumqa_part_consumer.cpp */; };
+		8382D34F23D19B1F00653E7A /* amtpap_msg.pb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8382D34E23D19B1F00653E7A /* amtpap_msg.pb.cpp */; };
+		8384CCA42462633400D182D1 /* jwumq_dealer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8384CCA22462633400D182D1 /* jwumq_dealer.cpp */; };
+		838945A924A2E8CB00FAB762 /* queue_pipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 838945A724A2E8CB00FAB762 /* queue_pipe.cpp */; };
+		838ED7A024C922D200CD968F /* libjwumqa_part_member.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 838ED79E24C922D200CD968F /* libjwumqa_part_member.cpp */; };
+		838ED7A324C939B600CD968F /* queue_member.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 838ED7A124C939B600CD968F /* queue_member.cpp */; };
+		83A4D24E240E46F0000456F8 /* amtp_gps_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A4D24C240E46F0000456F8 /* amtp_gps_info.cpp */; };
+		83A4D251240E4A10000456F8 /* amtp_gps_info_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A4D24F240E4A10000456F8 /* amtp_gps_info_resp.cpp */; };
+		83A4D254240E52E7000456F8 /* amtp_status_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A4D252240E52E7000456F8 /* amtp_status_info.cpp */; };
+		83A4D257240E52F7000456F8 /* amtp_status_info_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A4D255240E52F7000456F8 /* amtp_status_info_resp.cpp */; };
+		83A783FE246D3C5B00435C00 /* external_manage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A783FC246D3C5B00435C00 /* external_manage.cpp */; };
+		83A78401246D3C8200435C00 /* internal_manage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A783FF246D3C8200435C00 /* internal_manage.cpp */; };
+		83ABB115240A2F0E0096C5DA /* amtp_login.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83ABB113240A2F0E0096C5DA /* amtp_login.cpp */; };
+		83ABB118240B944B0096C5DA /* amtp_login_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83ABB116240B944B0096C5DA /* amtp_login_resp.cpp */; };
+		83AF0A1B2491B9EA007BBF29 /* jwumq_duplex_pub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83AF0A192491B9EA007BBF29 /* jwumq_duplex_pub.cpp */; };
+		83AF0A1E2491BA01007BBF29 /* jwumq_duplex_sub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83AF0A1C2491BA01007BBF29 /* jwumq_duplex_sub.cpp */; };
+		83AF0A212491C770007BBF29 /* pool_branch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83AF0A1F2491C770007BBF29 /* pool_branch.cpp */; };
+		83AF0A2424921CE0007BBF29 /* pool_status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83AF0A2224921CE0007BBF29 /* pool_status.cpp */; };
+		83B53D21248E2E3600DC3D65 /* factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83B53D1F248E2E3600DC3D65 /* factory.cpp */; };
+		83B53D24248E345000DC3D65 /* pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83B53D22248E345000DC3D65 /* pool.cpp */; };
+		83B83E9F23C46837006E4DE6 /* libamtpca.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83B83E9D23C46837006E4DE6 /* libamtpca.cpp */; };
+		83B83EA323C47FA2006E4DE6 /* libamtpsa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83B83EA123C47FA2006E4DE6 /* libamtpsa.cpp */; };
+		83B83EAA23C4845A006E4DE6 /* router.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83B83EA823C4845A006E4DE6 /* router.cpp */; };
+		83B83EAD23C56098006E4DE6 /* jwumq_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83B83EAB23C56098006E4DE6 /* jwumq_base.cpp */; };
+		83B83EB123C571A4006E4DE6 /* jwumq_queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83B83EAF23C571A4006E4DE6 /* jwumq_queue.cpp */; };
+		83B83EB423C572CE006E4DE6 /* jwumq_router.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83B83EB223C572CE006E4DE6 /* jwumq_router.cpp */; };
+		83B83EBF23C5CB2F006E4DE6 /* libjwumq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83B83EBD23C5CB2F006E4DE6 /* libjwumq.cpp */; };
+		83BB4E79248F75E300EAEA1C /* jwumq_msg.pb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BB4E78248F75E300EAEA1C /* jwumq_msg.pb.cpp */; };
+		83C04118246543EC00209603 /* jwumq_proxy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C04116246543EC00209603 /* jwumq_proxy.cpp */; };
+		83C0411C246544FD00209603 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0411B246544FD00209603 /* main.cpp */; };
+		83C0411F2465452400209603 /* proxy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0411D2465452400209603 /* proxy.cpp */; };
+		83C041222465458500209603 /* proxy_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C041202465458500209603 /* proxy_config.cpp */; };
+		83C0EA6324906B33006AFE68 /* pool_monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0EA6124906B33006AFE68 /* pool_monitor.cpp */; };
+		83C0EA6624906B7B006AFE68 /* factory_status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0EA6424906B7B006AFE68 /* factory_status.cpp */; };
+		83C0EA6924906BF4006AFE68 /* access_unit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0EA6724906BF4006AFE68 /* access_unit.cpp */; };
+		83D622502408BFB30021B953 /* license_msg.proto in Sources */ = {isa = PBXBuildFile; fileRef = 83D6224F2408BFB30021B953 /* license_msg.proto */; };
+		83D622532408C9510021B953 /* license_msg.pb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83D622522408C9510021B953 /* license_msg.pb.cpp */; };
+		83D666F92498B4A600277020 /* libjwumqa_tester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83D666F82498B4A600277020 /* libjwumqa_tester.cpp */; };
+		83E002DE2418AA4800AC6909 /* amtp_upload_file_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E002DC2418AA4800AC6909 /* amtp_upload_file_data.cpp */; };
+		83E002E12418B19F00AC6909 /* amtp_upload_file_data_resp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E002DF2418B19F00AC6909 /* amtp_upload_file_data_resp.cpp */; };
+		83E1AA6C23BD74BC00099598 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E1AA6923BD74BC00099598 /* main.cpp */; };
+		83E1AA6D23BD74BC00099598 /* monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E1AA6A23BD74BC00099598 /* monitor.cpp */; };
+		83E1AA7723BD7E3E00099598 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E1AA7323BD7E3E00099598 /* config.cpp */; };
+		83E1AA7823BD7E3E00099598 /* monitor_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E1AA7423BD7E3E00099598 /* monitor_config.cpp */; };
+		83E1AA7B23BD7E6500099598 /* jLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E1AA7A23BD7E6500099598 /* jLog.cpp */; };
+		83E1AA7F23BD8E9E00099598 /* cJSON.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E1AA7E23BD8E9E00099598 /* cJSON.cpp */; };
+		83E1AA8123BDD70B00099598 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E1AA8023BDD70B00099598 /* main.cpp */; };
+		83E1AA8A23BEC89100099598 /* router_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83E1AA8823BEC89100099598 /* router_config.cpp */; };
+		83F4F688248629CD009BB9B0 /* jwumq_msg.proto in Sources */ = {isa = PBXBuildFile; fileRef = 83F4F687248629CD009BB9B0 /* jwumq_msg.proto */; };
+		83F930EC24CA6D5E000CA614 /* jwumq_message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83F930EA24CA6D5E000CA614 /* jwumq_message.cpp */; };
+		83F930EE24CA6DC3000CA614 /* jwumq_message.proto in Sources */ = {isa = PBXBuildFile; fileRef = 83F930ED24CA6DC3000CA614 /* jwumq_message.proto */; };
+		83F930F424CA701D000CA614 /* jwumq_message.pb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83F930F324CA701D000CA614 /* jwumq_message.pb.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8327AC3C23B48DE4009AD7C0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8309E20C2480A859002AA809 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8309E20E2480A864002AA809 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8309E2102480A908002AA809 /* jwumq_pool.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = jwumq_pool.mk; sourceTree = "<group>"; };
+		8309E2112480A908002AA809 /* jwumq_factory.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = jwumq_factory.mk; sourceTree = "<group>"; };
+		8311C22624B2C2F9001E1A08 /* libjwumqa_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libjwumqa_c.h; sourceTree = "<group>"; };
+		8314D39F2499A2A6004CAAAD /* libjwumqa_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_factory.cpp; sourceTree = "<group>"; };
+		8314D3A22499A2CE004CAAAD /* libjwumqa_cpp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libjwumqa_cpp.h; sourceTree = "<group>"; };
+		8314D3A32499B7D3004CAAAD /* libjwumqa.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = libjwumqa.mk; sourceTree = "<group>"; };
+		8314D3A7249B1B7C004CAAAD /* libjwumqa_session.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_session.cpp; sourceTree = "<group>"; };
+		8314D3A8249B1B7C004CAAAD /* libjwumqa_session.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libjwumqa_session.hpp; sourceTree = "<group>"; };
+		8314D3AD249B225C004CAAAD /* libjwumqa_destination.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_destination.cpp; sourceTree = "<group>"; };
+		8314D3AE249B225C004CAAAD /* libjwumqa_destination.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libjwumqa_destination.hpp; sourceTree = "<group>"; };
+		8315DB1824A0974A00F7D6B7 /* access_unit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = access_unit.cpp; sourceTree = "<group>"; };
+		8315DB1924A0974B00F7D6B7 /* access_unit.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = access_unit.hpp; sourceTree = "<group>"; };
+		8322947A24F88B5500F50E7E /* libamtpa_license.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libamtpa_license.cpp; sourceTree = "<group>"; };
+		8322947B24F88B5500F50E7E /* libamtpa_license.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libamtpa_license.hpp; sourceTree = "<group>"; };
+		8322947D24F88BAA00F50E7E /* libamtpa_license.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = libamtpa_license.mk; sourceTree = "<group>"; };
+		8322947E24F88F1D00F50E7E /* amtpa_lic_generator.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = amtpa_lic_generator.mk; sourceTree = "<group>"; };
+		8322947F24F88F8E00F50E7E /* amtpa_lic_generator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtpa_lic_generator.cpp; sourceTree = "<group>"; };
+		8327AC3E23B48DE4009AD7C0 /* Amtp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Amtp; sourceTree = BUILT_PRODUCTS_DIR; };
+		8327AC4B23B490A7009AD7C0 /* libamtpca.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = libamtpca.mk; sourceTree = "<group>"; };
+		8327AC4C23B4914F009AD7C0 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		8327AC4E23B4914F009AD7C0 /* killall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = killall.sh; sourceTree = "<group>"; };
+		8327AC5123B49180009AD7C0 /* gflags_declare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gflags_declare.h; sourceTree = "<group>"; };
+		8327AC5223B49180009AD7C0 /* gflags_gflags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gflags_gflags.h; sourceTree = "<group>"; };
+		8327AC5323B49180009AD7C0 /* gflags_completions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gflags_completions.h; sourceTree = "<group>"; };
+		8327AC5423B49180009AD7C0 /* gflags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gflags.h; sourceTree = "<group>"; };
+		8327AC5623B49180009AD7C0 /* stl_logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stl_logging.h; sourceTree = "<group>"; };
+		8327AC5723B49180009AD7C0 /* logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = logging.h; sourceTree = "<group>"; };
+		8327AC5823B49180009AD7C0 /* raw_logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = raw_logging.h; sourceTree = "<group>"; };
+		8327AC5923B49180009AD7C0 /* vlog_is_on.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vlog_is_on.h; sourceTree = "<group>"; };
+		8327AC5A23B49180009AD7C0 /* log_severity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log_severity.h; sourceTree = "<group>"; };
+		8327AC6023B58E82009AD7C0 /* libamtpaccess_tester.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = libamtpaccess_tester.mk; sourceTree = "<group>"; };
+		8327AC6123B591F4009AD7C0 /* test_main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_main.cpp; sourceTree = "<group>"; };
+		832BC8D3246CED2A00743697 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		832BC8D5246CEDE700743697 /* jwumq_monitor.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = jwumq_monitor.mk; sourceTree = "<group>"; };
+		8333BDB5247363140036B737 /* monitor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = monitor.cpp; sourceTree = "<group>"; };
+		8333BDB6247363140036B737 /* monitor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = monitor.hpp; sourceTree = "<group>"; };
+		8333BDB8247364D50036B737 /* amtp_monitor_config.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_monitor_config.cpp; sourceTree = "<group>"; };
+		8333BDB9247364D50036B737 /* amtp_monitor_config.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_monitor_config.hpp; sourceTree = "<group>"; };
+		8333BDBB24736E320036B737 /* monitor_config.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = monitor_config.conf; sourceTree = "<group>"; };
+		8333BDBC247377300036B737 /* monitor_define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = monitor_define.h; sourceTree = "<group>"; };
+		83341F512410AC4A000A7948 /* amtp_config_notify.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_config_notify.cpp; sourceTree = "<group>"; };
+		83341F522410AC4A000A7948 /* amtp_config_notify.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_config_notify.hpp; sourceTree = "<group>"; };
+		83341F542410B015000A7948 /* amtp_config_notify_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_config_notify_resp.cpp; sourceTree = "<group>"; };
+		83341F552410B015000A7948 /* amtp_config_notify_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_config_notify_resp.hpp; sourceTree = "<group>"; };
+		83341F572410F7E1000A7948 /* amtp_restart_cmd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_restart_cmd.cpp; sourceTree = "<group>"; };
+		83341F582410F7E1000A7948 /* amtp_restart_cmd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_restart_cmd.hpp; sourceTree = "<group>"; };
+		83341F5A2410FFB7000A7948 /* amtp_restart_cmd_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_restart_cmd_resp.cpp; sourceTree = "<group>"; };
+		83341F5B2410FFB7000A7948 /* amtp_restart_cmd_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_restart_cmd_resp.hpp; sourceTree = "<group>"; };
+		8335EAFB2411EB8F0099A1F8 /* amtp_upload_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_upload_file.cpp; sourceTree = "<group>"; };
+		8335EAFC2411EB8F0099A1F8 /* amtp_upload_file.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_upload_file.hpp; sourceTree = "<group>"; };
+		8335EAFE2411EE840099A1F8 /* amtp_upload_file_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_upload_file_resp.cpp; sourceTree = "<group>"; };
+		8335EAFF2411EE840099A1F8 /* amtp_upload_file_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_upload_file_resp.hpp; sourceTree = "<group>"; };
+		8335EB012411FB8F0099A1F8 /* amtp_upload_eof.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_upload_eof.cpp; sourceTree = "<group>"; };
+		8335EB022411FB8F0099A1F8 /* amtp_upload_eof.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_upload_eof.hpp; sourceTree = "<group>"; };
+		8335EB042411FD8E0099A1F8 /* amtp_upload_eof_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_upload_eof_resp.cpp; sourceTree = "<group>"; };
+		8335EB052411FD8E0099A1F8 /* amtp_upload_eof_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_upload_eof_resp.hpp; sourceTree = "<group>"; };
+		8335EB0724120A8C0099A1F8 /* amtp_query_data.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_query_data.cpp; sourceTree = "<group>"; };
+		8335EB0824120A8C0099A1F8 /* amtp_query_data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_query_data.hpp; sourceTree = "<group>"; };
+		8335EB0A241211720099A1F8 /* amtp_query_data_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_query_data_resp.cpp; sourceTree = "<group>"; };
+		8335EB0B241211720099A1F8 /* amtp_query_data_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_query_data_resp.hpp; sourceTree = "<group>"; };
+		83450EE924A1B03E000FB9A9 /* queue_center.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = queue_center.cpp; sourceTree = "<group>"; };
+		83450EEA24A1B03E000FB9A9 /* queue_center.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = queue_center.hpp; sourceTree = "<group>"; };
+		83450EEC24A1C8CC000FB9A9 /* queue_base.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = queue_base.cpp; sourceTree = "<group>"; };
+		83450EED24A1C8CC000FB9A9 /* queue_base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = queue_base.hpp; sourceTree = "<group>"; };
+		83450EF024A1D674000FB9A9 /* pool_connection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pool_connection.cpp; sourceTree = "<group>"; };
+		83450EF124A1D674000FB9A9 /* pool_connection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pool_connection.hpp; sourceTree = "<group>"; };
+		8346C83E240CA68D000AD219 /* amtpca_define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = amtpca_define.h; sourceTree = "<group>"; };
+		8346C83F240CAE27000AD219 /* amtp_logout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_logout.cpp; sourceTree = "<group>"; };
+		8346C840240CAE27000AD219 /* amtp_logout.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_logout.hpp; sourceTree = "<group>"; };
+		8346C845240CC07C000AD219 /* amtp_logout_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_logout_resp.cpp; sourceTree = "<group>"; };
+		8346C846240CC07C000AD219 /* amtp_logout_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_logout_resp.hpp; sourceTree = "<group>"; };
+		8346C848240CF37F000AD219 /* amtp_event.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_event.cpp; sourceTree = "<group>"; };
+		8346C849240CF37F000AD219 /* amtp_event.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_event.hpp; sourceTree = "<group>"; };
+		8346C84B240CFB0E000AD219 /* amtp_event_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_event_resp.cpp; sourceTree = "<group>"; };
+		8346C84C240CFB0E000AD219 /* amtp_event_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_event_resp.hpp; sourceTree = "<group>"; };
+		8346C84E240D01A2000AD219 /* amtp_alarm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_alarm.cpp; sourceTree = "<group>"; };
+		8346C84F240D01A2000AD219 /* amtp_alarm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_alarm.hpp; sourceTree = "<group>"; };
+		8346C851240D01B4000AD219 /* amtp_alarm_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_alarm_resp.cpp; sourceTree = "<group>"; };
+		8346C852240D01B4000AD219 /* amtp_alarm_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_alarm_resp.hpp; sourceTree = "<group>"; };
+		8346C854240E044B000AD219 /* amtp_alarm_clear.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_alarm_clear.cpp; sourceTree = "<group>"; };
+		8346C855240E044B000AD219 /* amtp_alarm_clear.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_alarm_clear.hpp; sourceTree = "<group>"; };
+		8346C857240E075A000AD219 /* amtp_alarm_clear_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_alarm_clear_resp.cpp; sourceTree = "<group>"; };
+		8346C858240E075A000AD219 /* amtp_alarm_clear_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_alarm_clear_resp.hpp; sourceTree = "<group>"; };
+		8346C85A240E07EF000AD219 /* amtp_config.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_config.cpp; sourceTree = "<group>"; };
+		8346C85B240E07EF000AD219 /* amtp_config.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_config.hpp; sourceTree = "<group>"; };
+		8346C85D240E0858000AD219 /* amtp_config_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_config_resp.cpp; sourceTree = "<group>"; };
+		8346C85E240E0858000AD219 /* amtp_config_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_config_resp.hpp; sourceTree = "<group>"; };
+		8347280E240F682B001D4C10 /* amtp_config_data.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_config_data.cpp; sourceTree = "<group>"; };
+		8347280F240F682B001D4C10 /* amtp_config_data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_config_data.hpp; sourceTree = "<group>"; };
+		83472811240F77D4001D4C10 /* amtp_config_data_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_config_data_resp.cpp; sourceTree = "<group>"; };
+		83472812240F77D4001D4C10 /* amtp_config_data_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_config_data_resp.hpp; sourceTree = "<group>"; };
+		8347BAF724A8545B0004B119 /* JTextMessageImpl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = JTextMessageImpl.cpp; sourceTree = "<group>"; };
+		8347BAF824A8545B0004B119 /* JTextMessageImpl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = JTextMessageImpl.hpp; sourceTree = "<group>"; };
+		8347BAFA24A85CCF0004B119 /* JBytesMessageImpl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = JBytesMessageImpl.cpp; sourceTree = "<group>"; };
+		8347BAFB24A85CCF0004B119 /* JBytesMessageImpl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = JBytesMessageImpl.hpp; sourceTree = "<group>"; };
+		834DC00E249C5D50005CDDFF /* libjwumqa_connection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_connection.cpp; sourceTree = "<group>"; };
+		834DC00F249C5D50005CDDFF /* libjwumqa_connection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libjwumqa_connection.hpp; sourceTree = "<group>"; };
+		834DC011249C868E005CDDFF /* libjwumqa_part_pipe.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_part_pipe.cpp; sourceTree = "<group>"; };
+		834DC012249C868E005CDDFF /* libjwumqa_part_pipe.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libjwumqa_part_pipe.hpp; sourceTree = "<group>"; };
+		834DC014249C917F005CDDFF /* factory_connection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = factory_connection.cpp; sourceTree = "<group>"; };
+		834DC015249C917F005CDDFF /* factory_connection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = factory_connection.hpp; sourceTree = "<group>"; };
+		834DC017249CB9B0005CDDFF /* jwumq_router_server.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_router_server.cpp; sourceTree = "<group>"; };
+		834DC018249CB9B0005CDDFF /* jwumq_router_server.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jwumq_router_server.hpp; sourceTree = "<group>"; };
+		83558EAB23CC0FD200E2F82A /* amtpap_msg.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; path = amtpap_msg.proto; sourceTree = "<group>"; };
+		83558EAD23CC193D00E2F82A /* gen_amtpap_msg.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_amtpap_msg.sh; sourceTree = "<group>"; };
+		83558EAF23CC254100E2F82A /* amtpap_msg.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amtpap_msg.pb.h; sourceTree = "<group>"; };
+		83558EB623CD58B300E2F82A /* amtpsa.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtpsa.cpp; sourceTree = "<group>"; };
+		83558EB723CD58B300E2F82A /* amtpsa.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtpsa.hpp; sourceTree = "<group>"; };
+		835E695C246B79E900B6160E /* scss-files.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "scss-files.txt"; sourceTree = "<group>"; };
+		835E695D246B79E900B6160E /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		835E695F246B79E900B6160E /* contactform.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = contactform.js; sourceTree = "<group>"; };
+		835E6961246B79E900B6160E /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		835E6964246B79E900B6160E /* app2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = app2.jpg; sourceTree = "<group>"; };
+		835E6965246B79E900B6160E /* app3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = app3.jpg; sourceTree = "<group>"; };
+		835E6966246B79E900B6160E /* app1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = app1.jpg; sourceTree = "<group>"; };
+		835E6967246B79E900B6160E /* card3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = card3.jpg; sourceTree = "<group>"; };
+		835E6968246B79E900B6160E /* web1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = web1.jpg; sourceTree = "<group>"; };
+		835E6969246B79E900B6160E /* card2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = card2.jpg; sourceTree = "<group>"; };
+		835E696A246B79E900B6160E /* logo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo1.jpg; sourceTree = "<group>"; };
+		835E696B246B79E900B6160E /* logo3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo3.jpg; sourceTree = "<group>"; };
+		835E696C246B79E900B6160E /* web3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = web3.jpg; sourceTree = "<group>"; };
+		835E696D246B79E900B6160E /* web2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = web2.jpg; sourceTree = "<group>"; };
+		835E696E246B79E900B6160E /* card1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = card1.jpg; sourceTree = "<group>"; };
+		835E696F246B79E900B6160E /* logo2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo2.jpg; sourceTree = "<group>"; };
+		835E6970246B79E900B6160E /* apple-touch-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apple-touch-icon.png"; sourceTree = "<group>"; };
+		835E6971246B79E900B6160E /* favicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favicon.png; sourceTree = "<group>"; };
+		835E6972246B79E900B6160E /* config-img.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "config-img.jpg"; sourceTree = "<group>"; };
+		835E6973246B79E900B6160E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		835E6974246B79E900B6160E /* team-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "team-1.jpg"; sourceTree = "<group>"; };
+		835E6975246B79E900B6160E /* team-3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "team-3.jpg"; sourceTree = "<group>"; };
+		835E6976246B79E900B6160E /* team-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "team-2.jpg"; sourceTree = "<group>"; };
+		835E6977246B79E900B6160E /* call-to-action-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "call-to-action-bg.jpg"; sourceTree = "<group>"; };
+		835E6978246B79E900B6160E /* team-4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "team-4.jpg"; sourceTree = "<group>"; };
+		835E6979246B79E900B6160E /* welcome-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "welcome-bg.jpg"; sourceTree = "<group>"; };
+		835E697C246B79E900B6160E /* easing.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = easing.js; sourceTree = "<group>"; };
+		835E697D246B79E900B6160E /* easing.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = easing.min.js; sourceTree = "<group>"; };
+		835E697F246B79E900B6160E /* animate.min.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = animate.min.css; sourceTree = "<group>"; };
+		835E6980246B79E900B6160E /* animate.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = animate.css; sourceTree = "<group>"; };
+		835E6983246B79E900B6160E /* bootstrap.min.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = bootstrap.min.css; sourceTree = "<group>"; };
+		835E6984246B79E900B6160E /* bootstrap.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = bootstrap.css; sourceTree = "<group>"; };
+		835E6986246B79E900B6160E /* bootstrap.bundle.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = bootstrap.bundle.min.js; sourceTree = "<group>"; };
+		835E6987246B79E900B6160E /* bootstrap.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = bootstrap.min.js; sourceTree = "<group>"; };
+		835E6989246B79E900B6160E /* waypoints.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = waypoints.min.js; sourceTree = "<group>"; };
+		835E698B246B79E900B6160E /* wow.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = wow.js; sourceTree = "<group>"; };
+		835E698C246B79E900B6160E /* wow.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = wow.min.js; sourceTree = "<group>"; };
+		835E698E246B79E900B6160E /* jquery.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		835E698F246B79E900B6160E /* jquery-migrate.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "jquery-migrate.min.js"; sourceTree = "<group>"; };
+		835E6991246B79E900B6160E /* counterup.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = counterup.min.js; sourceTree = "<group>"; };
+		835E6993246B79E900B6160E /* superfish.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = superfish.js; sourceTree = "<group>"; };
+		835E6994246B79E900B6160E /* hoverIntent.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = hoverIntent.js; sourceTree = "<group>"; };
+		835E6995246B79E900B6160E /* superfish.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = superfish.min.js; sourceTree = "<group>"; };
+		835E6998246B79E900B6160E /* font-awesome.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "font-awesome.css"; sourceTree = "<group>"; };
+		835E6999246B79E900B6160E /* font-awesome.min.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "font-awesome.min.css"; sourceTree = "<group>"; };
+		835E699B246B79E900B6160E /* fontawesome-webfont.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "fontawesome-webfont.svg"; sourceTree = "<group>"; };
+		835E699C246B79E900B6160E /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		835E699D246B79E900B6160E /* fontawesome-webfont.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff2"; sourceTree = "<group>"; };
+		835E699E246B79E900B6160E /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		835E699F246B79E900B6160E /* fontawesome-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff"; sourceTree = "<group>"; };
+		835E69A0246B79E900B6160E /* fontawesome-webfont.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.eot"; sourceTree = "<group>"; };
+		835E69A2246B79E900B6160E /* post.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = post.html; sourceTree = "<group>"; };
+		835E69A3246B79E900B6160E /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		835E69A4246B79E900B6160E /* result.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = result.html; sourceTree = "<group>"; };
+		835E69A5246B79E900B6160E /* get.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = get.html; sourceTree = "<group>"; };
+		835E69A8246B79E900B6160E /* pip3.7 */ = {isa = PBXFileReference; lastKnownFileType = text; path = pip3.7; sourceTree = "<group>"; };
+		835E69A9246B79E900B6160E /* python3 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = python3; sourceTree = "<group>"; };
+		835E69AA246B79E900B6160E /* easy_install */ = {isa = PBXFileReference; lastKnownFileType = text; path = easy_install; sourceTree = "<group>"; };
+		835E69AB246B79E900B6160E /* python */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = python; sourceTree = "<group>"; };
+		835E69AC246B79E900B6160E /* pip3 */ = {isa = PBXFileReference; lastKnownFileType = text; path = pip3; sourceTree = "<group>"; };
+		835E69AD246B79E900B6160E /* activate.fish */ = {isa = PBXFileReference; lastKnownFileType = text; path = activate.fish; sourceTree = "<group>"; };
+		835E69AE246B79E900B6160E /* easy_install-3.7 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "easy_install-3.7"; sourceTree = "<group>"; };
+		835E69AF246B79E900B6160E /* python3.7 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = python3.7; sourceTree = "<group>"; };
+		835E69B0246B79E900B6160E /* pip */ = {isa = PBXFileReference; lastKnownFileType = text; path = pip; sourceTree = "<group>"; };
+		835E69B1246B79E900B6160E /* activate */ = {isa = PBXFileReference; lastKnownFileType = text; path = activate; sourceTree = "<group>"; };
+		835E69B2246B79E900B6160E /* activate.csh */ = {isa = PBXFileReference; lastKnownFileType = text.script.csh; path = activate.csh; sourceTree = "<group>"; };
+		835E69B4246B79E900B6160E /* pyvenv.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = pyvenv.cfg; sourceTree = "<group>"; };
+		835E69B8246B79E900B6160E /* easy-install.pth */ = {isa = PBXFileReference; lastKnownFileType = text; path = "easy-install.pth"; sourceTree = "<group>"; };
+		835E69B9246B79E900B6160E /* setuptools.pth */ = {isa = PBXFileReference; lastKnownFileType = text; path = setuptools.pth; sourceTree = "<group>"; };
+		835E69BC246B79E900B6160E /* PKG-INFO */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PKG-INFO"; sourceTree = "<group>"; };
+		835E69BD246B79E900B6160E /* not-zip-safe */ = {isa = PBXFileReference; lastKnownFileType = text; path = "not-zip-safe"; sourceTree = "<group>"; };
+		835E69BE246B79E900B6160E /* SOURCES.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = SOURCES.txt; sourceTree = "<group>"; };
+		835E69BF246B79E900B6160E /* entry_points.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = entry_points.txt; sourceTree = "<group>"; };
+		835E69C0246B79E900B6160E /* requires.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = requires.txt; sourceTree = "<group>"; };
+		835E69C1246B79E900B6160E /* top_level.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = top_level.txt; sourceTree = "<group>"; };
+		835E69C2246B79E900B6160E /* dependency_links.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = dependency_links.txt; sourceTree = "<group>"; };
+		835E69C5246B79E900B6160E /* configuration.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = configuration.py; sourceTree = "<group>"; };
+		835E69C6246B79E900B6160E /* baseparser.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = baseparser.py; sourceTree = "<group>"; };
+		835E69C7246B79E900B6160E /* resolve.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = resolve.py; sourceTree = "<group>"; };
+		835E69C8246B79E900B6160E /* compat.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = compat.py; sourceTree = "<group>"; };
+		835E69C9246B79E900B6160E /* index.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = index.py; sourceTree = "<group>"; };
+		835E69CA246B79E900B6160E /* cmdoptions.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = cmdoptions.py; sourceTree = "<group>"; };
+		835E69CB246B79E900B6160E /* download.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = download.py; sourceTree = "<group>"; };
+		835E69CC246B79E900B6160E /* cache.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = cache.py; sourceTree = "<group>"; };
+		835E69CD246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E69CE246B79E900B6160E /* status_codes.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = status_codes.py; sourceTree = "<group>"; };
+		835E69D0246B79E900B6160E /* logging.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = logging.py; sourceTree = "<group>"; };
+		835E69D1246B79E900B6160E /* misc.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = misc.py; sourceTree = "<group>"; };
+		835E69D2246B79E900B6160E /* encoding.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = encoding.py; sourceTree = "<group>"; };
+		835E69D3246B79E900B6160E /* deprecation.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = deprecation.py; sourceTree = "<group>"; };
+		835E69D4246B79E900B6160E /* ui.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ui.py; sourceTree = "<group>"; };
+		835E69D5246B79E900B6160E /* filesystem.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = filesystem.py; sourceTree = "<group>"; };
+		835E69D6246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E69D7246B79E900B6160E /* temp_dir.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = temp_dir.py; sourceTree = "<group>"; };
+		835E69D8246B79E900B6160E /* appdirs.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = appdirs.py; sourceTree = "<group>"; };
+		835E69D9246B79E900B6160E /* setuptools_build.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = setuptools_build.py; sourceTree = "<group>"; };
+		835E69DA246B79E900B6160E /* packaging.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = packaging.py; sourceTree = "<group>"; };
+		835E69DB246B79E900B6160E /* outdated.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = outdated.py; sourceTree = "<group>"; };
+		835E69DC246B79E900B6160E /* typing.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = typing.py; sourceTree = "<group>"; };
+		835E69DD246B79E900B6160E /* hashes.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = hashes.py; sourceTree = "<group>"; };
+		835E69DE246B79E900B6160E /* glibc.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = glibc.py; sourceTree = "<group>"; };
+		835E69E0246B79E900B6160E /* index.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = index.py; sourceTree = "<group>"; };
+		835E69E1246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E69E3246B79E900B6160E /* check.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = check.py; sourceTree = "<group>"; };
+		835E69E4246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E69E5246B79E900B6160E /* freeze.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = freeze.py; sourceTree = "<group>"; };
+		835E69E6246B79E900B6160E /* prepare.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = prepare.py; sourceTree = "<group>"; };
+		835E69E8246B79E900B6160E /* req_install.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = req_install.py; sourceTree = "<group>"; };
+		835E69E9246B79E900B6160E /* req_set.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = req_set.py; sourceTree = "<group>"; };
+		835E69EA246B79E900B6160E /* req_uninstall.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = req_uninstall.py; sourceTree = "<group>"; };
+		835E69EB246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E69EC246B79E900B6160E /* req_file.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = req_file.py; sourceTree = "<group>"; };
+		835E69EE246B79E900B6160E /* git.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = git.py; sourceTree = "<group>"; };
+		835E69EF246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E69F0246B79E900B6160E /* mercurial.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = mercurial.py; sourceTree = "<group>"; };
+		835E69F1246B79E900B6160E /* bazaar.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = bazaar.py; sourceTree = "<group>"; };
+		835E69F2246B79E900B6160E /* subversion.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = subversion.py; sourceTree = "<group>"; };
+		835E69F3246B79E900B6160E /* pep425tags.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = pep425tags.py; sourceTree = "<group>"; };
+		835E69F4246B79E900B6160E /* exceptions.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = exceptions.py; sourceTree = "<group>"; };
+		835E69F6246B79E900B6160E /* configuration.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = configuration.py; sourceTree = "<group>"; };
+		835E69F7246B79E900B6160E /* show.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = show.py; sourceTree = "<group>"; };
+		835E69F8246B79E900B6160E /* list.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = list.py; sourceTree = "<group>"; };
+		835E69F9246B79E900B6160E /* check.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = check.py; sourceTree = "<group>"; };
+		835E69FA246B79E900B6160E /* completion.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = completion.py; sourceTree = "<group>"; };
+		835E69FB246B79E900B6160E /* download.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = download.py; sourceTree = "<group>"; };
+		835E69FC246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E69FD246B79E900B6160E /* hash.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = hash.py; sourceTree = "<group>"; };
+		835E69FE246B79E900B6160E /* uninstall.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = uninstall.py; sourceTree = "<group>"; };
+		835E69FF246B79E900B6160E /* freeze.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = freeze.py; sourceTree = "<group>"; };
+		835E6A00246B79E900B6160E /* search.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = search.py; sourceTree = "<group>"; };
+		835E6A01246B79E900B6160E /* install.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = install.py; sourceTree = "<group>"; };
+		835E6A02246B79E900B6160E /* help.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = help.py; sourceTree = "<group>"; };
+		835E6A03246B79E900B6160E /* wheel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = wheel.py; sourceTree = "<group>"; };
+		835E6A04246B79E900B6160E /* basecommand.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = basecommand.py; sourceTree = "<group>"; };
+		835E6A05246B79E900B6160E /* locations.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = locations.py; sourceTree = "<group>"; };
+		835E6A06246B79E900B6160E /* wheel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = wheel.py; sourceTree = "<group>"; };
+		835E6A07246B79E900B6160E /* build_env.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = build_env.py; sourceTree = "<group>"; };
+		835E6A09246B79E900B6160E /* retrying.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = retrying.py; sourceTree = "<group>"; };
+		835E6A0B246B79E900B6160E /* version.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = version.py; sourceTree = "<group>"; };
+		835E6A0C246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A0D246B79E900B6160E /* utils.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = utils.py; sourceTree = "<group>"; };
+		835E6A0E246B79E900B6160E /* requirements.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = requirements.py; sourceTree = "<group>"; };
+		835E6A0F246B79E900B6160E /* _structures.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _structures.py; sourceTree = "<group>"; };
+		835E6A10246B79E900B6160E /* markers.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = markers.py; sourceTree = "<group>"; };
+		835E6A11246B79E900B6160E /* __about__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __about__.py; sourceTree = "<group>"; };
+		835E6A12246B79E900B6160E /* _compat.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _compat.py; sourceTree = "<group>"; };
+		835E6A13246B79E900B6160E /* specifiers.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = specifiers.py; sourceTree = "<group>"; };
+		835E6A15246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A16246B79E900B6160E /* core.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = core.py; sourceTree = "<group>"; };
+		835E6A17246B79E900B6160E /* parser.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = parser.py; sourceTree = "<group>"; };
+		835E6A18246B79E900B6160E /* writer.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = writer.py; sourceTree = "<group>"; };
+		835E6A19246B79E900B6160E /* ipaddress.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ipaddress.py; sourceTree = "<group>"; };
+		835E6A1B246B79E900B6160E /* _version.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _version.py; sourceTree = "<group>"; };
+		835E6A1C246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A1D246B79E900B6160E /* exceptions.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = exceptions.py; sourceTree = "<group>"; };
+		835E6A1E246B79E900B6160E /* fallback.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = fallback.py; sourceTree = "<group>"; };
+		835E6A20246B79E900B6160E /* enums.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = enums.py; sourceTree = "<group>"; };
+		835E6A21246B79E900B6160E /* langhungarianmodel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = langhungarianmodel.py; sourceTree = "<group>"; };
+		835E6A22246B79E900B6160E /* mbcssm.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = mbcssm.py; sourceTree = "<group>"; };
+		835E6A23246B79E900B6160E /* langthaimodel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = langthaimodel.py; sourceTree = "<group>"; };
+		835E6A24246B79E900B6160E /* version.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = version.py; sourceTree = "<group>"; };
+		835E6A25246B79E900B6160E /* compat.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = compat.py; sourceTree = "<group>"; };
+		835E6A26246B79E900B6160E /* langbulgarianmodel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = langbulgarianmodel.py; sourceTree = "<group>"; };
+		835E6A27246B79E900B6160E /* euckrprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = euckrprober.py; sourceTree = "<group>"; };
+		835E6A28246B79E900B6160E /* sjisprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sjisprober.py; sourceTree = "<group>"; };
+		835E6A29246B79E900B6160E /* cp949prober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = cp949prober.py; sourceTree = "<group>"; };
+		835E6A2A246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A2B246B79E900B6160E /* euctwfreq.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = euctwfreq.py; sourceTree = "<group>"; };
+		835E6A2C246B79E900B6160E /* langhebrewmodel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = langhebrewmodel.py; sourceTree = "<group>"; };
+		835E6A2E246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A2F246B79E900B6160E /* chardetect.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = chardetect.py; sourceTree = "<group>"; };
+		835E6A30246B79E900B6160E /* chardistribution.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = chardistribution.py; sourceTree = "<group>"; };
+		835E6A31246B79E900B6160E /* latin1prober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = latin1prober.py; sourceTree = "<group>"; };
+		835E6A32246B79E900B6160E /* charsetprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = charsetprober.py; sourceTree = "<group>"; };
+		835E6A33246B79E900B6160E /* gb2312prober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = gb2312prober.py; sourceTree = "<group>"; };
+		835E6A34246B79E900B6160E /* mbcharsetprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = mbcharsetprober.py; sourceTree = "<group>"; };
+		835E6A35246B79E900B6160E /* langcyrillicmodel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = langcyrillicmodel.py; sourceTree = "<group>"; };
+		835E6A36246B79E900B6160E /* euctwprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = euctwprober.py; sourceTree = "<group>"; };
+		835E6A37246B79E900B6160E /* codingstatemachine.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = codingstatemachine.py; sourceTree = "<group>"; };
+		835E6A38246B79E900B6160E /* escprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = escprober.py; sourceTree = "<group>"; };
+		835E6A39246B79E900B6160E /* universaldetector.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = universaldetector.py; sourceTree = "<group>"; };
+		835E6A3A246B79E900B6160E /* utf8prober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = utf8prober.py; sourceTree = "<group>"; };
+		835E6A3B246B79E900B6160E /* gb2312freq.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = gb2312freq.py; sourceTree = "<group>"; };
+		835E6A3C246B79E900B6160E /* mbcsgroupprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = mbcsgroupprober.py; sourceTree = "<group>"; };
+		835E6A3D246B79E900B6160E /* langgreekmodel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = langgreekmodel.py; sourceTree = "<group>"; };
+		835E6A3E246B79E900B6160E /* eucjpprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = eucjpprober.py; sourceTree = "<group>"; };
+		835E6A3F246B79E900B6160E /* jisfreq.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jisfreq.py; sourceTree = "<group>"; };
+		835E6A40246B79E900B6160E /* escsm.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = escsm.py; sourceTree = "<group>"; };
+		835E6A41246B79E900B6160E /* langturkishmodel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = langturkishmodel.py; sourceTree = "<group>"; };
+		835E6A42246B79E900B6160E /* sbcharsetprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sbcharsetprober.py; sourceTree = "<group>"; };
+		835E6A43246B79E900B6160E /* big5freq.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = big5freq.py; sourceTree = "<group>"; };
+		835E6A44246B79E900B6160E /* euckrfreq.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = euckrfreq.py; sourceTree = "<group>"; };
+		835E6A45246B79E900B6160E /* big5prober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = big5prober.py; sourceTree = "<group>"; };
+		835E6A46246B79E900B6160E /* hebrewprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = hebrewprober.py; sourceTree = "<group>"; };
+		835E6A47246B79E900B6160E /* charsetgroupprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = charsetgroupprober.py; sourceTree = "<group>"; };
+		835E6A48246B79E900B6160E /* sbcsgroupprober.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sbcsgroupprober.py; sourceTree = "<group>"; };
+		835E6A49246B79E900B6160E /* jpcntx.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jpcntx.py; sourceTree = "<group>"; };
+		835E6A4B246B79E900B6160E /* labels.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = labels.py; sourceTree = "<group>"; };
+		835E6A4C246B79E900B6160E /* mklabels.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = mklabels.py; sourceTree = "<group>"; };
+		835E6A4D246B79E900B6160E /* x_user_defined.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = x_user_defined.py; sourceTree = "<group>"; };
+		835E6A4E246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A4F246B79E900B6160E /* tests.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = tests.py; sourceTree = "<group>"; };
+		835E6A51246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A52246B79E900B6160E /* bar.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = bar.py; sourceTree = "<group>"; };
+		835E6A53246B79E900B6160E /* spinner.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = spinner.py; sourceTree = "<group>"; };
+		835E6A54246B79E900B6160E /* helpers.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = helpers.py; sourceTree = "<group>"; };
+		835E6A55246B79E900B6160E /* counter.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = counter.py; sourceTree = "<group>"; };
+		835E6A58246B79E900B6160E /* shutil.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = shutil.py; sourceTree = "<group>"; };
+		835E6A59246B79E900B6160E /* misc.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = misc.py; sourceTree = "<group>"; };
+		835E6A5A246B79E900B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A5B246B79E900B6160E /* sysconfig.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = sysconfig.cfg; sourceTree = "<group>"; };
+		835E6A5C246B79E900B6160E /* tarfile.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = tarfile.py; sourceTree = "<group>"; };
+		835E6A5D246B79E900B6160E /* sysconfig.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sysconfig.py; sourceTree = "<group>"; };
+		835E6A5E246B79E900B6160E /* w32.exe */ = {isa = PBXFileReference; lastKnownFileType = file; path = w32.exe; sourceTree = "<group>"; };
+		835E6A5F246B79E900B6160E /* locators.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = locators.py; sourceTree = "<group>"; };
+		835E6A60246B79E900B6160E /* metadata.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = metadata.py; sourceTree = "<group>"; };
+		835E6A61246B79E900B6160E /* version.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = version.py; sourceTree = "<group>"; };
+		835E6A62246B79E900B6160E /* compat.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = compat.py; sourceTree = "<group>"; };
+		835E6A63246B79E900B6160E /* index.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = index.py; sourceTree = "<group>"; };
+		835E6A64246B79E900B6160E /* manifest.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = manifest.py; sourceTree = "<group>"; };
+		835E6A65246B79E900B6160E /* util.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = util.py; sourceTree = "<group>"; };
+		835E6A66246B79E900B6160E /* database.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = database.py; sourceTree = "<group>"; };
+		835E6A67246B79EA00B6160E /* t32.exe */ = {isa = PBXFileReference; lastKnownFileType = file; path = t32.exe; sourceTree = "<group>"; };
+		835E6A68246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A69246B79EA00B6160E /* w64.exe */ = {isa = PBXFileReference; lastKnownFileType = file; path = w64.exe; sourceTree = "<group>"; };
+		835E6A6A246B79EA00B6160E /* markers.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = markers.py; sourceTree = "<group>"; };
+		835E6A6B246B79EA00B6160E /* resources.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = resources.py; sourceTree = "<group>"; };
+		835E6A6C246B79EA00B6160E /* scripts.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = scripts.py; sourceTree = "<group>"; };
+		835E6A6D246B79EA00B6160E /* t64.exe */ = {isa = PBXFileReference; lastKnownFileType = file; path = t64.exe; sourceTree = "<group>"; };
+		835E6A6E246B79EA00B6160E /* wheel.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = wheel.py; sourceTree = "<group>"; };
+		835E6A70246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A71246B79EA00B6160E /* win32.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = win32.py; sourceTree = "<group>"; };
+		835E6A72246B79EA00B6160E /* ansitowin32.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ansitowin32.py; sourceTree = "<group>"; };
+		835E6A73246B79EA00B6160E /* ansi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ansi.py; sourceTree = "<group>"; };
+		835E6A74246B79EA00B6160E /* winterm.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = winterm.py; sourceTree = "<group>"; };
+		835E6A75246B79EA00B6160E /* initialise.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = initialise.py; sourceTree = "<group>"; };
+		835E6A77246B79EA00B6160E /* sqlitelockfile.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sqlitelockfile.py; sourceTree = "<group>"; };
+		835E6A78246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A79246B79EA00B6160E /* linklockfile.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = linklockfile.py; sourceTree = "<group>"; };
+		835E6A7A246B79EA00B6160E /* mkdirlockfile.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = mkdirlockfile.py; sourceTree = "<group>"; };
+		835E6A7B246B79EA00B6160E /* symlinklockfile.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = symlinklockfile.py; sourceTree = "<group>"; };
+		835E6A7C246B79EA00B6160E /* pidlockfile.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = pidlockfile.py; sourceTree = "<group>"; };
+		835E6A7E246B79EA00B6160E /* serialize.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = serialize.py; sourceTree = "<group>"; };
+		835E6A7F246B79EA00B6160E /* wrapper.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = wrapper.py; sourceTree = "<group>"; };
+		835E6A80246B79EA00B6160E /* controller.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = controller.py; sourceTree = "<group>"; };
+		835E6A81246B79EA00B6160E /* compat.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = compat.py; sourceTree = "<group>"; };
+		835E6A82246B79EA00B6160E /* filewrapper.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = filewrapper.py; sourceTree = "<group>"; };
+		835E6A83246B79EA00B6160E /* heuristics.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = heuristics.py; sourceTree = "<group>"; };
+		835E6A84246B79EA00B6160E /* adapter.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = adapter.py; sourceTree = "<group>"; };
+		835E6A85246B79EA00B6160E /* cache.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = cache.py; sourceTree = "<group>"; };
+		835E6A86246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A87246B79EA00B6160E /* _cmd.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _cmd.py; sourceTree = "<group>"; };
+		835E6A89246B79EA00B6160E /* file_cache.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = file_cache.py; sourceTree = "<group>"; };
+		835E6A8A246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A8B246B79EA00B6160E /* redis_cache.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = redis_cache.py; sourceTree = "<group>"; };
+		835E6A8D246B79EA00B6160E /* intranges.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = intranges.py; sourceTree = "<group>"; };
+		835E6A8E246B79EA00B6160E /* package_data.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = package_data.py; sourceTree = "<group>"; };
+		835E6A8F246B79EA00B6160E /* compat.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = compat.py; sourceTree = "<group>"; };
+		835E6A90246B79EA00B6160E /* idnadata.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = idnadata.py; sourceTree = "<group>"; };
+		835E6A91246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A92246B79EA00B6160E /* core.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = core.py; sourceTree = "<group>"; };
+		835E6A93246B79EA00B6160E /* codec.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = codec.py; sourceTree = "<group>"; };
+		835E6A94246B79EA00B6160E /* uts46data.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = uts46data.py; sourceTree = "<group>"; };
+		835E6A95246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A97246B79EA00B6160E /* cookies.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = cookies.py; sourceTree = "<group>"; };
+		835E6A98246B79EA00B6160E /* auth.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = auth.py; sourceTree = "<group>"; };
+		835E6A99246B79EA00B6160E /* sessions.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sessions.py; sourceTree = "<group>"; };
+		835E6A9A246B79EA00B6160E /* hooks.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = hooks.py; sourceTree = "<group>"; };
+		835E6A9B246B79EA00B6160E /* compat.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = compat.py; sourceTree = "<group>"; };
+		835E6A9C246B79EA00B6160E /* models.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = models.py; sourceTree = "<group>"; };
+		835E6A9D246B79EA00B6160E /* certs.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = certs.py; sourceTree = "<group>"; };
+		835E6A9E246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6A9F246B79EA00B6160E /* status_codes.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = status_codes.py; sourceTree = "<group>"; };
+		835E6AA0246B79EA00B6160E /* packages.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = packages.py; sourceTree = "<group>"; };
+		835E6AA1246B79EA00B6160E /* __version__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __version__.py; sourceTree = "<group>"; };
+		835E6AA2246B79EA00B6160E /* api.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = api.py; sourceTree = "<group>"; };
+		835E6AA3246B79EA00B6160E /* _internal_utils.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _internal_utils.py; sourceTree = "<group>"; };
+		835E6AA4246B79EA00B6160E /* utils.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = utils.py; sourceTree = "<group>"; };
+		835E6AA5246B79EA00B6160E /* exceptions.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = exceptions.py; sourceTree = "<group>"; };
+		835E6AA6246B79EA00B6160E /* structures.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = structures.py; sourceTree = "<group>"; };
+		835E6AA7246B79EA00B6160E /* help.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = help.py; sourceTree = "<group>"; };
+		835E6AA8246B79EA00B6160E /* adapters.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = adapters.py; sourceTree = "<group>"; };
+		835E6AA9246B79EA00B6160E /* appdirs.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = appdirs.py; sourceTree = "<group>"; };
+		835E6AAC246B79EA00B6160E /* sanitizer.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sanitizer.py; sourceTree = "<group>"; };
+		835E6AAD246B79EA00B6160E /* inject_meta_charset.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = inject_meta_charset.py; sourceTree = "<group>"; };
+		835E6AAE246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AAF246B79EA00B6160E /* base.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = base.py; sourceTree = "<group>"; };
+		835E6AB0246B79EA00B6160E /* alphabeticalattributes.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = alphabeticalattributes.py; sourceTree = "<group>"; };
+		835E6AB1246B79EA00B6160E /* optionaltags.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = optionaltags.py; sourceTree = "<group>"; };
+		835E6AB2246B79EA00B6160E /* lint.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = lint.py; sourceTree = "<group>"; };
+		835E6AB3246B79EA00B6160E /* whitespace.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = whitespace.py; sourceTree = "<group>"; };
+		835E6AB5246B79EA00B6160E /* etree_lxml.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = etree_lxml.py; sourceTree = "<group>"; };
+		835E6AB6246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AB7246B79EA00B6160E /* etree.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = etree.py; sourceTree = "<group>"; };
+		835E6AB8246B79EA00B6160E /* genshi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = genshi.py; sourceTree = "<group>"; };
+		835E6AB9246B79EA00B6160E /* base.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = base.py; sourceTree = "<group>"; };
+		835E6ABA246B79EA00B6160E /* dom.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = dom.py; sourceTree = "<group>"; };
+		835E6ABC246B79EA00B6160E /* etree_lxml.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = etree_lxml.py; sourceTree = "<group>"; };
+		835E6ABD246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6ABE246B79EA00B6160E /* etree.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = etree.py; sourceTree = "<group>"; };
+		835E6ABF246B79EA00B6160E /* base.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = base.py; sourceTree = "<group>"; };
+		835E6AC0246B79EA00B6160E /* dom.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = dom.py; sourceTree = "<group>"; };
+		835E6AC1246B79EA00B6160E /* _inputstream.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _inputstream.py; sourceTree = "<group>"; };
+		835E6AC2246B79EA00B6160E /* _ihatexml.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _ihatexml.py; sourceTree = "<group>"; };
+		835E6AC3246B79EA00B6160E /* constants.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = constants.py; sourceTree = "<group>"; };
+		835E6AC4246B79EA00B6160E /* html5parser.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = html5parser.py; sourceTree = "<group>"; };
+		835E6AC5246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AC7246B79EA00B6160E /* _base.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _base.py; sourceTree = "<group>"; };
+		835E6AC8246B79EA00B6160E /* datrie.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = datrie.py; sourceTree = "<group>"; };
+		835E6AC9246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6ACA246B79EA00B6160E /* py.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = py.py; sourceTree = "<group>"; };
+		835E6ACC246B79EA00B6160E /* sax.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sax.py; sourceTree = "<group>"; };
+		835E6ACD246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6ACE246B79EA00B6160E /* genshi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = genshi.py; sourceTree = "<group>"; };
+		835E6ACF246B79EA00B6160E /* serializer.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = serializer.py; sourceTree = "<group>"; };
+		835E6AD0246B79EA00B6160E /* _tokenizer.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _tokenizer.py; sourceTree = "<group>"; };
+		835E6AD1246B79EA00B6160E /* _utils.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _utils.py; sourceTree = "<group>"; };
+		835E6AD3246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AD4246B79EA00B6160E /* core.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = core.py; sourceTree = "<group>"; };
+		835E6AD5246B79EA00B6160E /* cacert.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = cacert.pem; sourceTree = "<group>"; };
+		835E6AD6246B79EA00B6160E /* __main__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __main__.py; sourceTree = "<group>"; };
+		835E6AD7246B79EA00B6160E /* six.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = six.py; sourceTree = "<group>"; };
+		835E6AD9246B79EA00B6160E /* filepost.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = filepost.py; sourceTree = "<group>"; };
+		835E6ADA246B79EA00B6160E /* fields.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = fields.py; sourceTree = "<group>"; };
+		835E6ADC246B79EA00B6160E /* wait.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = wait.py; sourceTree = "<group>"; };
+		835E6ADD246B79EA00B6160E /* request.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = request.py; sourceTree = "<group>"; };
+		835E6ADE246B79EA00B6160E /* timeout.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = timeout.py; sourceTree = "<group>"; };
+		835E6ADF246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AE0246B79EA00B6160E /* selectors.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = selectors.py; sourceTree = "<group>"; };
+		835E6AE1246B79EA00B6160E /* response.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = response.py; sourceTree = "<group>"; };
+		835E6AE2246B79EA00B6160E /* ssl_.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ssl_.py; sourceTree = "<group>"; };
+		835E6AE3246B79EA00B6160E /* retry.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = retry.py; sourceTree = "<group>"; };
+		835E6AE4246B79EA00B6160E /* url.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = url.py; sourceTree = "<group>"; };
+		835E6AE5246B79EA00B6160E /* connection.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = connection.py; sourceTree = "<group>"; };
+		835E6AE6246B79EA00B6160E /* request.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = request.py; sourceTree = "<group>"; };
+		835E6AE7246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AE8246B79EA00B6160E /* poolmanager.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = poolmanager.py; sourceTree = "<group>"; };
+		835E6AE9246B79EA00B6160E /* response.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = response.py; sourceTree = "<group>"; };
+		835E6AEB246B79EA00B6160E /* securetransport.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = securetransport.py; sourceTree = "<group>"; };
+		835E6AEC246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AED246B79EA00B6160E /* socks.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = socks.py; sourceTree = "<group>"; };
+		835E6AEE246B79EA00B6160E /* pyopenssl.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = pyopenssl.py; sourceTree = "<group>"; };
+		835E6AEF246B79EA00B6160E /* appengine.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = appengine.py; sourceTree = "<group>"; };
+		835E6AF1246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AF2246B79EA00B6160E /* low_level.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = low_level.py; sourceTree = "<group>"; };
+		835E6AF3246B79EA00B6160E /* bindings.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = bindings.py; sourceTree = "<group>"; };
+		835E6AF4246B79EA00B6160E /* ntlmpool.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ntlmpool.py; sourceTree = "<group>"; };
+		835E6AF5246B79EA00B6160E /* connection.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = connection.py; sourceTree = "<group>"; };
+		835E6AF6246B79EA00B6160E /* _collections.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _collections.py; sourceTree = "<group>"; };
+		835E6AF8246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AFA246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6AFB246B79EA00B6160E /* makefile.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = makefile.py; sourceTree = "<group>"; };
+		835E6AFC246B79EA00B6160E /* ordered_dict.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ordered_dict.py; sourceTree = "<group>"; };
+		835E6AFD246B79EA00B6160E /* six.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = six.py; sourceTree = "<group>"; };
+		835E6AFF246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6B00246B79EA00B6160E /* _implementation.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = _implementation.py; sourceTree = "<group>"; };
+		835E6B01246B79EA00B6160E /* exceptions.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = exceptions.py; sourceTree = "<group>"; };
+		835E6B02246B79EA00B6160E /* connectionpool.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = connectionpool.py; sourceTree = "<group>"; };
+		835E6B03246B79EA00B6160E /* distro.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = distro.py; sourceTree = "<group>"; };
+		835E6B05246B79EA00B6160E /* py31compat.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = py31compat.py; sourceTree = "<group>"; };
+		835E6B06246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6B07246B79EA00B6160E /* pyparsing.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = pyparsing.py; sourceTree = "<group>"; };
+		835E6B08246B79EA00B6160E /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		835E6B09246B79EA00B6160E /* __main__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __main__.py; sourceTree = "<group>"; };
+		835E6B0A246B79EA00B6160E /* setuptools-39.1.0-py3.7.egg */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "setuptools-39.1.0-py3.7.egg"; sourceTree = "<group>"; };
+		835E6B0B246B79EA00B6160E /* jwumq_manager.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jwumq_manager.py; sourceTree = "<group>"; };
+		835E6B0E246B79EA00B6160E /* workspace.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = workspace.xml; sourceTree = "<group>"; };
+		835E6B0F246B79EA00B6160E /* modules.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = modules.xml; sourceTree = "<group>"; };
+		835E6B10246B79EA00B6160E /* jwumq_manager.iml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = jwumq_manager.iml; sourceTree = "<group>"; };
+		835E6B11246B79EA00B6160E /* misc.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = misc.xml; sourceTree = "<group>"; };
+		83609D4A249359650010274B /* pool_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pool_def.h; sourceTree = "<group>"; };
+		83609D4B249359AB0010274B /* factory_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = factory_def.h; sourceTree = "<group>"; };
+		8362D2D424FC9624000F5EFF /* system_info.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = system_info.cpp; sourceTree = "<group>"; };
+		8362D2D524FC9624000F5EFF /* system_info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = system_info.hpp; sourceTree = "<group>"; };
+		8362D2D724FC963B000F5EFF /* linux_info.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = linux_info.cpp; sourceTree = "<group>"; };
+		8362D2D824FC963B000F5EFF /* linux_info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = linux_info.hpp; sourceTree = "<group>"; };
+		8362D2DA24FC9653000F5EFF /* win_info.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = win_info.cpp; sourceTree = "<group>"; };
+		8362D2DB24FC9653000F5EFF /* win_info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = win_info.hpp; sourceTree = "<group>"; };
+		8367042624E2251B00829049 /* queue_producer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = queue_producer.cpp; sourceTree = "<group>"; };
+		8367042724E2251B00829049 /* queue_producer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = queue_producer.hpp; sourceTree = "<group>"; };
+		836D264A24077C0E00ACAC54 /* amtpca.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtpca.cpp; sourceTree = "<group>"; };
+		836D264B24077C0E00ACAC54 /* amtpca.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtpca.hpp; sourceTree = "<group>"; };
+		836FFA7624F4FB9300E20CEC /* amtp_module_conf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_module_conf.cpp; sourceTree = "<group>"; };
+		836FFA7724F4FB9300E20CEC /* amtp_module_conf.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_module_conf.hpp; sourceTree = "<group>"; };
+		836FFA7924F4FBB900E20CEC /* amtp_module_conf_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_module_conf_resp.cpp; sourceTree = "<group>"; };
+		836FFA7A24F4FBB900E20CEC /* amtp_module_conf_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_module_conf_resp.hpp; sourceTree = "<group>"; };
+		83716DD724AB2086005E6F8D /* libjwumqa_c.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_c.cpp; sourceTree = "<group>"; };
+		837C74EA24E0DCFF0074ACBA /* libjwumqa_part_producer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_part_producer.cpp; sourceTree = "<group>"; };
+		837C74EB24E0DCFF0074ACBA /* libjwumqa_part_producer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libjwumqa_part_producer.hpp; sourceTree = "<group>"; };
+		837C74ED24E0DD400074ACBA /* libjwumqa_part_consumer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_part_consumer.cpp; sourceTree = "<group>"; };
+		837C74EE24E0DD400074ACBA /* libjwumqa_part_consumer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libjwumqa_part_consumer.hpp; sourceTree = "<group>"; };
+		838093C524AEC04000A6DA2F /* make_jwumq_install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_jwumq_install.sh; sourceTree = "<group>"; };
+		838093C624AEC0AD00A6DA2F /* _jwumq_install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = _jwumq_install.sh; sourceTree = "<group>"; };
+		8382D34E23D19B1F00653E7A /* amtpap_msg.pb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = amtpap_msg.pb.cpp; sourceTree = "<group>"; };
+		8384CCA22462633400D182D1 /* jwumq_dealer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_dealer.cpp; sourceTree = "<group>"; };
+		8384CCA32462633400D182D1 /* jwumq_dealer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jwumq_dealer.hpp; sourceTree = "<group>"; };
+		838945A724A2E8CB00FAB762 /* queue_pipe.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = queue_pipe.cpp; sourceTree = "<group>"; };
+		838945A824A2E8CB00FAB762 /* queue_pipe.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = queue_pipe.hpp; sourceTree = "<group>"; };
+		838ED79E24C922D200CD968F /* libjwumqa_part_member.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_part_member.cpp; sourceTree = "<group>"; };
+		838ED79F24C922D200CD968F /* libjwumqa_part_member.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libjwumqa_part_member.hpp; sourceTree = "<group>"; };
+		838ED7A124C939B600CD968F /* queue_member.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = queue_member.cpp; sourceTree = "<group>"; };
+		838ED7A224C939B600CD968F /* queue_member.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = queue_member.hpp; sourceTree = "<group>"; };
+		83A4D24C240E46F0000456F8 /* amtp_gps_info.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_gps_info.cpp; sourceTree = "<group>"; };
+		83A4D24D240E46F0000456F8 /* amtp_gps_info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_gps_info.hpp; sourceTree = "<group>"; };
+		83A4D24F240E4A10000456F8 /* amtp_gps_info_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_gps_info_resp.cpp; sourceTree = "<group>"; };
+		83A4D250240E4A10000456F8 /* amtp_gps_info_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_gps_info_resp.hpp; sourceTree = "<group>"; };
+		83A4D252240E52E7000456F8 /* amtp_status_info.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_status_info.cpp; sourceTree = "<group>"; };
+		83A4D253240E52E7000456F8 /* amtp_status_info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_status_info.hpp; sourceTree = "<group>"; };
+		83A4D255240E52F7000456F8 /* amtp_status_info_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_status_info_resp.cpp; sourceTree = "<group>"; };
+		83A4D256240E52F7000456F8 /* amtp_status_info_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_status_info_resp.hpp; sourceTree = "<group>"; };
+		83A783FC246D3C5B00435C00 /* external_manage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = external_manage.cpp; sourceTree = "<group>"; };
+		83A783FD246D3C5B00435C00 /* external_manage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = external_manage.hpp; sourceTree = "<group>"; };
+		83A783FF246D3C8200435C00 /* internal_manage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = internal_manage.cpp; sourceTree = "<group>"; };
+		83A78400246D3C8200435C00 /* internal_manage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = internal_manage.hpp; sourceTree = "<group>"; };
+		83ABB113240A2F0E0096C5DA /* amtp_login.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_login.cpp; sourceTree = "<group>"; };
+		83ABB114240A2F0E0096C5DA /* amtp_login.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_login.hpp; sourceTree = "<group>"; };
+		83ABB116240B944B0096C5DA /* amtp_login_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_login_resp.cpp; sourceTree = "<group>"; };
+		83ABB117240B944B0096C5DA /* amtp_login_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_login_resp.hpp; sourceTree = "<group>"; };
+		83AF0A192491B9EA007BBF29 /* jwumq_duplex_pub.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_duplex_pub.cpp; sourceTree = "<group>"; };
+		83AF0A1A2491B9EA007BBF29 /* jwumq_duplex_pub.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jwumq_duplex_pub.hpp; sourceTree = "<group>"; };
+		83AF0A1C2491BA01007BBF29 /* jwumq_duplex_sub.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_duplex_sub.cpp; sourceTree = "<group>"; };
+		83AF0A1D2491BA01007BBF29 /* jwumq_duplex_sub.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jwumq_duplex_sub.hpp; sourceTree = "<group>"; };
+		83AF0A1F2491C770007BBF29 /* pool_branch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pool_branch.cpp; sourceTree = "<group>"; };
+		83AF0A202491C770007BBF29 /* pool_branch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pool_branch.hpp; sourceTree = "<group>"; };
+		83AF0A2224921CE0007BBF29 /* pool_status.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pool_status.cpp; sourceTree = "<group>"; };
+		83AF0A2324921CE0007BBF29 /* pool_status.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pool_status.hpp; sourceTree = "<group>"; };
+		83B53D1F248E2E3600DC3D65 /* factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = factory.cpp; sourceTree = "<group>"; };
+		83B53D20248E2E3600DC3D65 /* factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = factory.hpp; sourceTree = "<group>"; };
+		83B53D22248E345000DC3D65 /* pool.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pool.cpp; sourceTree = "<group>"; };
+		83B53D23248E345000DC3D65 /* pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pool.hpp; sourceTree = "<group>"; };
+		83B83E9D23C46837006E4DE6 /* libamtpca.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libamtpca.cpp; sourceTree = "<group>"; };
+		83B83E9E23C46837006E4DE6 /* libamtpca.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libamtpca.hpp; sourceTree = "<group>"; };
+		83B83EA023C47F57006E4DE6 /* libamtpa_define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libamtpa_define.h; sourceTree = "<group>"; };
+		83B83EA123C47FA2006E4DE6 /* libamtpsa.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libamtpsa.cpp; sourceTree = "<group>"; };
+		83B83EA223C47FA2006E4DE6 /* libamtpsa.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libamtpsa.hpp; sourceTree = "<group>"; };
+		83B83EA423C48180006E4DE6 /* libamtpsa.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = libamtpsa.mk; sourceTree = "<group>"; };
+		83B83EA823C4845A006E4DE6 /* router.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = router.cpp; sourceTree = "<group>"; };
+		83B83EA923C4845A006E4DE6 /* router.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = router.hpp; sourceTree = "<group>"; };
+		83B83EAB23C56098006E4DE6 /* jwumq_base.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_base.cpp; sourceTree = "<group>"; };
+		83B83EAC23C56098006E4DE6 /* jwumq_base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jwumq_base.hpp; sourceTree = "<group>"; };
+		83B83EAE23C56768006E4DE6 /* jwumq_define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jwumq_define.h; sourceTree = "<group>"; };
+		83B83EAF23C571A4006E4DE6 /* jwumq_queue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_queue.cpp; sourceTree = "<group>"; };
+		83B83EB023C571A4006E4DE6 /* jwumq_queue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jwumq_queue.hpp; sourceTree = "<group>"; };
+		83B83EB223C572CE006E4DE6 /* jwumq_router.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_router.cpp; sourceTree = "<group>"; };
+		83B83EB323C572CE006E4DE6 /* jwumq_router.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jwumq_router.hpp; sourceTree = "<group>"; };
+		83B83EBD23C5CB2F006E4DE6 /* libjwumq.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumq.cpp; sourceTree = "<group>"; };
+		83B83EBE23C5CB2F006E4DE6 /* libjwumq.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libjwumq.hpp; sourceTree = "<group>"; };
+		83B83EC023C5CBC0006E4DE6 /* libjwumq.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = libjwumq.mk; sourceTree = "<group>"; };
+		83BB4E78248F75E300EAEA1C /* jwumq_msg.pb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_msg.pb.cpp; sourceTree = "<group>"; };
+		83C04116246543EC00209603 /* jwumq_proxy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_proxy.cpp; sourceTree = "<group>"; };
+		83C04117246543EC00209603 /* jwumq_proxy.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jwumq_proxy.hpp; sourceTree = "<group>"; };
+		83C041192465441000209603 /* amtp_proxy.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = amtp_proxy.mk; sourceTree = "<group>"; };
+		83C0411B246544FD00209603 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		83C0411D2465452400209603 /* proxy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = proxy.cpp; sourceTree = "<group>"; };
+		83C0411E2465452400209603 /* proxy.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = proxy.hpp; sourceTree = "<group>"; };
+		83C041202465458500209603 /* proxy_config.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = proxy_config.cpp; sourceTree = "<group>"; };
+		83C041212465458500209603 /* proxy_config.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = proxy_config.hpp; sourceTree = "<group>"; };
+		83C0EA6124906B33006AFE68 /* pool_monitor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pool_monitor.cpp; sourceTree = "<group>"; };
+		83C0EA6224906B33006AFE68 /* pool_monitor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pool_monitor.hpp; sourceTree = "<group>"; };
+		83C0EA6424906B7B006AFE68 /* factory_status.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = factory_status.cpp; sourceTree = "<group>"; };
+		83C0EA6524906B7B006AFE68 /* factory_status.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = factory_status.hpp; sourceTree = "<group>"; };
+		83C0EA6724906BF4006AFE68 /* access_unit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = access_unit.cpp; sourceTree = "<group>"; };
+		83C0EA6824906BF4006AFE68 /* access_unit.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = access_unit.hpp; sourceTree = "<group>"; };
+		83D6224A2408BEA70021B953 /* gen_license_msg.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_license_msg.sh; sourceTree = "<group>"; };
+		83D6224F2408BFB30021B953 /* license_msg.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = license_msg.proto; sourceTree = "<group>"; };
+		83D622512408C9510021B953 /* license_msg.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = license_msg.pb.h; sourceTree = "<group>"; };
+		83D622522408C9510021B953 /* license_msg.pb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = license_msg.pb.cpp; sourceTree = "<group>"; };
+		83D666F82498B4A600277020 /* libjwumqa_tester.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = libjwumqa_tester.cpp; sourceTree = "<group>"; };
+		83D666FA2498B5CB00277020 /* libjwumqa_tester.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = libjwumqa_tester.mk; sourceTree = "<group>"; };
+		83D8A124244EA0B900E9E6D4 /* _amtpa_install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = _amtpa_install.sh; sourceTree = "<group>"; };
+		83D8A125244EA0EB00E9E6D4 /* make_amtpa_install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_amtpa_install.sh; sourceTree = "<group>"; };
+		83E002DC2418AA4800AC6909 /* amtp_upload_file_data.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_upload_file_data.cpp; sourceTree = "<group>"; };
+		83E002DD2418AA4800AC6909 /* amtp_upload_file_data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_upload_file_data.hpp; sourceTree = "<group>"; };
+		83E002DF2418B19F00AC6909 /* amtp_upload_file_data_resp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = amtp_upload_file_data_resp.cpp; sourceTree = "<group>"; };
+		83E002E02418B19F00AC6909 /* amtp_upload_file_data_resp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = amtp_upload_file_data_resp.hpp; sourceTree = "<group>"; };
+		83E1400E2477B2F200C85248 /* jwevents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jwevents.h; sourceTree = "<group>"; };
+		83E1AA6923BD74BC00099598 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		83E1AA6A23BD74BC00099598 /* monitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = monitor.cpp; sourceTree = "<group>"; };
+		83E1AA6B23BD74BC00099598 /* monitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = monitor.h; sourceTree = "<group>"; };
+		83E1AA6E23BD74EF00099598 /* amtp_monitor.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = amtp_monitor.mk; sourceTree = "<group>"; };
+		83E1AA7023BD755200099598 /* amtp_router.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = amtp_router.mk; sourceTree = "<group>"; };
+		83E1AA7223BD775300099598 /* config.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.conf; sourceTree = "<group>"; };
+		83E1AA7323BD7E3E00099598 /* config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = config.cpp; sourceTree = "<group>"; };
+		83E1AA7423BD7E3E00099598 /* monitor_config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = monitor_config.cpp; sourceTree = "<group>"; };
+		83E1AA7523BD7E3E00099598 /* monitor_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = monitor_config.h; sourceTree = "<group>"; };
+		83E1AA7623BD7E3E00099598 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		83E1AA7923BD7E6500099598 /* jLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jLog.h; sourceTree = "<group>"; };
+		83E1AA7A23BD7E6500099598 /* jLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jLog.cpp; sourceTree = "<group>"; };
+		83E1AA7D23BD8E9D00099598 /* cJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cJSON.h; sourceTree = "<group>"; };
+		83E1AA7E23BD8E9E00099598 /* cJSON.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cJSON.cpp; sourceTree = "<group>"; };
+		83E1AA8023BDD70B00099598 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		83E1AA8823BEC89100099598 /* router_config.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = router_config.cpp; sourceTree = "<group>"; };
+		83E1AA8923BEC89100099598 /* router_config.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = router_config.hpp; sourceTree = "<group>"; };
+		83F4F687248629CD009BB9B0 /* jwumq_msg.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = jwumq_msg.proto; path = source/jwumq_protocol/jwumq_msg.proto; sourceTree = SOURCE_ROOT; };
+		83F4F68924862A21009BB9B0 /* gen_jwumq_msg.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_jwumq_msg.sh; sourceTree = "<group>"; };
+		83F4F68A2486399C009BB9B0 /* jwumq_msg.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jwumq_msg.pb.h; sourceTree = "<group>"; };
+		83F930EA24CA6D5E000CA614 /* jwumq_message.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_message.cpp; sourceTree = "<group>"; };
+		83F930EB24CA6D5E000CA614 /* jwumq_message.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jwumq_message.hpp; sourceTree = "<group>"; };
+		83F930ED24CA6DC3000CA614 /* jwumq_message.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = jwumq_message.proto; sourceTree = "<group>"; };
+		83F930EF24CA6E08000CA614 /* gen_jwumq_message.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_jwumq_message.sh; sourceTree = "<group>"; };
+		83F930F024CA6E9C000CA614 /* jwumq_message.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jwumq_message.pb.h; sourceTree = "<group>"; };
+		83F930F324CA701D000CA614 /* jwumq_message.pb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jwumq_message.pb.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8327AC3B23B48DE4009AD7C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8309E20A2480A7F6002AA809 /* jwumq_factory */ = {
+			isa = PBXGroup;
+			children = (
+				8309E20C2480A859002AA809 /* main.cpp */,
+				83B53D1F248E2E3600DC3D65 /* factory.cpp */,
+				83B53D20248E2E3600DC3D65 /* factory.hpp */,
+				83C0EA6124906B33006AFE68 /* pool_monitor.cpp */,
+				83C0EA6224906B33006AFE68 /* pool_monitor.hpp */,
+				83C0EA6424906B7B006AFE68 /* factory_status.cpp */,
+				83C0EA6524906B7B006AFE68 /* factory_status.hpp */,
+				83C0EA6724906BF4006AFE68 /* access_unit.cpp */,
+				83C0EA6824906BF4006AFE68 /* access_unit.hpp */,
+				83609D4B249359AB0010274B /* factory_def.h */,
+			);
+			path = jwumq_factory;
+			sourceTree = "<group>";
+		};
+		8309E20B2480A80D002AA809 /* jwumq_pool */ = {
+			isa = PBXGroup;
+			children = (
+				83450EEF24A1C908000FB9A9 /* queue */,
+				8309E20E2480A864002AA809 /* main.cpp */,
+				83B53D22248E345000DC3D65 /* pool.cpp */,
+				83B53D23248E345000DC3D65 /* pool.hpp */,
+				83AF0A1F2491C770007BBF29 /* pool_branch.cpp */,
+				83AF0A202491C770007BBF29 /* pool_branch.hpp */,
+				83AF0A2224921CE0007BBF29 /* pool_status.cpp */,
+				83AF0A2324921CE0007BBF29 /* pool_status.hpp */,
+				83609D4A249359650010274B /* pool_def.h */,
+				8315DB1824A0974A00F7D6B7 /* access_unit.cpp */,
+				8315DB1924A0974B00F7D6B7 /* access_unit.hpp */,
+				83450EE924A1B03E000FB9A9 /* queue_center.cpp */,
+				83450EEA24A1B03E000FB9A9 /* queue_center.hpp */,
+			);
+			path = jwumq_pool;
+			sourceTree = "<group>";
+		};
+		8327AC3523B48DE4009AD7C0 = {
+			isa = PBXGroup;
+			children = (
+				8327AC4A23B48F77009AD7C0 /* source */,
+				8327AC4923B48F5E009AD7C0 /* shell */,
+				8327AC4823B48F47009AD7C0 /* make */,
+				8327AC3F23B48DE4009AD7C0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8327AC3F23B48DE4009AD7C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8327AC3E23B48DE4009AD7C0 /* Amtp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8327AC4823B48F47009AD7C0 /* make */ = {
+			isa = PBXGroup;
+			children = (
+				8322947E24F88F1D00F50E7E /* amtpa_lic_generator.mk */,
+				8322947D24F88BAA00F50E7E /* libamtpa_license.mk */,
+				8314D3A32499B7D3004CAAAD /* libjwumqa.mk */,
+				83D666FA2498B5CB00277020 /* libjwumqa_tester.mk */,
+				8309E2112480A908002AA809 /* jwumq_factory.mk */,
+				8309E2102480A908002AA809 /* jwumq_pool.mk */,
+				832BC8D5246CEDE700743697 /* jwumq_monitor.mk */,
+				83C041192465441000209603 /* amtp_proxy.mk */,
+				83B83EC023C5CBC0006E4DE6 /* libjwumq.mk */,
+				83B83EA423C48180006E4DE6 /* libamtpsa.mk */,
+				83E1AA7023BD755200099598 /* amtp_router.mk */,
+				83E1AA6E23BD74EF00099598 /* amtp_monitor.mk */,
+				8327AC6023B58E82009AD7C0 /* libamtpaccess_tester.mk */,
+				8327AC4B23B490A7009AD7C0 /* libamtpca.mk */,
+			);
+			path = make;
+			sourceTree = "<group>";
+		};
+		8327AC4923B48F5E009AD7C0 /* shell */ = {
+			isa = PBXGroup;
+			children = (
+				83F930EF24CA6E08000CA614 /* gen_jwumq_message.sh */,
+				838093C624AEC0AD00A6DA2F /* _jwumq_install.sh */,
+				838093C524AEC04000A6DA2F /* make_jwumq_install.sh */,
+				83F4F68924862A21009BB9B0 /* gen_jwumq_msg.sh */,
+				83D8A125244EA0EB00E9E6D4 /* make_amtpa_install.sh */,
+				83D8A124244EA0B900E9E6D4 /* _amtpa_install.sh */,
+				83D6224A2408BEA70021B953 /* gen_license_msg.sh */,
+				83558EAD23CC193D00E2F82A /* gen_amtpap_msg.sh */,
+				8327AC4C23B4914F009AD7C0 /* build.sh */,
+				8327AC4E23B4914F009AD7C0 /* killall.sh */,
+			);
+			path = shell;
+			sourceTree = "<group>";
+		};
+		8327AC4A23B48F77009AD7C0 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				83F4F6862485E938009BB9B0 /* jwumq_protocol */,
+				83D6224B2408BEC40021B953 /* license */,
+				83558EA923CBFA3E00E2F82A /* amtpa_protocol */,
+				83B83EBB23C5C97A006E4DE6 /* libjwumq */,
+				83B83E9C23C46355006E4DE6 /* libamtpa */,
+				83E1AA7123BD774100099598 /* config */,
+				83C0411A246544AB00209603 /* amtp_proxy */,
+				83E1AA6F23BD751700099598 /* amtp_router */,
+				83E1AA6823BD74A000099598 /* amtp_monitor */,
+				8327AC5C23B49221009AD7C0 /* jwumq */,
+				8327AC5B23B491FF009AD7C0 /* jlog */,
+				8327AC4F23B49167009AD7C0 /* include */,
+				8309E20A2480A7F6002AA809 /* jwumq_factory */,
+				8309E20B2480A80D002AA809 /* jwumq_pool */,
+				83D666F62498520100277020 /* libjwumqa */,
+				835E6959246B79E900B6160E /* jwumq_manager */,
+				835E6958246B79B000B6160E /* libjwumq_manager */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		8327AC4F23B49167009AD7C0 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				83E1400D2477B2B100C85248 /* jwevents */,
+				83E1AA7C23BD8E7D00099598 /* cjson */,
+				8327AC5023B49180009AD7C0 /* gflags */,
+				8327AC5523B49180009AD7C0 /* glog */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		8327AC5023B49180009AD7C0 /* gflags */ = {
+			isa = PBXGroup;
+			children = (
+				8327AC5123B49180009AD7C0 /* gflags_declare.h */,
+				8327AC5223B49180009AD7C0 /* gflags_gflags.h */,
+				8327AC5323B49180009AD7C0 /* gflags_completions.h */,
+				8327AC5423B49180009AD7C0 /* gflags.h */,
+			);
+			path = gflags;
+			sourceTree = "<group>";
+		};
+		8327AC5523B49180009AD7C0 /* glog */ = {
+			isa = PBXGroup;
+			children = (
+				8327AC5623B49180009AD7C0 /* stl_logging.h */,
+				8327AC5723B49180009AD7C0 /* logging.h */,
+				8327AC5823B49180009AD7C0 /* raw_logging.h */,
+				8327AC5923B49180009AD7C0 /* vlog_is_on.h */,
+				8327AC5A23B49180009AD7C0 /* log_severity.h */,
+			);
+			path = glog;
+			sourceTree = "<group>";
+		};
+		8327AC5B23B491FF009AD7C0 /* jlog */ = {
+			isa = PBXGroup;
+			children = (
+				83E1AA7A23BD7E6500099598 /* jLog.cpp */,
+				83E1AA7923BD7E6500099598 /* jLog.h */,
+			);
+			path = jlog;
+			sourceTree = "<group>";
+		};
+		8327AC5C23B49221009AD7C0 /* jwumq */ = {
+			isa = PBXGroup;
+			children = (
+				83B83EAB23C56098006E4DE6 /* jwumq_base.cpp */,
+				83B83EAC23C56098006E4DE6 /* jwumq_base.hpp */,
+				83B83EAE23C56768006E4DE6 /* jwumq_define.h */,
+				83B83EAF23C571A4006E4DE6 /* jwumq_queue.cpp */,
+				83B83EB023C571A4006E4DE6 /* jwumq_queue.hpp */,
+				83B83EB223C572CE006E4DE6 /* jwumq_router.cpp */,
+				83B83EB323C572CE006E4DE6 /* jwumq_router.hpp */,
+				8384CCA22462633400D182D1 /* jwumq_dealer.cpp */,
+				8384CCA32462633400D182D1 /* jwumq_dealer.hpp */,
+				83C04116246543EC00209603 /* jwumq_proxy.cpp */,
+				83C04117246543EC00209603 /* jwumq_proxy.hpp */,
+				83AF0A192491B9EA007BBF29 /* jwumq_duplex_pub.cpp */,
+				83AF0A1A2491B9EA007BBF29 /* jwumq_duplex_pub.hpp */,
+				83AF0A1C2491BA01007BBF29 /* jwumq_duplex_sub.cpp */,
+				83AF0A1D2491BA01007BBF29 /* jwumq_duplex_sub.hpp */,
+				834DC017249CB9B0005CDDFF /* jwumq_router_server.cpp */,
+				834DC018249CB9B0005CDDFF /* jwumq_router_server.hpp */,
+				83F930EA24CA6D5E000CA614 /* jwumq_message.cpp */,
+				83F930EB24CA6D5E000CA614 /* jwumq_message.hpp */,
+				83F930F324CA701D000CA614 /* jwumq_message.pb.cpp */,
+				83F930F024CA6E9C000CA614 /* jwumq_message.pb.h */,
+				83F930ED24CA6DC3000CA614 /* jwumq_message.proto */,
+			);
+			path = jwumq;
+			sourceTree = "<group>";
+		};
+		8327AC5D23B49349009AD7C0 /* client_access */ = {
+			isa = PBXGroup;
+			children = (
+				8362D2D324FC95FE000F5EFF /* sys_info */,
+				83ABB112240A2E930096C5DA /* message */,
+				83B83E9D23C46837006E4DE6 /* libamtpca.cpp */,
+				83B83E9E23C46837006E4DE6 /* libamtpca.hpp */,
+				836D264A24077C0E00ACAC54 /* amtpca.cpp */,
+				836D264B24077C0E00ACAC54 /* amtpca.hpp */,
+				8346C83E240CA68D000AD219 /* amtpca_define.h */,
+			);
+			path = client_access;
+			sourceTree = "<group>";
+		};
+		83450EEF24A1C908000FB9A9 /* queue */ = {
+			isa = PBXGroup;
+			children = (
+				83450EEC24A1C8CC000FB9A9 /* queue_base.cpp */,
+				83450EED24A1C8CC000FB9A9 /* queue_base.hpp */,
+				838945A724A2E8CB00FAB762 /* queue_pipe.cpp */,
+				838945A824A2E8CB00FAB762 /* queue_pipe.hpp */,
+				838ED7A124C939B600CD968F /* queue_member.cpp */,
+				838ED7A224C939B600CD968F /* queue_member.hpp */,
+				8367042624E2251B00829049 /* queue_producer.cpp */,
+				8367042724E2251B00829049 /* queue_producer.hpp */,
+			);
+			path = queue;
+			sourceTree = "<group>";
+		};
+		83558EA923CBFA3E00E2F82A /* amtpa_protocol */ = {
+			isa = PBXGroup;
+			children = (
+				8382D34E23D19B1F00653E7A /* amtpap_msg.pb.cpp */,
+				83558EAF23CC254100E2F82A /* amtpap_msg.pb.h */,
+				83558EAB23CC0FD200E2F82A /* amtpap_msg.proto */,
+			);
+			path = amtpa_protocol;
+			sourceTree = "<group>";
+		};
+		835E6958246B79B000B6160E /* libjwumq_manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = libjwumq_manager;
+			sourceTree = "<group>";
+		};
+		835E6959246B79E900B6160E /* jwumq_manager */ = {
+			isa = PBXGroup;
+			children = (
+				835E695A246B79E900B6160E /* static */,
+				835E69A1246B79E900B6160E /* templates */,
+				835E69A6246B79E900B6160E /* venv */,
+				835E6B0B246B79EA00B6160E /* jwumq_manager.py */,
+				835E6B0C246B79EA00B6160E /* .idea */,
+				832BC8D3246CED2A00743697 /* main.cpp */,
+				83A783FC246D3C5B00435C00 /* external_manage.cpp */,
+				83A783FD246D3C5B00435C00 /* external_manage.hpp */,
+				83A783FF246D3C8200435C00 /* internal_manage.cpp */,
+				83A78400246D3C8200435C00 /* internal_manage.hpp */,
+				8333BDB5247363140036B737 /* monitor.cpp */,
+				8333BDB6247363140036B737 /* monitor.hpp */,
+				8333BDBC247377300036B737 /* monitor_define.h */,
+			);
+			path = jwumq_manager;
+			sourceTree = "<group>";
+		};
+		835E695A246B79E900B6160E /* static */ = {
+			isa = PBXGroup;
+			children = (
+				835E695B246B79E900B6160E /* css */,
+				835E695E246B79E900B6160E /* contactform */,
+				835E6960246B79E900B6160E /* js */,
+				835E6962246B79E900B6160E /* img */,
+				835E697A246B79E900B6160E /* lib */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		835E695B246B79E900B6160E /* css */ = {
+			isa = PBXGroup;
+			children = (
+				835E695C246B79E900B6160E /* scss-files.txt */,
+				835E695D246B79E900B6160E /* style.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		835E695E246B79E900B6160E /* contactform */ = {
+			isa = PBXGroup;
+			children = (
+				835E695F246B79E900B6160E /* contactform.js */,
+			);
+			path = contactform;
+			sourceTree = "<group>";
+		};
+		835E6960246B79E900B6160E /* js */ = {
+			isa = PBXGroup;
+			children = (
+				835E6961246B79E900B6160E /* main.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		835E6962246B79E900B6160E /* img */ = {
+			isa = PBXGroup;
+			children = (
+				835E6963246B79E900B6160E /* statistics */,
+				835E6970246B79E900B6160E /* apple-touch-icon.png */,
+				835E6971246B79E900B6160E /* favicon.png */,
+				835E6972246B79E900B6160E /* config-img.jpg */,
+				835E6973246B79E900B6160E /* logo.png */,
+				835E6974246B79E900B6160E /* team-1.jpg */,
+				835E6975246B79E900B6160E /* team-3.jpg */,
+				835E6976246B79E900B6160E /* team-2.jpg */,
+				835E6977246B79E900B6160E /* call-to-action-bg.jpg */,
+				835E6978246B79E900B6160E /* team-4.jpg */,
+				835E6979246B79E900B6160E /* welcome-bg.jpg */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		835E6963246B79E900B6160E /* statistics */ = {
+			isa = PBXGroup;
+			children = (
+				835E6964246B79E900B6160E /* app2.jpg */,
+				835E6965246B79E900B6160E /* app3.jpg */,
+				835E6966246B79E900B6160E /* app1.jpg */,
+				835E6967246B79E900B6160E /* card3.jpg */,
+				835E6968246B79E900B6160E /* web1.jpg */,
+				835E6969246B79E900B6160E /* card2.jpg */,
+				835E696A246B79E900B6160E /* logo1.jpg */,
+				835E696B246B79E900B6160E /* logo3.jpg */,
+				835E696C246B79E900B6160E /* web3.jpg */,
+				835E696D246B79E900B6160E /* web2.jpg */,
+				835E696E246B79E900B6160E /* card1.jpg */,
+				835E696F246B79E900B6160E /* logo2.jpg */,
+			);
+			path = statistics;
+			sourceTree = "<group>";
+		};
+		835E697A246B79E900B6160E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				835E697B246B79E900B6160E /* easing */,
+				835E697E246B79E900B6160E /* animate */,
+				835E6981246B79E900B6160E /* bootstrap */,
+				835E6988246B79E900B6160E /* waypoints */,
+				835E698A246B79E900B6160E /* wow */,
+				835E698D246B79E900B6160E /* jquery */,
+				835E6990246B79E900B6160E /* counterup */,
+				835E6992246B79E900B6160E /* superfish */,
+				835E6996246B79E900B6160E /* font-awesome */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		835E697B246B79E900B6160E /* easing */ = {
+			isa = PBXGroup;
+			children = (
+				835E697C246B79E900B6160E /* easing.js */,
+				835E697D246B79E900B6160E /* easing.min.js */,
+			);
+			path = easing;
+			sourceTree = "<group>";
+		};
+		835E697E246B79E900B6160E /* animate */ = {
+			isa = PBXGroup;
+			children = (
+				835E697F246B79E900B6160E /* animate.min.css */,
+				835E6980246B79E900B6160E /* animate.css */,
+			);
+			path = animate;
+			sourceTree = "<group>";
+		};
+		835E6981246B79E900B6160E /* bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				835E6982246B79E900B6160E /* css */,
+				835E6985246B79E900B6160E /* js */,
+			);
+			path = bootstrap;
+			sourceTree = "<group>";
+		};
+		835E6982246B79E900B6160E /* css */ = {
+			isa = PBXGroup;
+			children = (
+				835E6983246B79E900B6160E /* bootstrap.min.css */,
+				835E6984246B79E900B6160E /* bootstrap.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		835E6985246B79E900B6160E /* js */ = {
+			isa = PBXGroup;
+			children = (
+				835E6986246B79E900B6160E /* bootstrap.bundle.min.js */,
+				835E6987246B79E900B6160E /* bootstrap.min.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		835E6988246B79E900B6160E /* waypoints */ = {
+			isa = PBXGroup;
+			children = (
+				835E6989246B79E900B6160E /* waypoints.min.js */,
+			);
+			path = waypoints;
+			sourceTree = "<group>";
+		};
+		835E698A246B79E900B6160E /* wow */ = {
+			isa = PBXGroup;
+			children = (
+				835E698B246B79E900B6160E /* wow.js */,
+				835E698C246B79E900B6160E /* wow.min.js */,
+			);
+			path = wow;
+			sourceTree = "<group>";
+		};
+		835E698D246B79E900B6160E /* jquery */ = {
+			isa = PBXGroup;
+			children = (
+				835E698E246B79E900B6160E /* jquery.min.js */,
+				835E698F246B79E900B6160E /* jquery-migrate.min.js */,
+			);
+			path = jquery;
+			sourceTree = "<group>";
+		};
+		835E6990246B79E900B6160E /* counterup */ = {
+			isa = PBXGroup;
+			children = (
+				835E6991246B79E900B6160E /* counterup.min.js */,
+			);
+			path = counterup;
+			sourceTree = "<group>";
+		};
+		835E6992246B79E900B6160E /* superfish */ = {
+			isa = PBXGroup;
+			children = (
+				835E6993246B79E900B6160E /* superfish.js */,
+				835E6994246B79E900B6160E /* hoverIntent.js */,
+				835E6995246B79E900B6160E /* superfish.min.js */,
+			);
+			path = superfish;
+			sourceTree = "<group>";
+		};
+		835E6996246B79E900B6160E /* font-awesome */ = {
+			isa = PBXGroup;
+			children = (
+				835E6997246B79E900B6160E /* css */,
+				835E699A246B79E900B6160E /* fonts */,
+			);
+			path = "font-awesome";
+			sourceTree = "<group>";
+		};
+		835E6997246B79E900B6160E /* css */ = {
+			isa = PBXGroup;
+			children = (
+				835E6998246B79E900B6160E /* font-awesome.css */,
+				835E6999246B79E900B6160E /* font-awesome.min.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		835E699A246B79E900B6160E /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				835E699B246B79E900B6160E /* fontawesome-webfont.svg */,
+				835E699C246B79E900B6160E /* FontAwesome.otf */,
+				835E699D246B79E900B6160E /* fontawesome-webfont.woff2 */,
+				835E699E246B79E900B6160E /* fontawesome-webfont.ttf */,
+				835E699F246B79E900B6160E /* fontawesome-webfont.woff */,
+				835E69A0246B79E900B6160E /* fontawesome-webfont.eot */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		835E69A1246B79E900B6160E /* templates */ = {
+			isa = PBXGroup;
+			children = (
+				835E69A2246B79E900B6160E /* post.html */,
+				835E69A3246B79E900B6160E /* index.html */,
+				835E69A4246B79E900B6160E /* result.html */,
+				835E69A5246B79E900B6160E /* get.html */,
+			);
+			path = templates;
+			sourceTree = "<group>";
+		};
+		835E69A6246B79E900B6160E /* venv */ = {
+			isa = PBXGroup;
+			children = (
+				835E69A7246B79E900B6160E /* bin */,
+				835E69B3246B79E900B6160E /* include */,
+				835E69B4246B79E900B6160E /* pyvenv.cfg */,
+				835E69B5246B79E900B6160E /* lib */,
+			);
+			path = venv;
+			sourceTree = "<group>";
+		};
+		835E69A7246B79E900B6160E /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				835E69A8246B79E900B6160E /* pip3.7 */,
+				835E69A9246B79E900B6160E /* python3 */,
+				835E69AA246B79E900B6160E /* easy_install */,
+				835E69AB246B79E900B6160E /* python */,
+				835E69AC246B79E900B6160E /* pip3 */,
+				835E69AD246B79E900B6160E /* activate.fish */,
+				835E69AE246B79E900B6160E /* easy_install-3.7 */,
+				835E69AF246B79E900B6160E /* python3.7 */,
+				835E69B0246B79E900B6160E /* pip */,
+				835E69B1246B79E900B6160E /* activate */,
+				835E69B2246B79E900B6160E /* activate.csh */,
+			);
+			path = bin;
+			sourceTree = "<group>";
+		};
+		835E69B3246B79E900B6160E /* include */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		835E69B5246B79E900B6160E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				835E69B6246B79E900B6160E /* python3.7 */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		835E69B6246B79E900B6160E /* python3.7 */ = {
+			isa = PBXGroup;
+			children = (
+				835E69B7246B79E900B6160E /* site-packages */,
+			);
+			path = python3.7;
+			sourceTree = "<group>";
+		};
+		835E69B7246B79E900B6160E /* site-packages */ = {
+			isa = PBXGroup;
+			children = (
+				835E69B8246B79E900B6160E /* easy-install.pth */,
+				835E69B9246B79E900B6160E /* setuptools.pth */,
+				835E69BA246B79E900B6160E /* pip-10.0.1-py3.7.egg */,
+				835E6B0A246B79EA00B6160E /* setuptools-39.1.0-py3.7.egg */,
+			);
+			path = "site-packages";
+			sourceTree = "<group>";
+		};
+		835E69BA246B79E900B6160E /* pip-10.0.1-py3.7.egg */ = {
+			isa = PBXGroup;
+			children = (
+				835E69BB246B79E900B6160E /* EGG-INFO */,
+				835E69C3246B79E900B6160E /* pip */,
+			);
+			path = "pip-10.0.1-py3.7.egg";
+			sourceTree = "<group>";
+		};
+		835E69BB246B79E900B6160E /* EGG-INFO */ = {
+			isa = PBXGroup;
+			children = (
+				835E69BC246B79E900B6160E /* PKG-INFO */,
+				835E69BD246B79E900B6160E /* not-zip-safe */,
+				835E69BE246B79E900B6160E /* SOURCES.txt */,
+				835E69BF246B79E900B6160E /* entry_points.txt */,
+				835E69C0246B79E900B6160E /* requires.txt */,
+				835E69C1246B79E900B6160E /* top_level.txt */,
+				835E69C2246B79E900B6160E /* dependency_links.txt */,
+			);
+			path = "EGG-INFO";
+			sourceTree = "<group>";
+		};
+		835E69C3246B79E900B6160E /* pip */ = {
+			isa = PBXGroup;
+			children = (
+				835E69C4246B79E900B6160E /* _internal */,
+				835E6A08246B79E900B6160E /* _vendor */,
+				835E6B08246B79EA00B6160E /* __init__.py */,
+				835E6B09246B79EA00B6160E /* __main__.py */,
+			);
+			path = pip;
+			sourceTree = "<group>";
+		};
+		835E69C4246B79E900B6160E /* _internal */ = {
+			isa = PBXGroup;
+			children = (
+				835E69C5246B79E900B6160E /* configuration.py */,
+				835E69C6246B79E900B6160E /* baseparser.py */,
+				835E69C7246B79E900B6160E /* resolve.py */,
+				835E69C8246B79E900B6160E /* compat.py */,
+				835E69C9246B79E900B6160E /* index.py */,
+				835E69CA246B79E900B6160E /* cmdoptions.py */,
+				835E69CB246B79E900B6160E /* download.py */,
+				835E69CC246B79E900B6160E /* cache.py */,
+				835E69CD246B79E900B6160E /* __init__.py */,
+				835E69CE246B79E900B6160E /* status_codes.py */,
+				835E69CF246B79E900B6160E /* utils */,
+				835E69DF246B79E900B6160E /* models */,
+				835E69E2246B79E900B6160E /* operations */,
+				835E69E7246B79E900B6160E /* req */,
+				835E69ED246B79E900B6160E /* vcs */,
+				835E69F3246B79E900B6160E /* pep425tags.py */,
+				835E69F4246B79E900B6160E /* exceptions.py */,
+				835E69F5246B79E900B6160E /* commands */,
+				835E6A04246B79E900B6160E /* basecommand.py */,
+				835E6A05246B79E900B6160E /* locations.py */,
+				835E6A06246B79E900B6160E /* wheel.py */,
+				835E6A07246B79E900B6160E /* build_env.py */,
+			);
+			path = _internal;
+			sourceTree = "<group>";
+		};
+		835E69CF246B79E900B6160E /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				835E69D0246B79E900B6160E /* logging.py */,
+				835E69D1246B79E900B6160E /* misc.py */,
+				835E69D2246B79E900B6160E /* encoding.py */,
+				835E69D3246B79E900B6160E /* deprecation.py */,
+				835E69D4246B79E900B6160E /* ui.py */,
+				835E69D5246B79E900B6160E /* filesystem.py */,
+				835E69D6246B79E900B6160E /* __init__.py */,
+				835E69D7246B79E900B6160E /* temp_dir.py */,
+				835E69D8246B79E900B6160E /* appdirs.py */,
+				835E69D9246B79E900B6160E /* setuptools_build.py */,
+				835E69DA246B79E900B6160E /* packaging.py */,
+				835E69DB246B79E900B6160E /* outdated.py */,
+				835E69DC246B79E900B6160E /* typing.py */,
+				835E69DD246B79E900B6160E /* hashes.py */,
+				835E69DE246B79E900B6160E /* glibc.py */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		835E69DF246B79E900B6160E /* models */ = {
+			isa = PBXGroup;
+			children = (
+				835E69E0246B79E900B6160E /* index.py */,
+				835E69E1246B79E900B6160E /* __init__.py */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		835E69E2246B79E900B6160E /* operations */ = {
+			isa = PBXGroup;
+			children = (
+				835E69E3246B79E900B6160E /* check.py */,
+				835E69E4246B79E900B6160E /* __init__.py */,
+				835E69E5246B79E900B6160E /* freeze.py */,
+				835E69E6246B79E900B6160E /* prepare.py */,
+			);
+			path = operations;
+			sourceTree = "<group>";
+		};
+		835E69E7246B79E900B6160E /* req */ = {
+			isa = PBXGroup;
+			children = (
+				835E69E8246B79E900B6160E /* req_install.py */,
+				835E69E9246B79E900B6160E /* req_set.py */,
+				835E69EA246B79E900B6160E /* req_uninstall.py */,
+				835E69EB246B79E900B6160E /* __init__.py */,
+				835E69EC246B79E900B6160E /* req_file.py */,
+			);
+			path = req;
+			sourceTree = "<group>";
+		};
+		835E69ED246B79E900B6160E /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				835E69EE246B79E900B6160E /* git.py */,
+				835E69EF246B79E900B6160E /* __init__.py */,
+				835E69F0246B79E900B6160E /* mercurial.py */,
+				835E69F1246B79E900B6160E /* bazaar.py */,
+				835E69F2246B79E900B6160E /* subversion.py */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
+		835E69F5246B79E900B6160E /* commands */ = {
+			isa = PBXGroup;
+			children = (
+				835E69F6246B79E900B6160E /* configuration.py */,
+				835E69F7246B79E900B6160E /* show.py */,
+				835E69F8246B79E900B6160E /* list.py */,
+				835E69F9246B79E900B6160E /* check.py */,
+				835E69FA246B79E900B6160E /* completion.py */,
+				835E69FB246B79E900B6160E /* download.py */,
+				835E69FC246B79E900B6160E /* __init__.py */,
+				835E69FD246B79E900B6160E /* hash.py */,
+				835E69FE246B79E900B6160E /* uninstall.py */,
+				835E69FF246B79E900B6160E /* freeze.py */,
+				835E6A00246B79E900B6160E /* search.py */,
+				835E6A01246B79E900B6160E /* install.py */,
+				835E6A02246B79E900B6160E /* help.py */,
+				835E6A03246B79E900B6160E /* wheel.py */,
+			);
+			path = commands;
+			sourceTree = "<group>";
+		};
+		835E6A08246B79E900B6160E /* _vendor */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A09246B79E900B6160E /* retrying.py */,
+				835E6A0A246B79E900B6160E /* packaging */,
+				835E6A14246B79E900B6160E /* pytoml */,
+				835E6A19246B79E900B6160E /* ipaddress.py */,
+				835E6A1A246B79E900B6160E /* msgpack */,
+				835E6A1F246B79E900B6160E /* chardet */,
+				835E6A4A246B79E900B6160E /* webencodings */,
+				835E6A50246B79E900B6160E /* progress */,
+				835E6A56246B79E900B6160E /* distlib */,
+				835E6A6F246B79EA00B6160E /* colorama */,
+				835E6A76246B79EA00B6160E /* lockfile */,
+				835E6A7D246B79EA00B6160E /* cachecontrol */,
+				835E6A8C246B79EA00B6160E /* idna */,
+				835E6A95246B79EA00B6160E /* __init__.py */,
+				835E6A96246B79EA00B6160E /* requests */,
+				835E6AA9246B79EA00B6160E /* appdirs.py */,
+				835E6AAA246B79EA00B6160E /* html5lib */,
+				835E6AD2246B79EA00B6160E /* certifi */,
+				835E6AD7246B79EA00B6160E /* six.py */,
+				835E6AD8246B79EA00B6160E /* urllib3 */,
+				835E6B03246B79EA00B6160E /* distro.py */,
+				835E6B04246B79EA00B6160E /* pkg_resources */,
+				835E6B07246B79EA00B6160E /* pyparsing.py */,
+			);
+			path = _vendor;
+			sourceTree = "<group>";
+		};
+		835E6A0A246B79E900B6160E /* packaging */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A0B246B79E900B6160E /* version.py */,
+				835E6A0C246B79E900B6160E /* __init__.py */,
+				835E6A0D246B79E900B6160E /* utils.py */,
+				835E6A0E246B79E900B6160E /* requirements.py */,
+				835E6A0F246B79E900B6160E /* _structures.py */,
+				835E6A10246B79E900B6160E /* markers.py */,
+				835E6A11246B79E900B6160E /* __about__.py */,
+				835E6A12246B79E900B6160E /* _compat.py */,
+				835E6A13246B79E900B6160E /* specifiers.py */,
+			);
+			path = packaging;
+			sourceTree = "<group>";
+		};
+		835E6A14246B79E900B6160E /* pytoml */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A15246B79E900B6160E /* __init__.py */,
+				835E6A16246B79E900B6160E /* core.py */,
+				835E6A17246B79E900B6160E /* parser.py */,
+				835E6A18246B79E900B6160E /* writer.py */,
+			);
+			path = pytoml;
+			sourceTree = "<group>";
+		};
+		835E6A1A246B79E900B6160E /* msgpack */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A1B246B79E900B6160E /* _version.py */,
+				835E6A1C246B79E900B6160E /* __init__.py */,
+				835E6A1D246B79E900B6160E /* exceptions.py */,
+				835E6A1E246B79E900B6160E /* fallback.py */,
+			);
+			path = msgpack;
+			sourceTree = "<group>";
+		};
+		835E6A1F246B79E900B6160E /* chardet */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A20246B79E900B6160E /* enums.py */,
+				835E6A21246B79E900B6160E /* langhungarianmodel.py */,
+				835E6A22246B79E900B6160E /* mbcssm.py */,
+				835E6A23246B79E900B6160E /* langthaimodel.py */,
+				835E6A24246B79E900B6160E /* version.py */,
+				835E6A25246B79E900B6160E /* compat.py */,
+				835E6A26246B79E900B6160E /* langbulgarianmodel.py */,
+				835E6A27246B79E900B6160E /* euckrprober.py */,
+				835E6A28246B79E900B6160E /* sjisprober.py */,
+				835E6A29246B79E900B6160E /* cp949prober.py */,
+				835E6A2A246B79E900B6160E /* __init__.py */,
+				835E6A2B246B79E900B6160E /* euctwfreq.py */,
+				835E6A2C246B79E900B6160E /* langhebrewmodel.py */,
+				835E6A2D246B79E900B6160E /* cli */,
+				835E6A30246B79E900B6160E /* chardistribution.py */,
+				835E6A31246B79E900B6160E /* latin1prober.py */,
+				835E6A32246B79E900B6160E /* charsetprober.py */,
+				835E6A33246B79E900B6160E /* gb2312prober.py */,
+				835E6A34246B79E900B6160E /* mbcharsetprober.py */,
+				835E6A35246B79E900B6160E /* langcyrillicmodel.py */,
+				835E6A36246B79E900B6160E /* euctwprober.py */,
+				835E6A37246B79E900B6160E /* codingstatemachine.py */,
+				835E6A38246B79E900B6160E /* escprober.py */,
+				835E6A39246B79E900B6160E /* universaldetector.py */,
+				835E6A3A246B79E900B6160E /* utf8prober.py */,
+				835E6A3B246B79E900B6160E /* gb2312freq.py */,
+				835E6A3C246B79E900B6160E /* mbcsgroupprober.py */,
+				835E6A3D246B79E900B6160E /* langgreekmodel.py */,
+				835E6A3E246B79E900B6160E /* eucjpprober.py */,
+				835E6A3F246B79E900B6160E /* jisfreq.py */,
+				835E6A40246B79E900B6160E /* escsm.py */,
+				835E6A41246B79E900B6160E /* langturkishmodel.py */,
+				835E6A42246B79E900B6160E /* sbcharsetprober.py */,
+				835E6A43246B79E900B6160E /* big5freq.py */,
+				835E6A44246B79E900B6160E /* euckrfreq.py */,
+				835E6A45246B79E900B6160E /* big5prober.py */,
+				835E6A46246B79E900B6160E /* hebrewprober.py */,
+				835E6A47246B79E900B6160E /* charsetgroupprober.py */,
+				835E6A48246B79E900B6160E /* sbcsgroupprober.py */,
+				835E6A49246B79E900B6160E /* jpcntx.py */,
+			);
+			path = chardet;
+			sourceTree = "<group>";
+		};
+		835E6A2D246B79E900B6160E /* cli */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A2E246B79E900B6160E /* __init__.py */,
+				835E6A2F246B79E900B6160E /* chardetect.py */,
+			);
+			path = cli;
+			sourceTree = "<group>";
+		};
+		835E6A4A246B79E900B6160E /* webencodings */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A4B246B79E900B6160E /* labels.py */,
+				835E6A4C246B79E900B6160E /* mklabels.py */,
+				835E6A4D246B79E900B6160E /* x_user_defined.py */,
+				835E6A4E246B79E900B6160E /* __init__.py */,
+				835E6A4F246B79E900B6160E /* tests.py */,
+			);
+			path = webencodings;
+			sourceTree = "<group>";
+		};
+		835E6A50246B79E900B6160E /* progress */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A51246B79E900B6160E /* __init__.py */,
+				835E6A52246B79E900B6160E /* bar.py */,
+				835E6A53246B79E900B6160E /* spinner.py */,
+				835E6A54246B79E900B6160E /* helpers.py */,
+				835E6A55246B79E900B6160E /* counter.py */,
+			);
+			path = progress;
+			sourceTree = "<group>";
+		};
+		835E6A56246B79E900B6160E /* distlib */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A57246B79E900B6160E /* _backport */,
+				835E6A5E246B79E900B6160E /* w32.exe */,
+				835E6A5F246B79E900B6160E /* locators.py */,
+				835E6A60246B79E900B6160E /* metadata.py */,
+				835E6A61246B79E900B6160E /* version.py */,
+				835E6A62246B79E900B6160E /* compat.py */,
+				835E6A63246B79E900B6160E /* index.py */,
+				835E6A64246B79E900B6160E /* manifest.py */,
+				835E6A65246B79E900B6160E /* util.py */,
+				835E6A66246B79E900B6160E /* database.py */,
+				835E6A67246B79EA00B6160E /* t32.exe */,
+				835E6A68246B79EA00B6160E /* __init__.py */,
+				835E6A69246B79EA00B6160E /* w64.exe */,
+				835E6A6A246B79EA00B6160E /* markers.py */,
+				835E6A6B246B79EA00B6160E /* resources.py */,
+				835E6A6C246B79EA00B6160E /* scripts.py */,
+				835E6A6D246B79EA00B6160E /* t64.exe */,
+				835E6A6E246B79EA00B6160E /* wheel.py */,
+			);
+			path = distlib;
+			sourceTree = "<group>";
+		};
+		835E6A57246B79E900B6160E /* _backport */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A58246B79E900B6160E /* shutil.py */,
+				835E6A59246B79E900B6160E /* misc.py */,
+				835E6A5A246B79E900B6160E /* __init__.py */,
+				835E6A5B246B79E900B6160E /* sysconfig.cfg */,
+				835E6A5C246B79E900B6160E /* tarfile.py */,
+				835E6A5D246B79E900B6160E /* sysconfig.py */,
+			);
+			path = _backport;
+			sourceTree = "<group>";
+		};
+		835E6A6F246B79EA00B6160E /* colorama */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A70246B79EA00B6160E /* __init__.py */,
+				835E6A71246B79EA00B6160E /* win32.py */,
+				835E6A72246B79EA00B6160E /* ansitowin32.py */,
+				835E6A73246B79EA00B6160E /* ansi.py */,
+				835E6A74246B79EA00B6160E /* winterm.py */,
+				835E6A75246B79EA00B6160E /* initialise.py */,
+			);
+			path = colorama;
+			sourceTree = "<group>";
+		};
+		835E6A76246B79EA00B6160E /* lockfile */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A77246B79EA00B6160E /* sqlitelockfile.py */,
+				835E6A78246B79EA00B6160E /* __init__.py */,
+				835E6A79246B79EA00B6160E /* linklockfile.py */,
+				835E6A7A246B79EA00B6160E /* mkdirlockfile.py */,
+				835E6A7B246B79EA00B6160E /* symlinklockfile.py */,
+				835E6A7C246B79EA00B6160E /* pidlockfile.py */,
+			);
+			path = lockfile;
+			sourceTree = "<group>";
+		};
+		835E6A7D246B79EA00B6160E /* cachecontrol */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A7E246B79EA00B6160E /* serialize.py */,
+				835E6A7F246B79EA00B6160E /* wrapper.py */,
+				835E6A80246B79EA00B6160E /* controller.py */,
+				835E6A81246B79EA00B6160E /* compat.py */,
+				835E6A82246B79EA00B6160E /* filewrapper.py */,
+				835E6A83246B79EA00B6160E /* heuristics.py */,
+				835E6A84246B79EA00B6160E /* adapter.py */,
+				835E6A85246B79EA00B6160E /* cache.py */,
+				835E6A86246B79EA00B6160E /* __init__.py */,
+				835E6A87246B79EA00B6160E /* _cmd.py */,
+				835E6A88246B79EA00B6160E /* caches */,
+			);
+			path = cachecontrol;
+			sourceTree = "<group>";
+		};
+		835E6A88246B79EA00B6160E /* caches */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A89246B79EA00B6160E /* file_cache.py */,
+				835E6A8A246B79EA00B6160E /* __init__.py */,
+				835E6A8B246B79EA00B6160E /* redis_cache.py */,
+			);
+			path = caches;
+			sourceTree = "<group>";
+		};
+		835E6A8C246B79EA00B6160E /* idna */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A8D246B79EA00B6160E /* intranges.py */,
+				835E6A8E246B79EA00B6160E /* package_data.py */,
+				835E6A8F246B79EA00B6160E /* compat.py */,
+				835E6A90246B79EA00B6160E /* idnadata.py */,
+				835E6A91246B79EA00B6160E /* __init__.py */,
+				835E6A92246B79EA00B6160E /* core.py */,
+				835E6A93246B79EA00B6160E /* codec.py */,
+				835E6A94246B79EA00B6160E /* uts46data.py */,
+			);
+			path = idna;
+			sourceTree = "<group>";
+		};
+		835E6A96246B79EA00B6160E /* requests */ = {
+			isa = PBXGroup;
+			children = (
+				835E6A97246B79EA00B6160E /* cookies.py */,
+				835E6A98246B79EA00B6160E /* auth.py */,
+				835E6A99246B79EA00B6160E /* sessions.py */,
+				835E6A9A246B79EA00B6160E /* hooks.py */,
+				835E6A9B246B79EA00B6160E /* compat.py */,
+				835E6A9C246B79EA00B6160E /* models.py */,
+				835E6A9D246B79EA00B6160E /* certs.py */,
+				835E6A9E246B79EA00B6160E /* __init__.py */,
+				835E6A9F246B79EA00B6160E /* status_codes.py */,
+				835E6AA0246B79EA00B6160E /* packages.py */,
+				835E6AA1246B79EA00B6160E /* __version__.py */,
+				835E6AA2246B79EA00B6160E /* api.py */,
+				835E6AA3246B79EA00B6160E /* _internal_utils.py */,
+				835E6AA4246B79EA00B6160E /* utils.py */,
+				835E6AA5246B79EA00B6160E /* exceptions.py */,
+				835E6AA6246B79EA00B6160E /* structures.py */,
+				835E6AA7246B79EA00B6160E /* help.py */,
+				835E6AA8246B79EA00B6160E /* adapters.py */,
+			);
+			path = requests;
+			sourceTree = "<group>";
+		};
+		835E6AAA246B79EA00B6160E /* html5lib */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AAB246B79EA00B6160E /* filters */,
+				835E6AB4246B79EA00B6160E /* treewalkers */,
+				835E6ABB246B79EA00B6160E /* treebuilders */,
+				835E6AC1246B79EA00B6160E /* _inputstream.py */,
+				835E6AC2246B79EA00B6160E /* _ihatexml.py */,
+				835E6AC3246B79EA00B6160E /* constants.py */,
+				835E6AC4246B79EA00B6160E /* html5parser.py */,
+				835E6AC5246B79EA00B6160E /* __init__.py */,
+				835E6AC6246B79EA00B6160E /* _trie */,
+				835E6ACB246B79EA00B6160E /* treeadapters */,
+				835E6ACF246B79EA00B6160E /* serializer.py */,
+				835E6AD0246B79EA00B6160E /* _tokenizer.py */,
+				835E6AD1246B79EA00B6160E /* _utils.py */,
+			);
+			path = html5lib;
+			sourceTree = "<group>";
+		};
+		835E6AAB246B79EA00B6160E /* filters */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AAC246B79EA00B6160E /* sanitizer.py */,
+				835E6AAD246B79EA00B6160E /* inject_meta_charset.py */,
+				835E6AAE246B79EA00B6160E /* __init__.py */,
+				835E6AAF246B79EA00B6160E /* base.py */,
+				835E6AB0246B79EA00B6160E /* alphabeticalattributes.py */,
+				835E6AB1246B79EA00B6160E /* optionaltags.py */,
+				835E6AB2246B79EA00B6160E /* lint.py */,
+				835E6AB3246B79EA00B6160E /* whitespace.py */,
+			);
+			path = filters;
+			sourceTree = "<group>";
+		};
+		835E6AB4246B79EA00B6160E /* treewalkers */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AB5246B79EA00B6160E /* etree_lxml.py */,
+				835E6AB6246B79EA00B6160E /* __init__.py */,
+				835E6AB7246B79EA00B6160E /* etree.py */,
+				835E6AB8246B79EA00B6160E /* genshi.py */,
+				835E6AB9246B79EA00B6160E /* base.py */,
+				835E6ABA246B79EA00B6160E /* dom.py */,
+			);
+			path = treewalkers;
+			sourceTree = "<group>";
+		};
+		835E6ABB246B79EA00B6160E /* treebuilders */ = {
+			isa = PBXGroup;
+			children = (
+				835E6ABC246B79EA00B6160E /* etree_lxml.py */,
+				835E6ABD246B79EA00B6160E /* __init__.py */,
+				835E6ABE246B79EA00B6160E /* etree.py */,
+				835E6ABF246B79EA00B6160E /* base.py */,
+				835E6AC0246B79EA00B6160E /* dom.py */,
+			);
+			path = treebuilders;
+			sourceTree = "<group>";
+		};
+		835E6AC6246B79EA00B6160E /* _trie */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AC7246B79EA00B6160E /* _base.py */,
+				835E6AC8246B79EA00B6160E /* datrie.py */,
+				835E6AC9246B79EA00B6160E /* __init__.py */,
+				835E6ACA246B79EA00B6160E /* py.py */,
+			);
+			path = _trie;
+			sourceTree = "<group>";
+		};
+		835E6ACB246B79EA00B6160E /* treeadapters */ = {
+			isa = PBXGroup;
+			children = (
+				835E6ACC246B79EA00B6160E /* sax.py */,
+				835E6ACD246B79EA00B6160E /* __init__.py */,
+				835E6ACE246B79EA00B6160E /* genshi.py */,
+			);
+			path = treeadapters;
+			sourceTree = "<group>";
+		};
+		835E6AD2246B79EA00B6160E /* certifi */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AD3246B79EA00B6160E /* __init__.py */,
+				835E6AD4246B79EA00B6160E /* core.py */,
+				835E6AD5246B79EA00B6160E /* cacert.pem */,
+				835E6AD6246B79EA00B6160E /* __main__.py */,
+			);
+			path = certifi;
+			sourceTree = "<group>";
+		};
+		835E6AD8246B79EA00B6160E /* urllib3 */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AD9246B79EA00B6160E /* filepost.py */,
+				835E6ADA246B79EA00B6160E /* fields.py */,
+				835E6ADB246B79EA00B6160E /* util */,
+				835E6AE6246B79EA00B6160E /* request.py */,
+				835E6AE7246B79EA00B6160E /* __init__.py */,
+				835E6AE8246B79EA00B6160E /* poolmanager.py */,
+				835E6AE9246B79EA00B6160E /* response.py */,
+				835E6AEA246B79EA00B6160E /* contrib */,
+				835E6AF5246B79EA00B6160E /* connection.py */,
+				835E6AF6246B79EA00B6160E /* _collections.py */,
+				835E6AF7246B79EA00B6160E /* packages */,
+				835E6B01246B79EA00B6160E /* exceptions.py */,
+				835E6B02246B79EA00B6160E /* connectionpool.py */,
+			);
+			path = urllib3;
+			sourceTree = "<group>";
+		};
+		835E6ADB246B79EA00B6160E /* util */ = {
+			isa = PBXGroup;
+			children = (
+				835E6ADC246B79EA00B6160E /* wait.py */,
+				835E6ADD246B79EA00B6160E /* request.py */,
+				835E6ADE246B79EA00B6160E /* timeout.py */,
+				835E6ADF246B79EA00B6160E /* __init__.py */,
+				835E6AE0246B79EA00B6160E /* selectors.py */,
+				835E6AE1246B79EA00B6160E /* response.py */,
+				835E6AE2246B79EA00B6160E /* ssl_.py */,
+				835E6AE3246B79EA00B6160E /* retry.py */,
+				835E6AE4246B79EA00B6160E /* url.py */,
+				835E6AE5246B79EA00B6160E /* connection.py */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		835E6AEA246B79EA00B6160E /* contrib */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AEB246B79EA00B6160E /* securetransport.py */,
+				835E6AEC246B79EA00B6160E /* __init__.py */,
+				835E6AED246B79EA00B6160E /* socks.py */,
+				835E6AEE246B79EA00B6160E /* pyopenssl.py */,
+				835E6AEF246B79EA00B6160E /* appengine.py */,
+				835E6AF0246B79EA00B6160E /* _securetransport */,
+				835E6AF4246B79EA00B6160E /* ntlmpool.py */,
+			);
+			path = contrib;
+			sourceTree = "<group>";
+		};
+		835E6AF0246B79EA00B6160E /* _securetransport */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AF1246B79EA00B6160E /* __init__.py */,
+				835E6AF2246B79EA00B6160E /* low_level.py */,
+				835E6AF3246B79EA00B6160E /* bindings.py */,
+			);
+			path = _securetransport;
+			sourceTree = "<group>";
+		};
+		835E6AF7246B79EA00B6160E /* packages */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AF8246B79EA00B6160E /* __init__.py */,
+				835E6AF9246B79EA00B6160E /* backports */,
+				835E6AFC246B79EA00B6160E /* ordered_dict.py */,
+				835E6AFD246B79EA00B6160E /* six.py */,
+				835E6AFE246B79EA00B6160E /* ssl_match_hostname */,
+			);
+			path = packages;
+			sourceTree = "<group>";
+		};
+		835E6AF9246B79EA00B6160E /* backports */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AFA246B79EA00B6160E /* __init__.py */,
+				835E6AFB246B79EA00B6160E /* makefile.py */,
+			);
+			path = backports;
+			sourceTree = "<group>";
+		};
+		835E6AFE246B79EA00B6160E /* ssl_match_hostname */ = {
+			isa = PBXGroup;
+			children = (
+				835E6AFF246B79EA00B6160E /* __init__.py */,
+				835E6B00246B79EA00B6160E /* _implementation.py */,
+			);
+			path = ssl_match_hostname;
+			sourceTree = "<group>";
+		};
+		835E6B04246B79EA00B6160E /* pkg_resources */ = {
+			isa = PBXGroup;
+			children = (
+				835E6B05246B79EA00B6160E /* py31compat.py */,
+				835E6B06246B79EA00B6160E /* __init__.py */,
+			);
+			path = pkg_resources;
+			sourceTree = "<group>";
+		};
+		835E6B0C246B79EA00B6160E /* .idea */ = {
+			isa = PBXGroup;
+			children = (
+				835E6B0D246B79EA00B6160E /* inspectionProfiles */,
+				835E6B0E246B79EA00B6160E /* workspace.xml */,
+				835E6B0F246B79EA00B6160E /* modules.xml */,
+				835E6B10246B79EA00B6160E /* jwumq_manager.iml */,
+				835E6B11246B79EA00B6160E /* misc.xml */,
+			);
+			path = .idea;
+			sourceTree = "<group>";
+		};
+		835E6B0D246B79EA00B6160E /* inspectionProfiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = inspectionProfiles;
+			sourceTree = "<group>";
+		};
+		8362D2D324FC95FE000F5EFF /* sys_info */ = {
+			isa = PBXGroup;
+			children = (
+				8362D2D424FC9624000F5EFF /* system_info.cpp */,
+				8362D2D524FC9624000F5EFF /* system_info.hpp */,
+				8362D2D724FC963B000F5EFF /* linux_info.cpp */,
+				8362D2D824FC963B000F5EFF /* linux_info.hpp */,
+				8362D2DA24FC9653000F5EFF /* win_info.cpp */,
+				8362D2DB24FC9653000F5EFF /* win_info.hpp */,
+			);
+			path = sys_info;
+			sourceTree = "<group>";
+		};
+		83ABB112240A2E930096C5DA /* message */ = {
+			isa = PBXGroup;
+			children = (
+				83ABB113240A2F0E0096C5DA /* amtp_login.cpp */,
+				83ABB114240A2F0E0096C5DA /* amtp_login.hpp */,
+				83ABB116240B944B0096C5DA /* amtp_login_resp.cpp */,
+				83ABB117240B944B0096C5DA /* amtp_login_resp.hpp */,
+				8346C83F240CAE27000AD219 /* amtp_logout.cpp */,
+				8346C840240CAE27000AD219 /* amtp_logout.hpp */,
+				8346C845240CC07C000AD219 /* amtp_logout_resp.cpp */,
+				8346C846240CC07C000AD219 /* amtp_logout_resp.hpp */,
+				8346C848240CF37F000AD219 /* amtp_event.cpp */,
+				8346C849240CF37F000AD219 /* amtp_event.hpp */,
+				8346C84B240CFB0E000AD219 /* amtp_event_resp.cpp */,
+				8346C84C240CFB0E000AD219 /* amtp_event_resp.hpp */,
+				8346C84E240D01A2000AD219 /* amtp_alarm.cpp */,
+				8346C84F240D01A2000AD219 /* amtp_alarm.hpp */,
+				8346C851240D01B4000AD219 /* amtp_alarm_resp.cpp */,
+				8346C852240D01B4000AD219 /* amtp_alarm_resp.hpp */,
+				8346C854240E044B000AD219 /* amtp_alarm_clear.cpp */,
+				8346C855240E044B000AD219 /* amtp_alarm_clear.hpp */,
+				8346C857240E075A000AD219 /* amtp_alarm_clear_resp.cpp */,
+				8346C858240E075A000AD219 /* amtp_alarm_clear_resp.hpp */,
+				8346C85A240E07EF000AD219 /* amtp_config.cpp */,
+				8346C85B240E07EF000AD219 /* amtp_config.hpp */,
+				8346C85D240E0858000AD219 /* amtp_config_resp.cpp */,
+				8346C85E240E0858000AD219 /* amtp_config_resp.hpp */,
+				83A4D24C240E46F0000456F8 /* amtp_gps_info.cpp */,
+				83A4D24D240E46F0000456F8 /* amtp_gps_info.hpp */,
+				83A4D24F240E4A10000456F8 /* amtp_gps_info_resp.cpp */,
+				83A4D250240E4A10000456F8 /* amtp_gps_info_resp.hpp */,
+				83A4D252240E52E7000456F8 /* amtp_status_info.cpp */,
+				83A4D253240E52E7000456F8 /* amtp_status_info.hpp */,
+				83A4D255240E52F7000456F8 /* amtp_status_info_resp.cpp */,
+				83A4D256240E52F7000456F8 /* amtp_status_info_resp.hpp */,
+				8347280E240F682B001D4C10 /* amtp_config_data.cpp */,
+				8347280F240F682B001D4C10 /* amtp_config_data.hpp */,
+				83472811240F77D4001D4C10 /* amtp_config_data_resp.cpp */,
+				83472812240F77D4001D4C10 /* amtp_config_data_resp.hpp */,
+				83341F512410AC4A000A7948 /* amtp_config_notify.cpp */,
+				83341F522410AC4A000A7948 /* amtp_config_notify.hpp */,
+				83341F542410B015000A7948 /* amtp_config_notify_resp.cpp */,
+				83341F552410B015000A7948 /* amtp_config_notify_resp.hpp */,
+				83341F572410F7E1000A7948 /* amtp_restart_cmd.cpp */,
+				83341F582410F7E1000A7948 /* amtp_restart_cmd.hpp */,
+				83341F5A2410FFB7000A7948 /* amtp_restart_cmd_resp.cpp */,
+				83341F5B2410FFB7000A7948 /* amtp_restart_cmd_resp.hpp */,
+				8335EAFB2411EB8F0099A1F8 /* amtp_upload_file.cpp */,
+				8335EAFC2411EB8F0099A1F8 /* amtp_upload_file.hpp */,
+				8335EAFE2411EE840099A1F8 /* amtp_upload_file_resp.cpp */,
+				8335EAFF2411EE840099A1F8 /* amtp_upload_file_resp.hpp */,
+				8335EB012411FB8F0099A1F8 /* amtp_upload_eof.cpp */,
+				8335EB022411FB8F0099A1F8 /* amtp_upload_eof.hpp */,
+				8335EB042411FD8E0099A1F8 /* amtp_upload_eof_resp.cpp */,
+				8335EB052411FD8E0099A1F8 /* amtp_upload_eof_resp.hpp */,
+				8335EB0724120A8C0099A1F8 /* amtp_query_data.cpp */,
+				8335EB0824120A8C0099A1F8 /* amtp_query_data.hpp */,
+				8335EB0A241211720099A1F8 /* amtp_query_data_resp.cpp */,
+				8335EB0B241211720099A1F8 /* amtp_query_data_resp.hpp */,
+				83E002DC2418AA4800AC6909 /* amtp_upload_file_data.cpp */,
+				83E002DD2418AA4800AC6909 /* amtp_upload_file_data.hpp */,
+				83E002DF2418B19F00AC6909 /* amtp_upload_file_data_resp.cpp */,
+				83E002E02418B19F00AC6909 /* amtp_upload_file_data_resp.hpp */,
+				836FFA7624F4FB9300E20CEC /* amtp_module_conf.cpp */,
+				836FFA7724F4FB9300E20CEC /* amtp_module_conf.hpp */,
+				836FFA7924F4FBB900E20CEC /* amtp_module_conf_resp.cpp */,
+				836FFA7A24F4FBB900E20CEC /* amtp_module_conf_resp.hpp */,
+			);
+			path = message;
+			sourceTree = "<group>";
+		};
+		83B83E9323C4616A006E4DE6 /* server_access */ = {
+			isa = PBXGroup;
+			children = (
+				83B83EA123C47FA2006E4DE6 /* libamtpsa.cpp */,
+				83B83EA223C47FA2006E4DE6 /* libamtpsa.hpp */,
+				83558EB623CD58B300E2F82A /* amtpsa.cpp */,
+				83558EB723CD58B300E2F82A /* amtpsa.hpp */,
+			);
+			path = server_access;
+			sourceTree = "<group>";
+		};
+		83B83E9C23C46355006E4DE6 /* libamtpa */ = {
+			isa = PBXGroup;
+			children = (
+				8327AC6123B591F4009AD7C0 /* test_main.cpp */,
+				83B83EA023C47F57006E4DE6 /* libamtpa_define.h */,
+				8327AC5D23B49349009AD7C0 /* client_access */,
+				83B83E9323C4616A006E4DE6 /* server_access */,
+			);
+			path = libamtpa;
+			sourceTree = "<group>";
+		};
+		83B83EBB23C5C97A006E4DE6 /* libjwumq */ = {
+			isa = PBXGroup;
+			children = (
+				83B83EBD23C5CB2F006E4DE6 /* libjwumq.cpp */,
+				83B83EBE23C5CB2F006E4DE6 /* libjwumq.hpp */,
+			);
+			path = libjwumq;
+			sourceTree = "<group>";
+		};
+		83C0411A246544AB00209603 /* amtp_proxy */ = {
+			isa = PBXGroup;
+			children = (
+				83C0411B246544FD00209603 /* main.cpp */,
+				83C0411D2465452400209603 /* proxy.cpp */,
+				83C0411E2465452400209603 /* proxy.hpp */,
+			);
+			path = amtp_proxy;
+			sourceTree = "<group>";
+		};
+		83D6224B2408BEC40021B953 /* license */ = {
+			isa = PBXGroup;
+			children = (
+				83D622522408C9510021B953 /* license_msg.pb.cpp */,
+				83D622512408C9510021B953 /* license_msg.pb.h */,
+				83D6224F2408BFB30021B953 /* license_msg.proto */,
+				8322947A24F88B5500F50E7E /* libamtpa_license.cpp */,
+				8322947B24F88B5500F50E7E /* libamtpa_license.hpp */,
+				8322947F24F88F8E00F50E7E /* amtpa_lic_generator.cpp */,
+			);
+			path = license;
+			sourceTree = "<group>";
+		};
+		83D666F62498520100277020 /* libjwumqa */ = {
+			isa = PBXGroup;
+			children = (
+				83716DD724AB2086005E6F8D /* libjwumqa_c.cpp */,
+				8314D3A22499A2CE004CAAAD /* libjwumqa_cpp.h */,
+				8311C22624B2C2F9001E1A08 /* libjwumqa_c.h */,
+				8314D39F2499A2A6004CAAAD /* libjwumqa_factory.cpp */,
+				834DC00E249C5D50005CDDFF /* libjwumqa_connection.cpp */,
+				834DC00F249C5D50005CDDFF /* libjwumqa_connection.hpp */,
+				8314D3A7249B1B7C004CAAAD /* libjwumqa_session.cpp */,
+				8314D3A8249B1B7C004CAAAD /* libjwumqa_session.hpp */,
+				8314D3AD249B225C004CAAAD /* libjwumqa_destination.cpp */,
+				8314D3AE249B225C004CAAAD /* libjwumqa_destination.hpp */,
+				838ED79E24C922D200CD968F /* libjwumqa_part_member.cpp */,
+				838ED79F24C922D200CD968F /* libjwumqa_part_member.hpp */,
+				834DC011249C868E005CDDFF /* libjwumqa_part_pipe.cpp */,
+				834DC012249C868E005CDDFF /* libjwumqa_part_pipe.hpp */,
+				837C74EA24E0DCFF0074ACBA /* libjwumqa_part_producer.cpp */,
+				837C74EB24E0DCFF0074ACBA /* libjwumqa_part_producer.hpp */,
+				837C74ED24E0DD400074ACBA /* libjwumqa_part_consumer.cpp */,
+				837C74EE24E0DD400074ACBA /* libjwumqa_part_consumer.hpp */,
+				834DC014249C917F005CDDFF /* factory_connection.cpp */,
+				834DC015249C917F005CDDFF /* factory_connection.hpp */,
+				83450EF024A1D674000FB9A9 /* pool_connection.cpp */,
+				83450EF124A1D674000FB9A9 /* pool_connection.hpp */,
+				8347BAFA24A85CCF0004B119 /* JBytesMessageImpl.cpp */,
+				8347BAFB24A85CCF0004B119 /* JBytesMessageImpl.hpp */,
+				8347BAF724A8545B0004B119 /* JTextMessageImpl.cpp */,
+				8347BAF824A8545B0004B119 /* JTextMessageImpl.hpp */,
+				83D666F724985F6800277020 /* tester_cpp */,
+			);
+			path = libjwumqa;
+			sourceTree = "<group>";
+		};
+		83D666F724985F6800277020 /* tester_cpp */ = {
+			isa = PBXGroup;
+			children = (
+				83D666F82498B4A600277020 /* libjwumqa_tester.cpp */,
+			);
+			path = tester_cpp;
+			sourceTree = "<group>";
+		};
+		83E1400D2477B2B100C85248 /* jwevents */ = {
+			isa = PBXGroup;
+			children = (
+				83E1400E2477B2F200C85248 /* jwevents.h */,
+			);
+			path = jwevents;
+			sourceTree = "<group>";
+		};
+		83E1AA6823BD74A000099598 /* amtp_monitor */ = {
+			isa = PBXGroup;
+			children = (
+				83E1AA6923BD74BC00099598 /* main.cpp */,
+				83E1AA6A23BD74BC00099598 /* monitor.cpp */,
+				83E1AA6B23BD74BC00099598 /* monitor.h */,
+			);
+			path = amtp_monitor;
+			sourceTree = "<group>";
+		};
+		83E1AA6F23BD751700099598 /* amtp_router */ = {
+			isa = PBXGroup;
+			children = (
+				83E1AA8023BDD70B00099598 /* main.cpp */,
+				83B83EA823C4845A006E4DE6 /* router.cpp */,
+				83B83EA923C4845A006E4DE6 /* router.hpp */,
+			);
+			path = amtp_router;
+			sourceTree = "<group>";
+		};
+		83E1AA7123BD774100099598 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				83E1AA7323BD7E3E00099598 /* config.cpp */,
+				83E1AA7623BD7E3E00099598 /* config.h */,
+				83E1AA7423BD7E3E00099598 /* monitor_config.cpp */,
+				83E1AA7523BD7E3E00099598 /* monitor_config.h */,
+				83E1AA7223BD775300099598 /* config.conf */,
+				83E1AA8823BEC89100099598 /* router_config.cpp */,
+				83E1AA8923BEC89100099598 /* router_config.hpp */,
+				83C041202465458500209603 /* proxy_config.cpp */,
+				83C041212465458500209603 /* proxy_config.hpp */,
+				8333BDB8247364D50036B737 /* amtp_monitor_config.cpp */,
+				8333BDB9247364D50036B737 /* amtp_monitor_config.hpp */,
+				8333BDBB24736E320036B737 /* monitor_config.conf */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		83E1AA7C23BD8E7D00099598 /* cjson */ = {
+			isa = PBXGroup;
+			children = (
+				83E1AA7E23BD8E9E00099598 /* cJSON.cpp */,
+				83E1AA7D23BD8E9D00099598 /* cJSON.h */,
+			);
+			path = cjson;
+			sourceTree = "<group>";
+		};
+		83F4F6862485E938009BB9B0 /* jwumq_protocol */ = {
+			isa = PBXGroup;
+			children = (
+				83F4F68A2486399C009BB9B0 /* jwumq_msg.pb.h */,
+				83F4F687248629CD009BB9B0 /* jwumq_msg.proto */,
+				83BB4E78248F75E300EAEA1C /* jwumq_msg.pb.cpp */,
+			);
+			path = jwumq_protocol;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8327AC3D23B48DE4009AD7C0 /* Amtp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8327AC4523B48DE4009AD7C0 /* Build configuration list for PBXNativeTarget "Amtp" */;
+			buildPhases = (
+				8327AC3A23B48DE4009AD7C0 /* Sources */,
+				8327AC3B23B48DE4009AD7C0 /* Frameworks */,
+				8327AC3C23B48DE4009AD7C0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Amtp;
+			productName = Amtp;
+			productReference = 8327AC3E23B48DE4009AD7C0 /* Amtp */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8327AC3623B48DE4009AD7C0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = jiangwei;
+				TargetAttributes = {
+					8327AC3D23B48DE4009AD7C0 = {
+						CreatedOnToolsVersion = 11.3;
+					};
+				};
+			};
+			buildConfigurationList = 8327AC3923B48DE4009AD7C0 /* Build configuration list for PBXProject "Amtp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8327AC3523B48DE4009AD7C0;
+			productRefGroup = 8327AC3F23B48DE4009AD7C0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8327AC3D23B48DE4009AD7C0 /* Amtp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8327AC3A23B48DE4009AD7C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83B83EAA23C4845A006E4DE6 /* router.cpp in Sources */,
+				8322947C24F88B5500F50E7E /* libamtpa_license.cpp in Sources */,
+				83A78401246D3C8200435C00 /* internal_manage.cpp in Sources */,
+				834DC019249CB9B0005CDDFF /* jwumq_router_server.cpp in Sources */,
+				83E1AA6D23BD74BC00099598 /* monitor.cpp in Sources */,
+				83BB4E79248F75E300EAEA1C /* jwumq_msg.pb.cpp in Sources */,
+				83A783FE246D3C5B00435C00 /* external_manage.cpp in Sources */,
+				8346C847240CC07C000AD219 /* amtp_logout_resp.cpp in Sources */,
+				8346C850240D01A2000AD219 /* amtp_alarm.cpp in Sources */,
+				83A4D257240E52F7000456F8 /* amtp_status_info_resp.cpp in Sources */,
+				83450EEE24A1C8CC000FB9A9 /* queue_base.cpp in Sources */,
+				8335EB062411FD8E0099A1F8 /* amtp_upload_eof_resp.cpp in Sources */,
+				8335EB0924120A8C0099A1F8 /* amtp_query_data.cpp in Sources */,
+				8346C853240D01B4000AD219 /* amtp_alarm_resp.cpp in Sources */,
+				83AF0A1E2491BA01007BBF29 /* jwumq_duplex_sub.cpp in Sources */,
+				83450EEB24A1B03E000FB9A9 /* queue_center.cpp in Sources */,
+				83C041222465458500209603 /* proxy_config.cpp in Sources */,
+				83B83EB123C571A4006E4DE6 /* jwumq_queue.cpp in Sources */,
+				83E1AA7723BD7E3E00099598 /* config.cpp in Sources */,
+				8347BAF924A8545B0004B119 /* JTextMessageImpl.cpp in Sources */,
+				8346C859240E075A000AD219 /* amtp_alarm_clear_resp.cpp in Sources */,
+				83D622502408BFB30021B953 /* license_msg.proto in Sources */,
+				8346C841240CAE27000AD219 /* amtp_logout.cpp in Sources */,
+				83B83EBF23C5CB2F006E4DE6 /* libjwumq.cpp in Sources */,
+				8362D2D624FC9624000F5EFF /* system_info.cpp in Sources */,
+				8309E20F2480A864002AA809 /* main.cpp in Sources */,
+				83F930F424CA701D000CA614 /* jwumq_message.pb.cpp in Sources */,
+				83E1AA6C23BD74BC00099598 /* main.cpp in Sources */,
+				8327AC6223B591F4009AD7C0 /* test_main.cpp in Sources */,
+				83E002DE2418AA4800AC6909 /* amtp_upload_file_data.cpp in Sources */,
+				8362D2DC24FC9653000F5EFF /* win_info.cpp in Sources */,
+				83341F5C2410FFB7000A7948 /* amtp_restart_cmd_resp.cpp in Sources */,
+				8315DB1A24A0974B00F7D6B7 /* access_unit.cpp in Sources */,
+				838ED7A024C922D200CD968F /* libjwumqa_part_member.cpp in Sources */,
+				83C0EA6324906B33006AFE68 /* pool_monitor.cpp in Sources */,
+				83F4F688248629CD009BB9B0 /* jwumq_msg.proto in Sources */,
+				83F930EC24CA6D5E000CA614 /* jwumq_message.cpp in Sources */,
+				83558EAC23CC0FD200E2F82A /* amtpap_msg.proto in Sources */,
+				83F930EE24CA6DC3000CA614 /* jwumq_message.proto in Sources */,
+				83472813240F77D4001D4C10 /* amtp_config_data_resp.cpp in Sources */,
+				83C0EA6924906BF4006AFE68 /* access_unit.cpp in Sources */,
+				83D622532408C9510021B953 /* license_msg.pb.cpp in Sources */,
+				83E1AA7823BD7E3E00099598 /* monitor_config.cpp in Sources */,
+				8346C84D240CFB0E000AD219 /* amtp_event_resp.cpp in Sources */,
+				83ABB118240B944B0096C5DA /* amtp_login_resp.cpp in Sources */,
+				83C0EA6624906B7B006AFE68 /* factory_status.cpp in Sources */,
+				836FFA7824F4FB9300E20CEC /* amtp_module_conf.cpp in Sources */,
+				83C0411C246544FD00209603 /* main.cpp in Sources */,
+				83B83EB423C572CE006E4DE6 /* jwumq_router.cpp in Sources */,
+				83A4D251240E4A10000456F8 /* amtp_gps_info_resp.cpp in Sources */,
+				83B83E9F23C46837006E4DE6 /* libamtpca.cpp in Sources */,
+				83C04118246543EC00209603 /* jwumq_proxy.cpp in Sources */,
+				8367042824E2251B00829049 /* queue_producer.cpp in Sources */,
+				83450EF224A1D674000FB9A9 /* pool_connection.cpp in Sources */,
+				8335EAFD2411EB8F0099A1F8 /* amtp_upload_file.cpp in Sources */,
+				8346C856240E044B000AD219 /* amtp_alarm_clear.cpp in Sources */,
+				83B53D21248E2E3600DC3D65 /* factory.cpp in Sources */,
+				8314D3A9249B1B7C004CAAAD /* libjwumqa_session.cpp in Sources */,
+				834DC013249C868E005CDDFF /* libjwumqa_part_pipe.cpp in Sources */,
+				8346C84A240CF37F000AD219 /* amtp_event.cpp in Sources */,
+				838945A924A2E8CB00FAB762 /* queue_pipe.cpp in Sources */,
+				83E1AA7F23BD8E9E00099598 /* cJSON.cpp in Sources */,
+				837C74EF24E0DD400074ACBA /* libjwumqa_part_consumer.cpp in Sources */,
+				83AF0A1B2491B9EA007BBF29 /* jwumq_duplex_pub.cpp in Sources */,
+				83716DD824AB2086005E6F8D /* libjwumqa_c.cpp in Sources */,
+				8333BDBA247364D50036B737 /* amtp_monitor_config.cpp in Sources */,
+				832BC8D4246CED2A00743697 /* main.cpp in Sources */,
+				836FFA7B24F4FBB900E20CEC /* amtp_module_conf_resp.cpp in Sources */,
+				83B53D24248E345000DC3D65 /* pool.cpp in Sources */,
+				83E1AA8A23BEC89100099598 /* router_config.cpp in Sources */,
+				8335EB032411FB8F0099A1F8 /* amtp_upload_eof.cpp in Sources */,
+				83A4D254240E52E7000456F8 /* amtp_status_info.cpp in Sources */,
+				8314D3AF249B225C004CAAAD /* libjwumqa_destination.cpp in Sources */,
+				83341F592410F7E1000A7948 /* amtp_restart_cmd.cpp in Sources */,
+				83AF0A212491C770007BBF29 /* pool_branch.cpp in Sources */,
+				8335EB0C241211720099A1F8 /* amtp_query_data_resp.cpp in Sources */,
+				83D666F92498B4A600277020 /* libjwumqa_tester.cpp in Sources */,
+				83ABB115240A2F0E0096C5DA /* amtp_login.cpp in Sources */,
+				83C0411F2465452400209603 /* proxy.cpp in Sources */,
+				8346C85C240E07EF000AD219 /* amtp_config.cpp in Sources */,
+				83E1AA8123BDD70B00099598 /* main.cpp in Sources */,
+				836D264C24077C0E00ACAC54 /* amtpca.cpp in Sources */,
+				834DC010249C5D50005CDDFF /* libjwumqa_connection.cpp in Sources */,
+				838ED7A324C939B600CD968F /* queue_member.cpp in Sources */,
+				8322948024F88F8E00F50E7E /* amtpa_lic_generator.cpp in Sources */,
+				837C74EC24E0DCFF0074ACBA /* libjwumqa_part_producer.cpp in Sources */,
+				83472810240F682B001D4C10 /* amtp_config_data.cpp in Sources */,
+				83E1AA7B23BD7E6500099598 /* jLog.cpp in Sources */,
+				8309E20D2480A85A002AA809 /* main.cpp in Sources */,
+				8362D2D924FC963B000F5EFF /* linux_info.cpp in Sources */,
+				834DC016249C917F005CDDFF /* factory_connection.cpp in Sources */,
+				8347BAFC24A85CCF0004B119 /* JBytesMessageImpl.cpp in Sources */,
+				83E002E12418B19F00AC6909 /* amtp_upload_file_data_resp.cpp in Sources */,
+				83AF0A2424921CE0007BBF29 /* pool_status.cpp in Sources */,
+				8314D3A12499A2A6004CAAAD /* libjwumqa_factory.cpp in Sources */,
+				8346C85F240E0858000AD219 /* amtp_config_resp.cpp in Sources */,
+				83A4D24E240E46F0000456F8 /* amtp_gps_info.cpp in Sources */,
+				83341F532410AC4A000A7948 /* amtp_config_notify.cpp in Sources */,
+				83B83EAD23C56098006E4DE6 /* jwumq_base.cpp in Sources */,
+				83341F562410B015000A7948 /* amtp_config_notify_resp.cpp in Sources */,
+				8382D34F23D19B1F00653E7A /* amtpap_msg.pb.cpp in Sources */,
+				83558EB823CD58B300E2F82A /* amtpsa.cpp in Sources */,
+				83B83EA323C47FA2006E4DE6 /* libamtpsa.cpp in Sources */,
+				8333BDB7247363140036B737 /* monitor.cpp in Sources */,
+				8384CCA42462633400D182D1 /* jwumq_dealer.cpp in Sources */,
+				8335EB002411EE840099A1F8 /* amtp_upload_file_resp.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8327AC4323B48DE4009AD7C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8327AC4423B48DE4009AD7C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8327AC4623B48DE4009AD7C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8327AC4723B48DE4009AD7C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8327AC3923B48DE4009AD7C0 /* Build configuration list for PBXProject "Amtp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8327AC4323B48DE4009AD7C0 /* Debug */,
+				8327AC4423B48DE4009AD7C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8327AC4523B48DE4009AD7C0 /* Build configuration list for PBXNativeTarget "Amtp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8327AC4623B48DE4009AD7C0 /* Debug */,
+				8327AC4723B48DE4009AD7C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8327AC3623B48DE4009AD7C0 /* Project object */;
+}

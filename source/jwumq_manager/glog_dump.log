@@ -1,0 +1,10 @@
+*** Aborted at 1589447243 (unix time) try "date -d @1589447243" if you are using GNU date ***
+PC: @     0x7f1d966fb818 __GI___nanosleep
+*** SIGTERM (@0x1) received by PID 18041 (TID 0x7f1d9802e740) from PID 1; stack trace: ***
+    @     0x7f1d975d1c49 google::(anonymous namespace)::FailureSignalHandler()
+    @     0x7f1d977fbdd0 (unknown)
+    @     0x7f1d966fb818 __GI___nanosleep
+    @     0x7f1d966fb74e __sleep
+    @           0x404062 main
+    @     0x7f1d96656873 __libc_start_main
+    @           0x4040fe _start

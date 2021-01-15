@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package jwumq_pb_msg;
+
+
+enum JWUMQ_MSG_RESULT_E
+{
+	SUCCESS						= 0;
+	CREATE_QUEUE_ERROR			= 1;
+	QUEUE_NOT_EXIST				= 2;
+	QUEUE_IS_FULL				= 3;
+	QUEUE_TYPE_ERROR			= 4;
+}
+
+message	PoolStatusRequest
+{
+	uint32		sn = 1;
+}
+
+message QueueStatus
+{
+	string	name = 1;
+	uint32	total_bytes = 2;
+	uint32	package_count = 3;
+	float	flow = 4;
+}
+
+message PoolStatusReport
+{
+	string					name = 1;
+	uint32					sn = 2;
+	uint32					private_bytes = 3;
+	uint32					private_count = 4;
+	uint32					access_port = 5;
+	uint64					report_time = 6;
+	uint32					queue_count = 7;
+	repeated QueueStatus	queue_status = 8;
+}
+
+message	SessionResponse
+{
+	uint64		session = 1;
+}
+
+message	CreateQueueRequest
+{
+	uint64	session		= 1;
+	string	queue_name	= 2;
+}
+
+message	CreateQueueResponse
+{
+	uint64	session				= 1;
+	string	queue_name			= 2;
+	uint32	queue_port			= 3;
+	JWUMQ_MSG_RESULT_E result	= 4;
+}
+
+message	AssignedQueueRequest
+{
+	uint32	sn = 1;
+	uint64	session				= 2;
+	string	queue_name			= 3;
+}
+
+message	CreatePipeQueueRequest
+{
+	string	queue_name	= 1;
+	string	node_id		= 2;
+}
+
+message	CreatePipeQueueResponse
+{
+	string	queue_name			= 1;
+	string	node_id				= 2;
+	JWUMQ_MSG_RESULT_E result	= 3;
+}
+
+message	CreateMemberQueueRequest
+{
+	string	queue_name	= 1;
+	string	node_id		= 2;
+}
+
+message	CreateMemberQueueResponse
+{
+	string	queue_name			= 1;
+	string	node_id				= 2;
+	JWUMQ_MSG_RESULT_E result	= 3;
+}
+
+message	CreateProducerQueueRequest
+{
+	string	queue_name	= 1;
+	string	node_id		= 2;
+}
+
+message	CreateProducerQueueResponse
+{
+	string	queue_name			= 1;
+	string	node_id				= 2;
+	JWUMQ_MSG_RESULT_E result	= 3;
+}
+
+message	CreateConsumerQueueRequest
+{
+	string	queue_name	= 1;
+	string	node_id		= 2;
+}
+
+message	CreateConsumerQueueResponse
+{
+	string	queue_name			= 1;
+	string	node_id				= 2;
+	JWUMQ_MSG_RESULT_E result	= 3;
+}
+
+
+

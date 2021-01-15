@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Home</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">-->
+
+  <!-- Bootstrap CSS File -->
+  <link type="text/css" href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{{ url_for('static', filename='lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <style type="text/css">
+    html {
+      font-family: sans-serif;
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0px;
+    }
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    td,th {
+      padding: 0;
+    }
+
+    .pure-table, .pure-table-1 {
+      border-collapse: collapse;
+      border-spacing: 0;
+      empty-cells: show;
+      border: 1px solid #cbcbcb;
+    }
+
+    .pure-table caption, .pure-table-1 caption {
+      color: #000;
+      font: italic 85%/1 arial,sans-serif;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    .pure-table th, .pure-table-1 th {
+      border-left: 1px solid #cbcbcb;
+      border-width: 0 0 0 1px;
+      font-size: 12px;
+      margin: 0;
+      overflow: visible;
+      padding: .5em 1em;
+      height:10px;
+      color: #000;
+    }
+    .pure-table td {
+      border-left: 1px solid #cbcbcb;
+      border-width: 0 0 0 1px;
+      font-size: 12px;
+      margin: 0;
+      overflow: visible;
+      padding: .5em 1em;
+      height:10px;
+      color: #000;
+      background-color: transparent;
+    }
+    .pure-table-1 td {
+      border-left: 1px solid #cbcbcb;
+      border-width: 0 0 0 1px;
+      font-size: 12px;
+      margin: 0;
+      overflow: visible;
+      padding: .5em 1em;
+      height:10px;
+      color: #000;
+      background-color: #fff;
+    }
+
+    .pure-table thead , .pure-table-1 thead{
+      background-color: #e0e0e0;
+      color: #000;
+      text-align: left;
+      vertical-align: bottom;
+    }
+
+  </style>
+  <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
+  <script >
+
+  </script>
+
+</head>
+
+<body>
+
+<!--==========================
+Header
+============================-->
+<header id="header">
+  <div class="container">
+
+    <div id="logo" class="pull-left">
+      <!-- <a href="#welcome"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="" title="" /></img></a>-->
+      <!-- Uncomment below if you prefer to use a text logo -->
+      <h1><a href="#welcome">CMDI</a></h1>
+    </div>
+
+    <nav id="nav-menu-container">
+      <ul class="nav-menu">
+        <li class="menu-active"><a href="#welcome">欢迎</a></li>
+        <li><a href="#service-start">启动服务</a></li>
+        <li><a href="#config">配置</a></li>
+        <li><a href="#monitor">监控</a></li>
+        <li><a href="#statistics">统计</a></li>
+        <li><a href="#team">开发团队</a></li>
+        <li class="menu-has-children"><a href="">Drop Down</a>
+          <ul>
+            <li><a href="#">Drop Down 1</a></li>
+            <li class="menu-has-children"><a href="#">Drop Down 2</a>
+              <ul>
+                <li><a href="#">Deep Drop Down 1</a></li>
+                <li><a href="#">Deep Drop Down 2</a></li>
+                <li><a href="#">Deep Drop Down 3</a></li>
+                <li><a href="#">Deep Drop Down 4</a></li>
+                <li><a href="#">Deep Drop Down 5</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Drop Down 3</a></li>
+            <li><a href="#">Drop Down 4</a></li>
+            <li><a href="#">Drop Down 5</a></li>
+          </ul>
+        </li>
+        <li><a href="#contact">联系我们</a></li>
+      </ul>
+    </nav><!-- #nav-menu-container -->
+  </div>
+</header><!-- #header -->
+
+<!--==========================
+  Welcome Section
+============================-->
+<section id="welcome">
+  <div class="welcome-container">
+    <h1>Welcome to jwumq</h1>
+    <h2>一个新问世的消息队列，欢迎使用！</h2>
+    <a href="#service-start" class="btn-get-started">开始</a>
+  </div>
+</section><!-- #welcome -->
+
+<main id="main">
+
+  <!--==========================
+  Service Start Section
+  ============================-->
+  <section id="service-start">
+    <div class="container wow fadeIn">
+      <div class="row">
+        <div class="col-lg-9 text-center text-lg-left">
+          <h3 class="cta-title" >启动服务</h3>
+          <p class="cta-text"> 启动Jwumq管理服务，只有在服务启动后，Jwumq的web管理功能才能有效执行。</p>
+        </div>
+        <div class="col-lg-3 cta-btn-container text-center">
+          <a class="cta-btn align-middle" href="javascript:void(0)" onclick="inputHostUrl()">启动服务</a>
+        </div>
+        <div class="col-lg-9 text-center text-lg-left">
+          <h3 class="cta-title">终止服务</h3>
+          <p class="cta-text"> 点击'终止服务'后，Jwumq的web管理功能将终止，只有在服务启动时，Jwumq的web管理功能才能有效执行.如果当前没有Jwumq管理服务启动，则点击'终止服务'无效。</p>
+        </div>
+        <div class="col-lg-3 cta-btn-container text-center">
+          <a class="cta-btn align-middle" href="javascript:void(0)" onclick="stopService()">终止服务</a>
+        </div>
+        <div class="col-lg-9 text-center text-lg-left">
+          <h3 class="cta-title">可用IP列表</h3>
+          <p class="cta-text" id="service-hostname"> 主机名:未知.</p>
+        </div>
+        <table class="pure-table-1 col-lg-12 wow fadeInUp" id="ip_table" data-wow-delay="0.2s">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>网卡</th>
+            <th>IP</th>
+          </tr>
+          </thead>
+
+          <tbody id="ip_info">
+          </tbody>
+        </table>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="connModal" tabindex="-1" role="dialog" aria-labelledby="connModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">-->
+                  <!--&times;-->
+                <!--</button>-->
+                <h4 class="modal-title" id="connModalLabel">
+                  Jwumq主机URL
+                </h4>
+              </div>
+              <div class="modal-body">
+                            <textarea name="house.remark" id="host_url" cols="" rows="" class="textarea" placeholder="tcp://127.0.0.1:12120" datatype="*0-100"
+                                      dragonfly="true" errormsg="备注不可超过100个字符！" style="width:100%;min-height: 5px;">tcp://10.211.55.9:12120</textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="startService()">
+                  启动
+                </button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal -->
+        </div>
+      </div>
+
+    </div>
+  </section><!-- #service-start -->
+  <!--==========================
+    Config Section
+  ============================-->
+  <section id="config">
+    <div class="container">
+      <div class="row config-container">
+        <div class="content col-lg-12">
+          <div class="row">
+            <h2 class="title col-lg-3">Jwumq 配置</h2>
+            <p class="sub-title">留着后面补充文字！！！！</p>
+          </div>
+          <div class="row">
+            <div class="icon-box col-lg-4 col-md-6 wow fadeInRight">
+              <div class="icon"><i class="fa fa-shopping-bag"></i></div>
+              <h4 class="title" onclick="requestConfig()"><a href="javascript:void(0)">刷新jwumq配置</a></h4>
+              <p class="description">获取Jwumq Factory配置</p>
+            </div>
+
+            <div class="icon-box col-lg-4 col-md-6 wow fadeInRight" data-wow-delay="0.2s">
+              <div class="icon"><i class="fa fa-photo"></i></div>
+              <h4 class="title" onclick="updateConfig()"><a href="javascript:void(0)">更新jwumq配置</a></h4>
+              <p class="description">提交配置，Jwumq将会重启并加载最新配置</p>
+            </div>
+            <table class="pure-table col-lg-12 wow fadeInUp" id="config_table" data-wow-delay="0.2s">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Enable</th>
+                  <th>Jwumwq Pool Name</th>
+                  <th>Max Queue counts</th>
+                  <th>Access Port</th>
+                  <th> </th>
+                </tr>
+              </thead>
+
+              <tbody id="pool_config_table">
+              </tbody>
+            </table>
+            <!--<div class="icon-box col-lg-4 col-md-6 wow fadeInRight" data-wow-delay="0.4s">-->
+            <!--<div class="icon"><i class=""></i></div>-->
+            <!--<h4 class="title"><a href=""></a></h4>-->
+            <!--<p class="description"></p>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<table class="pure-table col-lg-12 wow fadeInUp" id="config_table" data-wow-delay="0.2s">-->
+      <!--<thead>-->
+      <!--<tr>-->
+        <!--<th>#</th>-->
+        <!--<th>Jwumwq Pool Name</th>-->
+        <!--<th>Max Queue number</th>-->
+        <!--<th>Access Port</th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+
+      <!--<tbody id="config_node_info">-->
+      <!--</tbody>-->
+    <!--</table>-->
+    <!-- 模态框（Modal） -->
+    <!--<div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+      <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+          <!--<div class="modal-header">-->
+            <!--&lt;!&ndash;<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&ndash;&gt;-->
+              <!--&lt;!&ndash;&times;&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+            <!--<h4 class="modal-title" id="myModalLabel">-->
+              <!--配置文件编辑-->
+            <!--</h4>-->
+          <!--</div>-->
+          <!--<div class="modal-body">-->
+                        <!--<textarea name="house.remark" id="config_content" cols="" rows="" class="textarea" placeholder="有效Json字符串" datatype="*0-100"-->
+                                  <!--dragonfly="true" errormsg="备注不可超过100个字符！" style="width:100%;min-height: 500px;"></textarea>-->
+          <!--</div>-->
+          <!--<div class="modal-footer">-->
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭-->
+            <!--</button>-->
+            <!--<button type="button" class="btn btn-primary" onclick="submitConf()">-->
+              <!--提交-->
+            <!--</button>-->
+          <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+      <!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+    <!--</div>-->
+
+    </div>
+  </section><!-- #config -->
+
+  <!--==========================
+    Facts Section
+  ============================-->
+  <section id="facts">
+    <!--<div class="container wow fadeIn">-->
+    <!--<div class="section-header">-->
+    <!--<h3 class="section-title">Facts</h3>-->
+    <!--<p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>-->
+    <!--</div>-->
+    <!--<div class="row counters">-->
+
+    <!--<div class="col-lg-3 col-6 text-center">-->
+    <!--<span data-toggle="counter-up">232</span>-->
+    <!--<p>Clients</p>-->
+    <!--</div>-->
+
+    <!--<div class="col-lg-3 col-6 text-center">-->
+    <!--<span data-toggle="counter-up">521</span>-->
+    <!--<p>Projects</p>-->
+    <!--</div>-->
+
+    <!--<div class="col-lg-3 col-6 text-center">-->
+    <!--<span data-toggle="counter-up">1,463</span>-->
+    <!--<p>Hours Of Support</p>-->
+    <!--</div>-->
+
+    <!--<div class="col-lg-3 col-6 text-center">-->
+    <!--<span data-toggle="counter-up">15</span>-->
+    <!--<p>Hard Workers</p>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+    <!--</div>-->
+  </section><!-- #facts -->
+
+  <!--==========================
+    Monitor Section
+  ============================-->
+  <section id="monitor">
+    <div class="container wow fadeIn">
+      <div class="section-header">
+        <h3 class="section-title">Jwumq 监控</h3>
+        <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+          <div class="box">
+            <div class="icon"><a href=""><i class="fa fa-desktop"></i></a></div>
+            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+          <div class="box">
+            <div class="icon"><a href=""><i class="fa fa-bar-chart"></i></a></div>
+            <h4 class="title"><a href="">Dolor Sitema</a></h4>
+            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+          <div class="box">
+            <div class="icon"><a href=""><i class="fa fa-paper-plane"></i></a></div>
+            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+          <div class="box">
+            <div class="icon"><a href=""><i class="fa fa-photo"></i></a></div>
+            <h4 class="title"><a href="">Magni Dolores</a></h4>
+            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+          <div class="box">
+            <div class="icon"><a href=""><i class="fa fa-road"></i></a></div>
+            <h4 class="title"><a href="">Nemo Enim</a></h4>
+            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+          <div class="box">
+            <div class="icon"><a href=""><i class="fa fa-shopping-bag"></i></a></div>
+            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
+            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- #monitor -->
+  <!--==========================
+    Service start Section
+  ============================-->
+  <section id="service_start">
+    <div class="container wow fadeIn">
+      <div class="section-header">
+        <h3 class="section-title">Jwumq 监控</h3>
+        <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+          <div class="box">
+            <div class="icon"><a href=""><i class="fa fa-desktop"></i></a></div>
+            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+          <div class="box">
+            <div class="icon"><a href=""><i class="fa fa-bar-chart"></i></a></div>
+            <h4 class="title"><a href="">Dolor Sitema</a></h4>
+            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+          <div class="box">
+            <div class="icon"><a href=""><i class="fa fa-paper-plane"></i></a></div>
+            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+          </div>
+        </div>
+
+        <!--<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">-->
+        <!--<div class="box">-->
+        <!--<div class="icon"><a href=""><i class="fa fa-photo"></i></a></div>-->
+        <!--<h4 class="title"><a href="">Magni Dolores</a></h4>-->
+        <!--<p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">-->
+        <!--<div class="box">-->
+        <!--<div class="icon"><a href=""><i class="fa fa-road"></i></a></div>-->
+        <!--<h4 class="title"><a href="">Nemo Enim</a></h4>-->
+        <!--<p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">-->
+        <!--<div class="box">-->
+        <!--<div class="icon"><a href=""><i class="fa fa-shopping-bag"></i></a></div>-->
+        <!--<h4 class="title"><a href="">Eiusmod Tempor</a></h4>-->
+        <!--<p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+
+    </div>
+  </section><!-- #service_start -->
+
+
+
+  <!--==========================
+    Statistics Section
+  ============================-->
+  <section id="statistics">
+    <div class="container wow fadeInUp">
+      <div class="section-header">
+        <h3 class="section-title">Jwumq 统计</h3>
+        <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+      <div class="row">
+
+        <div class="col-lg-12">
+          <ul id="statistics-flters">
+            <li data-filter=".filter-app, .filter-card, .filter-logo, .filter-web" class="filter-active">All</li>
+            <li data-filter=".filter-app">App</li>
+            <li data-filter=".filter-card">Card</li>
+            <li data-filter=".filter-logo">Logo</li>
+            <li data-filter=".filter-web">Web</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row" id="statistics-wrapper">
+        <div class="col-lg-3 col-md-6 statistics-item filter-app">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/app1.jpg') }}" alt="">
+            <div class="details">
+              <h4>App 1</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-web">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/web2.jpg') }}" alt="">
+            <div class="details">
+              <h4>Web 2</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-app">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/app3.jpg') }}" alt="">
+            <div class="details">
+              <h4>App 3</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-card">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/card1.jpg') }}" alt="">
+            <div class="details">
+              <h4>Card 1</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-card">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/card2.jpg') }}" alt="">
+            <div class="details">
+              <h4>Card 2</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-web">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/web3.jpg') }}" alt="">
+            <div class="details">
+              <h4>Web 3</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-card">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/card3.jpg') }}" alt="">
+            <div class="details">
+              <h4>Card 3</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-app">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/app2.jpg') }}" alt="">
+            <div class="details">
+              <h4>App 2</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-logo">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/logo1.jpg') }}" alt="">
+            <div class="details">
+              <h4>Logo 1</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-logo">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/logo3.jpg') }}" alt="">
+            <div class="details">
+              <h4>Logo 3</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-web">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/web1.jpg') }}" alt="">
+            <div class="details">
+              <h4>Web 1</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 statistics-item filter-logo">
+          <a href="">
+            <img src="{{ url_for('static', filename='img/statistics/logo2.jpg') }}" alt="">
+            <div class="details">
+              <h4>Logo 2</h4>
+              <span>Alored dono par</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- #statistics -->
+
+  <!--==========================
+    Team Section
+  ============================-->
+  <section id="team">
+    <div class="container wow fadeInUp">
+      <div class="section-header">
+        <h3 class="section-title">Jwumq 开发团队</h3>
+        <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="member">
+            <div class="pic"><img src="{{ url_for('static', filename='img/team-1.jpg') }}" alt=""></div>
+            <h4>Walter White</h4>
+            <span>Chief Executive Officer</span>
+            <div class="social">
+              <a href=""><i class="fa fa-twitter"></i></a>
+              <a href=""><i class="fa fa-facebook"></i></a>
+              <a href=""><i class="fa fa-google-plus"></i></a>
+              <a href=""><i class="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="member">
+            <div class="pic"><img src="{{ url_for('static', filename='img/team-2.jpg') }}" alt=""></div>
+            <h4>Sarah Jhinson</h4>
+            <span>Product Manager</span>
+            <div class="social">
+              <a href=""><i class="fa fa-twitter"></i></a>
+              <a href=""><i class="fa fa-facebook"></i></a>
+              <a href=""><i class="fa fa-google-plus"></i></a>
+              <a href=""><i class="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="member">
+            <div class="pic"><img src="{{ url_for('static', filename='img/team-3.jpg') }}" alt=""></div>
+            <h4>William Anderson</h4>
+            <span>CTO</span>
+            <div class="social">
+              <a href=""><i class="fa fa-twitter"></i></a>
+              <a href=""><i class="fa fa-facebook"></i></a>
+              <a href=""><i class="fa fa-google-plus"></i></a>
+              <a href=""><i class="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="member">
+            <div class="pic"><img src="{{ url_for('static', filename='img/team-4.jpg') }}" alt=""></div>
+            <h4>Amanda Jepson</h4>
+            <span>Accountant</span>
+            <div class="social">
+              <a href=""><i class="fa fa-twitter"></i></a>
+              <a href=""><i class="fa fa-facebook"></i></a>
+              <a href=""><i class="fa fa-google-plus"></i></a>
+              <a href=""><i class="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- #team -->
+
+  <!--==========================
+    Contact Section
+  ============================-->
+  <section id="contact">
+    <div class="container wow fadeInUp">
+      <div class="section-header">
+        <h3 class="section-title">联系我们</h3>
+        <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+    </div>
+
+
+
+    <div class="container wow fadeInUp">
+      <div class="row justify-content-center">
+
+        <div class="col-lg-3 col-md-4">
+
+          <div class="info">
+            <div>
+              <i class="fa fa-map-marker"></i>
+              <p>A108 Adam Street<br>New York, NY 535022</p>
+            </div>
+
+            <div>
+              <i class="fa fa-envelope"></i>
+              <p>info@example.com</p>
+            </div>
+
+            <div>
+              <i class="fa fa-phone"></i>
+              <p>+1 5589 55488 55s</p>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+          </div>
+
+        </div>
+
+        <div class="col-lg-5 col-md-8">
+          <div class="form">
+            <div id="sendmessage">Your message has been sent. Thank you!</div>
+            <div id="errormessage"></div>
+            <form action="" method="post" role="form" class="contactForm">
+              <div class="form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                <div class="validation"></div>
+              </div>
+              <div class="text-center"><button type="submit">提交建议</button></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- #contact -->
+
+</main>
+
+<!--==========================
+  Footer
+============================-->
+<footer id="footer">
+  <div class="footer-top">
+    <div class="container">
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="copyright">Copyright &copy; 2019.Company name All rights reserved.<a target="_blank" href="http://www.aspku.com
+/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></div>
+    <div class="credits"></div>
+  </div>
+</footer><!-- #footer -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<!-- JavaScript Libraries -->
+<script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/jquery/jquery-migrate.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/superfish/hoverIntent.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/superfish/superfish.min.js') }}"></script>
+
+<!-- Contact Form JavaScript File -->
+<script src="{{ url_for('static', filename='contactform/contactform.js') }}"></script>
+
+<!-- Template Main Javascript File -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

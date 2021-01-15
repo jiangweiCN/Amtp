@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package jwumq_message_pb;
+
+
+
+message	jwumq_message
+{
+	uint32		command = 1;
+	uint32		ts_sec = 2;
+	uint32		ts_us = 3;
+	uint32		sn = 4;
+	string		src_id = 5;
+	string		des_id = 6;
+	string		queue_name = 7;
+	uint32		raw_data_len = 8;
+	bytes		raw_data = 9;
+}
+
+
