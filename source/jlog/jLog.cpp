@@ -13,19 +13,14 @@
 #include <io.h>
 #include <direct.h>
 #include <fstream>
-//#include "../include/glog_win/logging.h"
+#include "../include/glog_win/logging.h"
 //#include "../include/glog_win/raw_logging.h"
 //using namespace google;
 
 #ifdef _DEBUG
 #pragma comment(lib, "../../source/include/glog_win/glogd.lib")
 #else
-
-#if defined(_WIN64)
-#pragma comment(lib, "../../source/include/glog_win64/glog.lib")
-#else // _WIN32
-#pragma comment(lib, "../../source/include/glog_win32/glog.lib")
-#endif
+#pragma comment(lib, "../../source/include/glog_win/glog.lib")
 #endif // DEBUG
 
 #else
