@@ -13,9 +13,7 @@ CXX_LDOPTIONS =  -Wl,-lz -lm -lpthread -ldl
 LIBS = -lprotobuf -L../bin -lamtpa_license
 
 
-SRCS = $(wildcard $(MAIN)/amtpa_lic_generator.cpp \
-					$(MAIN)/amtpa_license.cpp\
-					$(MAIN)/license_msg.pb.cpp )
+SRCS = $(wildcard $(MAIN)/amtpa_lic_generator.cpp  )
 
 OBJS= $(SRCS:%.cpp=%.o)
 

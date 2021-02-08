@@ -2,7 +2,7 @@
 
 time=$(date "+%Y%m%d%H%M%S")
 installPath="../install"
-runFile="jwumq_install_2.0.1.$time.run"
+runFile="jwumq_install_2.0.2.$time.run"
 runFilePath="$installPath/$runFile"
 tarFile="$installPath/jwumq_install.tar.bz2"
 binPath="$installPath/jwumq_bin/"

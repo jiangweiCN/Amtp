@@ -42,6 +42,7 @@ public:
 	
 	int Load(string license_file, LIC_CONF_T &load_conf);
 	int Make(LIC_CONF_T lic_conf);
+	int Make(LIC_CONF_T lic_conf, string file);
 
 private:
 	int Save(string license_file, license_msg::License license);

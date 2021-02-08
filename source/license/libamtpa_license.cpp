@@ -112,6 +112,12 @@ int AmtpaLicense::Load(string license_file, LIC_CONF_T &load_conf)
 int AmtpaLicense::Make(LIC_CONF_T lic_conf)
 {
 	string license_file = lic_conf.save_path + "/" + lic_conf.box_id + ".license";
+	return Make(lic_conf, license_file);
+}
+
+int AmtpaLicense::Make(LIC_CONF_T lic_conf, string file)
+{
+	string license_file = file;
 	
 	license_msg::License license;
 	license_msg::LicenseInfo license_info;
