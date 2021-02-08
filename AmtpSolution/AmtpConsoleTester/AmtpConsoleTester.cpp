@@ -68,7 +68,8 @@ void LibAmtpcaTest::TestThread()
 
 	if (lib_version == NULL || lib_init == NULL || lib_sendcmd == NULL || lib_waitforcmd == NULL || lib_release == NULL)
 	{
-		PrintScreen("Get %s function error!", lib_name.c_str());
+		PrintScreen("Get %s function error! %d, %d, %d, %d, %d, %s"
+			, lib_name.c_str(), lib_version, lib_init, lib_sendcmd, lib_waitforcmd, lib_release, strerror(errno));
 		return;
 	}
 	PrintScreen("%s version:%s", lib_name.c_str(), lib_version());
