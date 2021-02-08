@@ -38,7 +38,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <PreferredToolArchitecture>x86</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -74,6 +74,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>Amtpca</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -93,10 +94,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;AMTPCADLL_EXPORTS;_WINDOWS;_USRDLL;GOOGLE_GLOG_DLL_DECL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;AMTPCADLL_EXPORTS;_WINDOWS;_USRDLL;GOOGLE_GLOG_DLL_DECL=;ZLIB_WINAPI;_CRT_SECURE_NO_WARNINGS;ZMQ_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\source\include\libzmq-4.3.1-win32;$(SolutionDir)..\source\include\protobuf-3.11.2-win32;$(SolutionDir)..\source\include\zlib-1.2.11-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -104,12 +108,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)..\source\include\protobuf-3.11.2-win32\gmock.lib;$(SolutionDir)..\source\include\protobuf-3.11.2-win32\gmock_main.lib;$(SolutionDir)..\source\include\protobuf-3.11.2-win32\libprotobuf.lib;$(SolutionDir)..\source\include\protobuf-3.11.2-win32\libprotobuf-lite.lib;$(SolutionDir)..\source\include\protobuf-3.11.2-win32\libprotoc.lib;$(SolutionDir)..\source\include\libzmq-4.3.1-win32\libzmq-v142-mt-s-4_3_1.lib;$(SolutionDir)..\source\include\zlib-1.2.11-win32\zlibstat.lib;wsock32.lib;ws2_32.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>if not exist "$(SolutionDir)../bin_win64" md "$(SolutionDir)../bin_win64"
-copy "$(TargetPath)" "$(SolutionDir)../bin_win64/$(TargetFileName)"</Command>
+      <Command>if not exist "$(SolutionDir)../bin_win32" md "$(SolutionDir)../bin_win32"
+copy "$(TargetPath)" "$(SolutionDir)../bin_win32/$(TargetFileName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

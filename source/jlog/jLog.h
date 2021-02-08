@@ -13,7 +13,11 @@
 
 #if defined(_WIN32)
 #define GLOG_NO_ABBREVIATED_SEVERITIES
-#include "../include/glog_win/logging.h"
+#if defined(_WIN64)
+#include "../include/glog_win64/logging.h"
+#else // _WIN32
+#include "../include/glog_win32/logging.h"
+#endif
 #else
 #include "../include/glog/logging.h"
 #include "../include/glog/raw_logging.h"
