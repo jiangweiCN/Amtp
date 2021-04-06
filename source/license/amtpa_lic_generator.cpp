@@ -162,7 +162,7 @@ int main(int argc, char * argv[])
 		}
 		return 1;
 	}
-	else if(argc == 9)
+	else if(argc == 10)
 	{
 		fprintf(stderr, "*********************Amtpa license generator begin --- auto model *********************\n");
 		AmtpaLicense al;
@@ -174,9 +174,9 @@ int main(int argc, char * argv[])
 		conf.data_ip = argv[3];
 		conf.data_port = atoi(argv[4]);
 
-		vector<string> box_v;
+		// vector<string> box_v;
 		string box_id = argv[5];
-		SplitString(box_id, box_v,",");
+		// SplitString(box_id, box_v,",");
 
 		conf.manufactor = argv[6];
 
@@ -208,13 +208,17 @@ int main(int argc, char * argv[])
 			}
 		}
 
-		string save_file = argv[8];
+		string save_path = argv[8];
+		int count = atoi(argv[9]);
 		
-		for(int x = 0; x < (int)box_v.size(); x++)
+		for(int x = 1; x <= count; x++)
 		{
-			conf.box_id = box_v[x];
-			conf.jwumq_id = box_v[x];
-			conf.pwd = box_v[x];
+			char box[256] = {0};
+			sprintf(box, "%s_%04d", box_id.c_str(), x);
+			conf.box_id = box;
+			conf.jwumq_id = box;
+			conf.pwd = box;
+			string save_file = save_path + "/" + box + ".license";
 
 			int result = al.Make(conf, save_file);
 			if(result != 0)
@@ -225,6 +229,28 @@ int main(int argc, char * argv[])
 		}
 		
 		return 1;
+	}
+	else if(argc == 2)
+	{
+		string license_file = argv[1];
+		AmtpaLicense al_read;
+		LIC_CONF_T load_conf;
+
+		if(al_read.Load(license_file, load_conf) != 0)
+		{
+			fprintf(stderr, "License load '%s' faild!\n", license_file.c_str());
+			return -1;
+		}
+		fprintf(stderr, "License load '%s' !\n", license_file.c_str());
+		fprintf(stderr, "type = %d, check = %d\n", load_conf.lic_type, load_conf.check);
+		fprintf(stderr, "cmd_ip = %s, cmd_port = %d, data_ip = %s, data_port = %d, box_id = %s, pwd = %s, manufactor = %s, "\
+					"begin_time = %ld, end_time = %ld, release_id = %d, jwumq_id = %s\n"
+					, load_conf.cmd_ip.c_str(), load_conf.cmd_port
+					, load_conf.data_ip.c_str(), load_conf.data_port
+					, load_conf.box_id.c_str(), load_conf.pwd.c_str()
+					, load_conf.manufactor.c_str(), load_conf.begin_time
+					, load_conf.end_time, load_conf.release_id
+					, load_conf.jwumq_id.c_str());
 	}
 	else
 	{

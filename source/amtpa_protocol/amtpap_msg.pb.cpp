@@ -913,6 +913,11 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_amtpap_5fmsg_2eproto::offsets[
   PROTOBUF_FIELD_OFFSET(::amtpap::ModuleConfV1, imei_),
   PROTOBUF_FIELD_OFFSET(::amtpap::ModuleConfV1, phone_number_),
   PROTOBUF_FIELD_OFFSET(::amtpap::ModuleConfV1, network_operator_),
+  PROTOBUF_FIELD_OFFSET(::amtpap::ModuleConfV1, module_num_),
+  PROTOBUF_FIELD_OFFSET(::amtpap::ModuleConfV1, module_system_),
+  PROTOBUF_FIELD_OFFSET(::amtpap::ModuleConfV1, module_factory_),
+  PROTOBUF_FIELD_OFFSET(::amtpap::ModuleConfV1, imsi_),
+  PROTOBUF_FIELD_OFFSET(::amtpap::ModuleConfV1, box_id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::amtpap::ModuleConfRespV1, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -954,7 +959,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 270, -1, sizeof(::amtpap::ReatartCmdV1)},
   { 278, -1, sizeof(::amtpap::ReatartRespV1)},
   { 285, -1, sizeof(::amtpap::ModuleConfV1)},
-  { 298, -1, sizeof(::amtpap::ModuleConfRespV1)},
+  { 303, -1, sizeof(::amtpap::ModuleConfRespV1)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -1064,34 +1069,36 @@ const char descriptor_table_protodef_amtpap_5fmsg_2eproto[] PROTOBUF_SECTION_VAR
   "taRespV1\022\r\n\005token\030\001 \001(\014\022\016\n\006result\030\002 \001(\005\""
   ">\n\014ReatartCmdV1\022\r\n\005token\030\001 \001(\014\022\016\n\006ts_sec"
   "\030\002 \001(\r\022\017\n\007ts_usec\030\003 \001(\r\".\n\rReatartRespV1"
-  "\022\r\n\005token\030\001 \001(\014\022\016\n\006result\030\002 \001(\005\"\263\001\n\014Modu"
+  "\022\r\n\005token\030\001 \001(\014\022\016\n\006result\030\002 \001(\005\"\224\002\n\014Modu"
   "leConfV1\022\r\n\005token\030\001 \001(\014\022\023\n\013module_type\030\002"
   " \001(\r\022\031\n\021chip_manufacturer\030\003 \001(\r\022\021\n\tchip_"
   "type\030\004 \001(\t\022\023\n\013icd_version\030\005 \001(\t\022\014\n\004imei\030"
   "\006 \001(\t\022\024\n\014phone_number\030\007 \001(\t\022\030\n\020network_o"
-  "perator\030\010 \001(\t\"1\n\020ModuleConfRespV1\022\r\n\005tok"
-  "en\030\001 \001(\014\022\016\n\006result\030\002 \001(\005*\"\n\007MsgType\022\n\n\006P"
-  "UBLIC\020\000\022\013\n\007PRIVATE\020\001*\217\006\n\005MsgID\022\013\n\007RESERV"
-  "E\020\000\022\016\n\010LOGIN_V1\020\201\200\004\022\016\n\010LOGIN_V2\020\202\200\004\022\023\n\rL"
-  "OGIN_RESP_V1\020\201\200\010\022\017\n\tLOGOUT_V1\020\201\200\014\022\024\n\016LOG"
-  "OUT_RESP_V1\020\201\200\020\022\017\n\tCONFIG_V1\020\201\200\024\022\024\n\016CONF"
-  "IG_RESP_V1\020\201\200\030\022\025\n\017REPORT_EVENT_V1\020\201\200\034\022\032\n"
-  "\024REPORT_EVENT_RESP_V1\020\201\200 \022\016\n\010ALARM_V1\020\201\200"
-  "$\022\023\n\rALARM_RESP_V1\020\201\200(\022\024\n\016ALARM_CLEAR_V1"
-  "\020\201\200,\022\031\n\023ALARM_CLEAR_RESP_V1\020\201\2000\022\021\n\013GPS_I"
-  "NFO_V1\020\201\2004\022\026\n\020GPS_INFO_RESP_V1\020\201\2008\022\024\n\016ST"
-  "ATUS_INFO_V1\020\201\200<\022\031\n\023STATUS_INFO_RESP_V1\020"
-  "\201\200@\022\024\n\016CONFIG_DATA_V1\020\201\200D\022\031\n\023CONFIG_DATA"
-  "_RESP_V1\020\201\200H\022\026\n\020CONFIG_NOTIFY_V1\020\201\200L\022\033\n\025"
-  "CONFIG_NOTIFY_RESP_V1\020\201\200P\022\024\n\016UPLOAD_FILE"
-  "_V1\020\201\200T\022\031\n\023UPLOAD_FILE_RESP_V1\020\201\200X\022\023\n\rUP"
-  "LOAD_EOF_V1\020\201\200\\\022\030\n\022UPLOAD_EOF_RESP_V1\020\201\200"
-  "`\022\024\n\016RESTART_CMD_V1\020\201\200d\022\031\n\023RESTART_CMD_R"
-  "ESP_V1\020\201\200h\022\023\n\rQUERY_DATA_V1\020\201\200l\022\030\n\022QUERY"
-  "_DATA_RESP_V1\020\201\200p\022\031\n\023UPLOAD_FILE_DATA_V1"
-  "\020\201\200t\022\036\n\030UPLOAD_FILE_DATA_RESP_V1\020\201\200x\022\024\n\016"
-  "MODULE_CONF_V1\020\201\200|\022\032\n\023MODULE_CONF_RESP_V"
-  "1\020\201\200\200\001b\006proto3"
+  "perator\030\010 \001(\t\022\022\n\nmodule_num\030\t \001(\r\022\025\n\rmod"
+  "ule_system\030\n \001(\t\022\026\n\016module_factory\030\013 \001(\t"
+  "\022\014\n\004imsi\030\014 \001(\t\022\016\n\006box_id\030\r \001(\t\"1\n\020Module"
+  "ConfRespV1\022\r\n\005token\030\001 \001(\014\022\016\n\006result\030\002 \001("
+  "\005*\"\n\007MsgType\022\n\n\006PUBLIC\020\000\022\013\n\007PRIVATE\020\001*\217\006"
+  "\n\005MsgID\022\013\n\007RESERVE\020\000\022\016\n\010LOGIN_V1\020\201\200\004\022\016\n\010"
+  "LOGIN_V2\020\202\200\004\022\023\n\rLOGIN_RESP_V1\020\201\200\010\022\017\n\tLOG"
+  "OUT_V1\020\201\200\014\022\024\n\016LOGOUT_RESP_V1\020\201\200\020\022\017\n\tCONF"
+  "IG_V1\020\201\200\024\022\024\n\016CONFIG_RESP_V1\020\201\200\030\022\025\n\017REPOR"
+  "T_EVENT_V1\020\201\200\034\022\032\n\024REPORT_EVENT_RESP_V1\020\201"
+  "\200 \022\016\n\010ALARM_V1\020\201\200$\022\023\n\rALARM_RESP_V1\020\201\200(\022"
+  "\024\n\016ALARM_CLEAR_V1\020\201\200,\022\031\n\023ALARM_CLEAR_RES"
+  "P_V1\020\201\2000\022\021\n\013GPS_INFO_V1\020\201\2004\022\026\n\020GPS_INFO_"
+  "RESP_V1\020\201\2008\022\024\n\016STATUS_INFO_V1\020\201\200<\022\031\n\023STA"
+  "TUS_INFO_RESP_V1\020\201\200@\022\024\n\016CONFIG_DATA_V1\020\201"
+  "\200D\022\031\n\023CONFIG_DATA_RESP_V1\020\201\200H\022\026\n\020CONFIG_"
+  "NOTIFY_V1\020\201\200L\022\033\n\025CONFIG_NOTIFY_RESP_V1\020\201"
+  "\200P\022\024\n\016UPLOAD_FILE_V1\020\201\200T\022\031\n\023UPLOAD_FILE_"
+  "RESP_V1\020\201\200X\022\023\n\rUPLOAD_EOF_V1\020\201\200\\\022\030\n\022UPLO"
+  "AD_EOF_RESP_V1\020\201\200`\022\024\n\016RESTART_CMD_V1\020\201\200d"
+  "\022\031\n\023RESTART_CMD_RESP_V1\020\201\200h\022\023\n\rQUERY_DAT"
+  "A_V1\020\201\200l\022\030\n\022QUERY_DATA_RESP_V1\020\201\200p\022\031\n\023UP"
+  "LOAD_FILE_DATA_V1\020\201\200t\022\036\n\030UPLOAD_FILE_DAT"
+  "A_RESP_V1\020\201\200x\022\024\n\016MODULE_CONF_V1\020\201\200|\022\032\n\023M"
+  "ODULE_CONF_RESP_V1\020\201\200\200\001b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_amtpap_5fmsg_2eproto_deps[1] = {
 };
@@ -1133,7 +1140,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_amt
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_amtpap_5fmsg_2eproto_once;
 static bool descriptor_table_amtpap_5fmsg_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_amtpap_5fmsg_2eproto = {
-  &descriptor_table_amtpap_5fmsg_2eproto_initialized, descriptor_table_protodef_amtpap_5fmsg_2eproto, "amtpap_msg.proto", 3894,
+  &descriptor_table_amtpap_5fmsg_2eproto_initialized, descriptor_table_protodef_amtpap_5fmsg_2eproto, "amtpap_msg.proto", 3991,
   &descriptor_table_amtpap_5fmsg_2eproto_once, descriptor_table_amtpap_5fmsg_2eproto_sccs, descriptor_table_amtpap_5fmsg_2eproto_deps, 33, 0,
   schemas, file_default_instances, TableStruct_amtpap_5fmsg_2eproto::offsets,
   file_level_metadata_amtpap_5fmsg_2eproto, 33, file_level_enum_descriptors_amtpap_5fmsg_2eproto, file_level_service_descriptors_amtpap_5fmsg_2eproto,
@@ -10104,9 +10111,25 @@ ModuleConfV1::ModuleConfV1(const ModuleConfV1& from)
   if (!from._internal_network_operator().empty()) {
     network_operator_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.network_operator_);
   }
+  module_system_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_module_system().empty()) {
+    module_system_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.module_system_);
+  }
+  module_factory_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_module_factory().empty()) {
+    module_factory_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.module_factory_);
+  }
+  imsi_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_imsi().empty()) {
+    imsi_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.imsi_);
+  }
+  box_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_box_id().empty()) {
+    box_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.box_id_);
+  }
   ::memcpy(&module_type_, &from.module_type_,
-    static_cast<size_t>(reinterpret_cast<char*>(&chip_manufacturer_) -
-    reinterpret_cast<char*>(&module_type_)) + sizeof(chip_manufacturer_));
+    static_cast<size_t>(reinterpret_cast<char*>(&module_num_) -
+    reinterpret_cast<char*>(&module_type_)) + sizeof(module_num_));
   // @@protoc_insertion_point(copy_constructor:amtpap.ModuleConfV1)
 }
 
@@ -10118,9 +10141,13 @@ void ModuleConfV1::SharedCtor() {
   imei_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   phone_number_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   network_operator_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  module_system_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  module_factory_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  imsi_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  box_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&module_type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&chip_manufacturer_) -
-      reinterpret_cast<char*>(&module_type_)) + sizeof(chip_manufacturer_));
+      reinterpret_cast<char*>(&module_num_) -
+      reinterpret_cast<char*>(&module_type_)) + sizeof(module_num_));
 }
 
 ModuleConfV1::~ModuleConfV1() {
@@ -10135,6 +10162,10 @@ void ModuleConfV1::SharedDtor() {
   imei_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   phone_number_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   network_operator_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  module_system_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  module_factory_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  imsi_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  box_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ModuleConfV1::SetCachedSize(int size) const {
@@ -10158,9 +10189,13 @@ void ModuleConfV1::Clear() {
   imei_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   phone_number_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   network_operator_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  module_system_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  module_factory_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  imsi_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  box_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&module_type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&chip_manufacturer_) -
-      reinterpret_cast<char*>(&module_type_)) + sizeof(chip_manufacturer_));
+      reinterpret_cast<char*>(&module_num_) -
+      reinterpret_cast<char*>(&module_type_)) + sizeof(module_num_));
   _internal_metadata_.Clear();
 }
 
@@ -10235,6 +10270,49 @@ const char* ModuleConfV1::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_I
           auto str = _internal_mutable_network_operator();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "amtpap.ModuleConfV1.network_operator"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint32 module_num = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 72)) {
+          module_num_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string module_system = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
+          auto str = _internal_mutable_module_system();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "amtpap.ModuleConfV1.module_system"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string module_factory = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          auto str = _internal_mutable_module_factory();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "amtpap.ModuleConfV1.module_factory"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string imsi = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
+          auto str = _internal_mutable_imsi();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "amtpap.ModuleConfV1.imsi"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string box_id = 13;
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106)) {
+          auto str = _internal_mutable_box_id();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "amtpap.ModuleConfV1.box_id"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -10332,6 +10410,52 @@ failure:
         8, this->_internal_network_operator(), target);
   }
 
+  // uint32 module_num = 9;
+  if (this->module_num() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(9, this->_internal_module_num(), target);
+  }
+
+  // string module_system = 10;
+  if (this->module_system().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_module_system().data(), static_cast<int>(this->_internal_module_system().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "amtpap.ModuleConfV1.module_system");
+    target = stream->WriteStringMaybeAliased(
+        10, this->_internal_module_system(), target);
+  }
+
+  // string module_factory = 11;
+  if (this->module_factory().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_module_factory().data(), static_cast<int>(this->_internal_module_factory().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "amtpap.ModuleConfV1.module_factory");
+    target = stream->WriteStringMaybeAliased(
+        11, this->_internal_module_factory(), target);
+  }
+
+  // string imsi = 12;
+  if (this->imsi().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_imsi().data(), static_cast<int>(this->_internal_imsi().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "amtpap.ModuleConfV1.imsi");
+    target = stream->WriteStringMaybeAliased(
+        12, this->_internal_imsi(), target);
+  }
+
+  // string box_id = 13;
+  if (this->box_id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_box_id().data(), static_cast<int>(this->_internal_box_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "amtpap.ModuleConfV1.box_id");
+    target = stream->WriteStringMaybeAliased(
+        13, this->_internal_box_id(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target, stream);
@@ -10390,6 +10514,34 @@ size_t ModuleConfV1::ByteSizeLong() const {
         this->_internal_network_operator());
   }
 
+  // string module_system = 10;
+  if (this->module_system().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_module_system());
+  }
+
+  // string module_factory = 11;
+  if (this->module_factory().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_module_factory());
+  }
+
+  // string imsi = 12;
+  if (this->imsi().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_imsi());
+  }
+
+  // string box_id = 13;
+  if (this->box_id().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_box_id());
+  }
+
   // uint32 module_type = 2;
   if (this->module_type() != 0) {
     total_size += 1 +
@@ -10402,6 +10554,13 @@ size_t ModuleConfV1::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
         this->_internal_chip_manufacturer());
+  }
+
+  // uint32 module_num = 9;
+  if (this->module_num() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_module_num());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -10459,11 +10618,30 @@ void ModuleConfV1::MergeFrom(const ModuleConfV1& from) {
 
     network_operator_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.network_operator_);
   }
+  if (from.module_system().size() > 0) {
+
+    module_system_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.module_system_);
+  }
+  if (from.module_factory().size() > 0) {
+
+    module_factory_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.module_factory_);
+  }
+  if (from.imsi().size() > 0) {
+
+    imsi_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.imsi_);
+  }
+  if (from.box_id().size() > 0) {
+
+    box_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.box_id_);
+  }
   if (from.module_type() != 0) {
     _internal_set_module_type(from._internal_module_type());
   }
   if (from.chip_manufacturer() != 0) {
     _internal_set_chip_manufacturer(from._internal_chip_manufacturer());
+  }
+  if (from.module_num() != 0) {
+    _internal_set_module_num(from._internal_module_num());
   }
 }
 
@@ -10500,8 +10678,17 @@ void ModuleConfV1::InternalSwap(ModuleConfV1* other) {
     GetArenaNoVirtual());
   network_operator_.Swap(&other->network_operator_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  module_system_.Swap(&other->module_system_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  module_factory_.Swap(&other->module_factory_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  imsi_.Swap(&other->imsi_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  box_id_.Swap(&other->box_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(module_type_, other->module_type_);
   swap(chip_manufacturer_, other->chip_manufacturer_);
+  swap(module_num_, other->module_num_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ModuleConfV1::GetMetadata() const {

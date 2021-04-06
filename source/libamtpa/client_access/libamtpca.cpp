@@ -35,7 +35,7 @@ int _cdecl amtpca_init(const char* license_path, const char* log_path, LIBAMTPCA
 #else
 int amtpca_init(const char * license_path, const char * log_path, LIBAMTPCA_CMD_RECV_CBFUN call_back)
 #endif
-{
+{ 
 	if(amtpca_p != nullptr)
 	{
 		return LIB_AMTPA_IS_WORKING;

@@ -380,7 +380,11 @@ message ModuleConfV1
 	string		imei = 6;
 	string		phone_number = 7;
 	string		network_operator = 8;
-//	uint32		channel_num = 9;
+	uint32		module_num = 9;
+	string		module_system = 10;
+	string		module_factory = 11;
+	string		imsi = 12;
+	string		box_id = 13;
 }
 
 message ModuleConfRespV1

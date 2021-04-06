@@ -17,7 +17,7 @@ JwumqDealer::JwumqDealer()
 	this->recv_callback_c = nullptr;
 	memset(identity, 0, sizeof(identity));
 }
-
+ 
 JwumqDealer::~JwumqDealer()
 {
 	loop = 0;

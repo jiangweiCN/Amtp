@@ -97,7 +97,7 @@ Amtpca::Amtpca()
 	recv_mutex_map[AMTP_CMD_ENUM::module_conf_resp] = make_unique<mutex>();
 	recv_cv_map[AMTP_CMD_ENUM::module_conf_resp] = make_unique<condition_variable>();
 }
-
+ 
 Amtpca::~Amtpca()
 {
 	

@@ -23,15 +23,19 @@ unique_ptr<JwumqMessage> amtp_module_conf::data(MODULE_CONF_STRU * s, unsigned c
 {
 	amtpap::ModuleConfV1 req;
 	req.set_token((char*)token);
-//	req.set_channel_num(s->channel_num);
+	req.set_module_num(s->module_num);
 	req.set_module_type(static_cast<uint32_t>(s->module_type));
 	req.set_chip_manufacturer(static_cast<uint32_t>(s->chip_manufacturer));
 	req.set_chip_type(s->chip_type);
 	req.set_icd_version(s->icd_version);
 	req.set_imei(s->imei);
+	req.set_imsi(s->imsi);
+	req.set_module_system(s->module_system);
 	req.set_phone_number(s->phone_number);
 	req.set_network_operator(s->network_operator);
-	
+	req.set_module_factory(s->module_factory);
+	req.set_box_id(load_conf.box_id);
+
 	size_t req_len = req.ByteSizeLong();
 	unique_ptr<char[]> req_buf(new char[req_len]());
 	req.SerializeToArray(req_buf.get(), (int)req_len);

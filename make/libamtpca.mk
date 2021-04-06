@@ -63,9 +63,9 @@ SRCS = $(wildcard $(MAIN)/libamtpca.cpp \
 
 OBJS= $(SRCS:%.cpp=%.o)
 
-EXES= $(OUTPUT_PATH)/libamtpca.so.1.0.0
+EXES= $(OUTPUT_PATH)/libamtpca.so.1.0.1
 
-EXES_I368= $(OUTPUT_PATH_I368)/libamtpca.so.1.0.0
+EXES_I368= $(OUTPUT_PATH_I368)/libamtpca.so.1.0.1
 
 
 all:$(OBJS)

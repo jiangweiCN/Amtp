@@ -5803,8 +5803,13 @@ class ModuleConfV1 :
     kImeiFieldNumber = 6,
     kPhoneNumberFieldNumber = 7,
     kNetworkOperatorFieldNumber = 8,
+    kModuleSystemFieldNumber = 10,
+    kModuleFactoryFieldNumber = 11,
+    kImsiFieldNumber = 12,
+    kBoxIdFieldNumber = 13,
     kModuleTypeFieldNumber = 2,
     kChipManufacturerFieldNumber = 3,
+    kModuleNumFieldNumber = 9,
   };
   // bytes token = 1;
   void clear_token();
@@ -5902,6 +5907,70 @@ class ModuleConfV1 :
   std::string* _internal_mutable_network_operator();
   public:
 
+  // string module_system = 10;
+  void clear_module_system();
+  const std::string& module_system() const;
+  void set_module_system(const std::string& value);
+  void set_module_system(std::string&& value);
+  void set_module_system(const char* value);
+  void set_module_system(const char* value, size_t size);
+  std::string* mutable_module_system();
+  std::string* release_module_system();
+  void set_allocated_module_system(std::string* module_system);
+  private:
+  const std::string& _internal_module_system() const;
+  void _internal_set_module_system(const std::string& value);
+  std::string* _internal_mutable_module_system();
+  public:
+
+  // string module_factory = 11;
+  void clear_module_factory();
+  const std::string& module_factory() const;
+  void set_module_factory(const std::string& value);
+  void set_module_factory(std::string&& value);
+  void set_module_factory(const char* value);
+  void set_module_factory(const char* value, size_t size);
+  std::string* mutable_module_factory();
+  std::string* release_module_factory();
+  void set_allocated_module_factory(std::string* module_factory);
+  private:
+  const std::string& _internal_module_factory() const;
+  void _internal_set_module_factory(const std::string& value);
+  std::string* _internal_mutable_module_factory();
+  public:
+
+  // string imsi = 12;
+  void clear_imsi();
+  const std::string& imsi() const;
+  void set_imsi(const std::string& value);
+  void set_imsi(std::string&& value);
+  void set_imsi(const char* value);
+  void set_imsi(const char* value, size_t size);
+  std::string* mutable_imsi();
+  std::string* release_imsi();
+  void set_allocated_imsi(std::string* imsi);
+  private:
+  const std::string& _internal_imsi() const;
+  void _internal_set_imsi(const std::string& value);
+  std::string* _internal_mutable_imsi();
+  public:
+
+  // string box_id = 13;
+  void clear_box_id();
+  const std::string& box_id() const;
+  void set_box_id(const std::string& value);
+  void set_box_id(std::string&& value);
+  void set_box_id(const char* value);
+  void set_box_id(const char* value, size_t size);
+  std::string* mutable_box_id();
+  std::string* release_box_id();
+  void set_allocated_box_id(std::string* box_id);
+  private:
+  const std::string& _internal_box_id() const;
+  void _internal_set_box_id(const std::string& value);
+  std::string* _internal_mutable_box_id();
+  public:
+
   // uint32 module_type = 2;
   void clear_module_type();
   ::PROTOBUF_NAMESPACE_ID::uint32 module_type() const;
@@ -5920,6 +5989,15 @@ class ModuleConfV1 :
   void _internal_set_chip_manufacturer(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
+  // uint32 module_num = 9;
+  void clear_module_num();
+  ::PROTOBUF_NAMESPACE_ID::uint32 module_num() const;
+  void set_module_num(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_module_num() const;
+  void _internal_set_module_num(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:amtpap.ModuleConfV1)
  private:
   class _Internal;
@@ -5931,8 +6009,13 @@ class ModuleConfV1 :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr imei_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr phone_number_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr network_operator_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr module_system_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr module_factory_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr imsi_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr box_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 module_type_;
   ::PROTOBUF_NAMESPACE_ID::uint32 chip_manufacturer_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 module_num_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_amtpap_5fmsg_2eproto;
 };
@@ -11255,6 +11338,266 @@ inline void ModuleConfV1::set_allocated_network_operator(std::string* network_op
   }
   network_operator_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), network_operator);
   // @@protoc_insertion_point(field_set_allocated:amtpap.ModuleConfV1.network_operator)
+}
+
+// uint32 module_num = 9;
+inline void ModuleConfV1::clear_module_num() {
+  module_num_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ModuleConfV1::_internal_module_num() const {
+  return module_num_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ModuleConfV1::module_num() const {
+  // @@protoc_insertion_point(field_get:amtpap.ModuleConfV1.module_num)
+  return _internal_module_num();
+}
+inline void ModuleConfV1::_internal_set_module_num(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  module_num_ = value;
+}
+inline void ModuleConfV1::set_module_num(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_module_num(value);
+  // @@protoc_insertion_point(field_set:amtpap.ModuleConfV1.module_num)
+}
+
+// string module_system = 10;
+inline void ModuleConfV1::clear_module_system() {
+  module_system_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ModuleConfV1::module_system() const {
+  // @@protoc_insertion_point(field_get:amtpap.ModuleConfV1.module_system)
+  return _internal_module_system();
+}
+inline void ModuleConfV1::set_module_system(const std::string& value) {
+  _internal_set_module_system(value);
+  // @@protoc_insertion_point(field_set:amtpap.ModuleConfV1.module_system)
+}
+inline std::string* ModuleConfV1::mutable_module_system() {
+  // @@protoc_insertion_point(field_mutable:amtpap.ModuleConfV1.module_system)
+  return _internal_mutable_module_system();
+}
+inline const std::string& ModuleConfV1::_internal_module_system() const {
+  return module_system_.GetNoArena();
+}
+inline void ModuleConfV1::_internal_set_module_system(const std::string& value) {
+  
+  module_system_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ModuleConfV1::set_module_system(std::string&& value) {
+  
+  module_system_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:amtpap.ModuleConfV1.module_system)
+}
+inline void ModuleConfV1::set_module_system(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  module_system_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:amtpap.ModuleConfV1.module_system)
+}
+inline void ModuleConfV1::set_module_system(const char* value, size_t size) {
+  
+  module_system_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:amtpap.ModuleConfV1.module_system)
+}
+inline std::string* ModuleConfV1::_internal_mutable_module_system() {
+  
+  return module_system_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ModuleConfV1::release_module_system() {
+  // @@protoc_insertion_point(field_release:amtpap.ModuleConfV1.module_system)
+  
+  return module_system_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ModuleConfV1::set_allocated_module_system(std::string* module_system) {
+  if (module_system != nullptr) {
+    
+  } else {
+    
+  }
+  module_system_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), module_system);
+  // @@protoc_insertion_point(field_set_allocated:amtpap.ModuleConfV1.module_system)
+}
+
+// string module_factory = 11;
+inline void ModuleConfV1::clear_module_factory() {
+  module_factory_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ModuleConfV1::module_factory() const {
+  // @@protoc_insertion_point(field_get:amtpap.ModuleConfV1.module_factory)
+  return _internal_module_factory();
+}
+inline void ModuleConfV1::set_module_factory(const std::string& value) {
+  _internal_set_module_factory(value);
+  // @@protoc_insertion_point(field_set:amtpap.ModuleConfV1.module_factory)
+}
+inline std::string* ModuleConfV1::mutable_module_factory() {
+  // @@protoc_insertion_point(field_mutable:amtpap.ModuleConfV1.module_factory)
+  return _internal_mutable_module_factory();
+}
+inline const std::string& ModuleConfV1::_internal_module_factory() const {
+  return module_factory_.GetNoArena();
+}
+inline void ModuleConfV1::_internal_set_module_factory(const std::string& value) {
+  
+  module_factory_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ModuleConfV1::set_module_factory(std::string&& value) {
+  
+  module_factory_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:amtpap.ModuleConfV1.module_factory)
+}
+inline void ModuleConfV1::set_module_factory(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  module_factory_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:amtpap.ModuleConfV1.module_factory)
+}
+inline void ModuleConfV1::set_module_factory(const char* value, size_t size) {
+  
+  module_factory_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:amtpap.ModuleConfV1.module_factory)
+}
+inline std::string* ModuleConfV1::_internal_mutable_module_factory() {
+  
+  return module_factory_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ModuleConfV1::release_module_factory() {
+  // @@protoc_insertion_point(field_release:amtpap.ModuleConfV1.module_factory)
+  
+  return module_factory_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ModuleConfV1::set_allocated_module_factory(std::string* module_factory) {
+  if (module_factory != nullptr) {
+    
+  } else {
+    
+  }
+  module_factory_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), module_factory);
+  // @@protoc_insertion_point(field_set_allocated:amtpap.ModuleConfV1.module_factory)
+}
+
+// string imsi = 12;
+inline void ModuleConfV1::clear_imsi() {
+  imsi_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ModuleConfV1::imsi() const {
+  // @@protoc_insertion_point(field_get:amtpap.ModuleConfV1.imsi)
+  return _internal_imsi();
+}
+inline void ModuleConfV1::set_imsi(const std::string& value) {
+  _internal_set_imsi(value);
+  // @@protoc_insertion_point(field_set:amtpap.ModuleConfV1.imsi)
+}
+inline std::string* ModuleConfV1::mutable_imsi() {
+  // @@protoc_insertion_point(field_mutable:amtpap.ModuleConfV1.imsi)
+  return _internal_mutable_imsi();
+}
+inline const std::string& ModuleConfV1::_internal_imsi() const {
+  return imsi_.GetNoArena();
+}
+inline void ModuleConfV1::_internal_set_imsi(const std::string& value) {
+  
+  imsi_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ModuleConfV1::set_imsi(std::string&& value) {
+  
+  imsi_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:amtpap.ModuleConfV1.imsi)
+}
+inline void ModuleConfV1::set_imsi(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  imsi_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:amtpap.ModuleConfV1.imsi)
+}
+inline void ModuleConfV1::set_imsi(const char* value, size_t size) {
+  
+  imsi_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:amtpap.ModuleConfV1.imsi)
+}
+inline std::string* ModuleConfV1::_internal_mutable_imsi() {
+  
+  return imsi_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ModuleConfV1::release_imsi() {
+  // @@protoc_insertion_point(field_release:amtpap.ModuleConfV1.imsi)
+  
+  return imsi_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ModuleConfV1::set_allocated_imsi(std::string* imsi) {
+  if (imsi != nullptr) {
+    
+  } else {
+    
+  }
+  imsi_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), imsi);
+  // @@protoc_insertion_point(field_set_allocated:amtpap.ModuleConfV1.imsi)
+}
+
+// string box_id = 13;
+inline void ModuleConfV1::clear_box_id() {
+  box_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ModuleConfV1::box_id() const {
+  // @@protoc_insertion_point(field_get:amtpap.ModuleConfV1.box_id)
+  return _internal_box_id();
+}
+inline void ModuleConfV1::set_box_id(const std::string& value) {
+  _internal_set_box_id(value);
+  // @@protoc_insertion_point(field_set:amtpap.ModuleConfV1.box_id)
+}
+inline std::string* ModuleConfV1::mutable_box_id() {
+  // @@protoc_insertion_point(field_mutable:amtpap.ModuleConfV1.box_id)
+  return _internal_mutable_box_id();
+}
+inline const std::string& ModuleConfV1::_internal_box_id() const {
+  return box_id_.GetNoArena();
+}
+inline void ModuleConfV1::_internal_set_box_id(const std::string& value) {
+  
+  box_id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ModuleConfV1::set_box_id(std::string&& value) {
+  
+  box_id_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:amtpap.ModuleConfV1.box_id)
+}
+inline void ModuleConfV1::set_box_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  box_id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:amtpap.ModuleConfV1.box_id)
+}
+inline void ModuleConfV1::set_box_id(const char* value, size_t size) {
+  
+  box_id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:amtpap.ModuleConfV1.box_id)
+}
+inline std::string* ModuleConfV1::_internal_mutable_box_id() {
+  
+  return box_id_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ModuleConfV1::release_box_id() {
+  // @@protoc_insertion_point(field_release:amtpap.ModuleConfV1.box_id)
+  
+  return box_id_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ModuleConfV1::set_allocated_box_id(std::string* box_id) {
+  if (box_id != nullptr) {
+    
+  } else {
+    
+  }
+  box_id_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), box_id);
+  // @@protoc_insertion_point(field_set_allocated:amtpap.ModuleConfV1.box_id)
 }
 
 // -------------------------------------------------------------------

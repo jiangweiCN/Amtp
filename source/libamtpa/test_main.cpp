@@ -501,7 +501,7 @@ void LibAmtpsaTest::TestThread(string name)
 	lib_setlimit(sa_handle, 100);
 
 	int index = 0;
-	while(index < 100)
+	while(index < 100000000)
 	{
 		int msg_len = 0;
 		int result = lib_waitformsg(sa_handle, &msg_len, 10000);
@@ -616,15 +616,19 @@ void LibAmtpsaTest::TestThread(string name)
 	lib_release(sa_handle);
 	dlclose(so);
 }
+
 void LibAmtpsaTest::RecvModuleConf(string src_id, string data, int len)
 {
 	amtpap::ModuleConfV1 req;
 	req.ParseFromArray(data.c_str(), len);
-	
-	fprintf(stderr, "%s:%s recv module conf cmd token = %s, module_type = %d, chip_manufacturer = %d, chip_type = %s, icd_version = %s, imei = %s, phone_number = %s, network_operator = %s\n"
-			, Time().c_str(), name.c_str(), req.token().c_str(), req.module_type(), req.chip_manufacturer()
-			, req.chip_type().c_str(), req.icd_version().c_str(), req.imei().c_str(), req.phone_number().c_str(), req.network_operator().c_str());
-	
+
+	fprintf(stderr, "%s:%s recv module conf cmd token = %s, module_type = %d, chip_manufacturer = %d, \
+chip_type = %s, icd_version = %s, imei = %s, phone_number = %s, network_operator = %s \
+module_num = %d, module_system = %s, module_factory = %s, imsi = %s, box_id = %s\n",
+			Time().c_str(), name.c_str(), req.token().c_str(), req.module_type(), req.chip_manufacturer(), 
+			req.chip_type().c_str(), req.icd_version().c_str(), req.imei().c_str(), req.phone_number().c_str(), req.network_operator().c_str(), 
+			req.module_num(), req.module_system().c_str(), req.module_factory().c_str(), req.imsi().c_str(), req.box_id().c_str());
+
 	amtpap::ModuleConfRespV1 resp;
 	resp.set_token(token, strlen(token));
 	resp.set_result(0);
@@ -1278,6 +1282,15 @@ public:
 private:
 	void TestThread(string name);
 	void LibamtpcaCmdRecvCbfun(AMTP_CMD_ENUM cmd, void * cmd_s, void* reserve);
+	void LoginTest();
+	void ModuleConfigTest();
+	void ConfigTest();
+	void UploadFileRequestTest();
+	void UploadFileDataTest();
+	void UploadFileEofTest();
+	void LogoutTest();
+	void PerformanceTest();
+
 private:
 	string name;
 	int type;
@@ -1332,277 +1345,310 @@ void LibAmtpcaTest::TestThread(string name)
 		fprintf(stderr, "lib_init failed\n");
 		return;
 	}
-	int result = lib_init("dev.license", NULL/*"/tmp/log"*/, std::bind(&LibAmtpcaTest::LibamtpcaCmdRecvCbfun, this
-	, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+	int result = -1;
+	
+	if (name == "client_p")
+	{
+		result = lib_init("dev.license", "log", std::bind(&LibAmtpcaTest::LibamtpcaCmdRecvCbfun, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+	}
+	else
+	{
+		result = lib_init("dev.license", NULL, std::bind(&LibAmtpcaTest::LibamtpcaCmdRecvCbfun, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+	}
+	
 	fprintf(stderr, "%s:%s Init result = %d\n", Time().c_str(), name.c_str(), result);
 	if(result != 0)
 	{
 		return;
 	}
 
+	while(1)
 	{
-		LOGIN_STRU login_s;
-		memset(&login_s, 0, sizeof(LOGIN_STRU));
-		strcpy(login_s.manufacturer_pwd, "abcdefgh");
-		
-		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::login), &login_s, true, 5000);
-		fprintf(stderr, "%s:%s login result = %d\n", Time().c_str(), name.c_str(), result);
-		LOGIN_RESP_STRU login_resp_s;
-		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::login_resp), (void *)&login_resp_s, 5000);
-		fprintf(stderr, "%s:%s -----------------------------wait for login response(%d) result = %d, manufacturer = %s\n", Time().c_str(), name.c_str(), result, login_resp_s.result, login_resp_s.manufacturer);
-	}///LOGIN_STRU
-	usleep(10*1000);
-	{
-		MODULE_CONF_STRU module_conf_s;
-		memset(&module_conf_s, 0, sizeof(MODULE_CONF_STRU));
-//		module_conf_s.channel_num = 1;
-		module_conf_s.module_type = AMTP_MODULE_TYPE_ENUM::NR;
-		module_conf_s.chip_manufacturer = AMTP_CHIP_MANUFACTURER_ENUM::Qualcomm;
-		strcpy(module_conf_s.chip_type, "Snapdragon 865");
-		strcpy(module_conf_s.icd_version, "96-V3708-1");
-		strcpy(module_conf_s.imei, "355672052457519");
-		strcpy(module_conf_s.phone_number, "13488828654");
-		strcpy(module_conf_s.network_operator, "CMCC");
-		
-		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::module_conf), &module_conf_s, true, 5000);
-		fprintf(stderr, "%s:%s module conf report result = %d\n", Time().c_str(), name.c_str(), result);
-		MODULE_CONF_RESP_STRU module_conf_resp_s;
-		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::module_conf_resp), (void *)&module_conf_resp_s, 5000);
-		fprintf(stderr, "%s:%s -----------------------------wait for module conf report response(%d) result = %d\n", Time().c_str(), name.c_str(), result, module_conf_resp_s.result);
-	}///MODULE_CONF_STRU
-	usleep(10*1000);
-	{
-		struct timeval tv;
-		struct timezone tz;
-		gettimeofday(&tv,&tz);
-		
-		CONFIG_STRU config_s;
-		memset(&config_s, 0, sizeof(CONFIG_STRU));
-//		config_s.version = 100;
-		sprintf(config_s.atuid_version, "a1b2c3d4e5_123");
-		
-		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::config), &config_s, true, 5000);
-		fprintf(stderr, "%s:%s config result = %d\n", Time().c_str(), name.c_str(), result);
-		
-		CONFIG_RESP_STRU config_resp_s;
-		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::config_resp), (void *)&config_resp_s, 5000);
-		fprintf(stderr, "%s:%s -----------------------------wait for config response(%d) atuid_version = %s, result = %d, update = %d, packet_count = %d, md5 = %s\n"
-				, Time().c_str(), name.c_str(), result, config_resp_s.atuid_version, config_resp_s.result
-				, config_resp_s.update, config_resp_s.packet_count, config_resp_s.md5);
-	}///CONFIG_STRU
-	sleep(3);
-	{
-		UPLOAD_FILE_STRU upload_file_s;
-		memset(&upload_file_s, 0, sizeof(UPLOAD_FILE_STRU));
-		sprintf(upload_file_s.file_name, "9177700220190103104005ms1.lte");
-		upload_file_s.retransmit = false;
-		upload_file_s.module = 2;
-		
-		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file), &upload_file_s, true, 5000);
-		fprintf(stderr, "%s:%s send upload file request(%d)\n", Time().c_str(), name.c_str(), result);
-		
-		UPLOAD_FILE_RESP_STRU upload_file_resp_s;
-		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_resp), (void *)&upload_file_resp_s, 5000);
-		fprintf(stderr, "%s:%s -----------------------------wait for upload file response(%d) result = %d\n"
-				, Time().c_str(), name.c_str(), result, upload_file_resp_s.result);
-	}///UPLOAD_FILE_STRU
-	usleep(10*1000);
-	{
-		int max_packet_size = 1024 * 1024;
-		FILE *dtlog_f = fopen( "688k.txt", "rb" );
-		size_t file_size = 0;
-		fseek(dtlog_f,0L,SEEK_END);
-		file_size=ftell(dtlog_f);
-		
-		int packet_count = ((int)file_size / max_packet_size)
-							+ (((int)(file_size % max_packet_size) == 0) ? 0 : 1);
-		
-		
-		for(int packet_no = 1; packet_no <= packet_count; packet_no++)
+		char choice[64] = {0};
+		printf("=======================================================================\n");
+		printf("please input your choice\n");
+		printf("1: Login\n");
+		printf("2: Module conf report\n");
+		printf("3: Config request\n");
+		printf("4: Upload file request\n");
+		printf("5: Upload file data\n");
+		printf("6: Upload file eof\n");
+		printf("7: Logout\n");
+		printf("8: Performance test\n");
+		printf("0: Exit test\n");
+		printf("Select:");
+		scanf("%s",choice);
+
+		int select = atoi(choice);
+
+		if(select == 1)
 		{
-//			SendFileData(x);
-			int read_len = 0;
-			if(packet_no == packet_count)
-			{
-				read_len = (int)file_size - (packet_no - 1) * max_packet_size;
-			}
-			else
-			{
-				read_len = max_packet_size;
-			}
-			
-			fseek(dtlog_f, (packet_no - 1) * max_packet_size, SEEK_SET);
-			unique_ptr<unsigned char[]> buf(new unsigned char[read_len]());
-			fread( buf.get(), 1, read_len, dtlog_f );
-//			fclose(config_f);
-			
-			UPLOAD_FILE_DATA_STRU upload_file_data_s;
-			memset(&upload_file_data_s, 0, sizeof(UPLOAD_FILE_DATA_STRU));
-			upload_file_data_s.file_id = 123;
-			upload_file_data_s.packet_no = packet_no;
-			upload_file_data_s.data_len = read_len;
-			upload_file_data_s.data = buf.get();
-			
-			int result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_data), &upload_file_data_s, true, 5000);
-			fprintf(stderr, "%s:%s Upload file data result = %d\n", Time().c_str(), name.c_str(), result);
-			
-			UPLOAD_FILE_DATA_RESP_STRU upload_file_data_resp_s;
-			result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_data_resp), (void *)&upload_file_data_resp_s, 5000);
-			fprintf(stderr, "%s:%s -----------------------------wait for upload file data response(%d) result = %d, file_id = %d, packet_no = %d\n"
-					, Time().c_str(), name.c_str(), result, upload_file_data_resp_s.result, upload_file_data_resp_s.file_id, upload_file_data_resp_s.packet_no);
-			usleep(10*1000);
+			LoginTest ();
 		}
-		fclose(dtlog_f);
+		else if(select == 2)
+		{
+			ModuleConfigTest();
+		}
+		else if (select == 3)
+		{
+			ConfigTest();
+		}
+		else if (select == 4)
+		{
+			UploadFileRequestTest();
+		}
+		else if (select == 5)
+		{
+			UploadFileDataTest();
+		}
+		else if (select == 6)
+		{
+			UploadFileEofTest();
+		}
+		else if (select == 7)
+		{
+			LogoutTest();
+		}
+		else if (select == 8)
+		{
+			PerformanceTest();
+		}
+		else if (select == 0)
+		{
+			break;
+		}
+		else
+		{
+			printf("***********Your choice is invalid!\n");
+		}
 	}
-	usleep(100*1000);
-	{
-		UPLOAD_EOF_STRU upload_eof_s;
-		memset(&upload_eof_s, 0, sizeof(UPLOAD_EOF_STRU));
-		sprintf(upload_eof_s.file_name, "9177700220190103104005ms1.lte");
-		upload_eof_s.file_id = 12345;
-		upload_eof_s.packet_count = 3;
-		upload_eof_s.total_size = 67890;
-		upload_eof_s.module = 3;
-		sprintf(upload_eof_s.md5, "abcdefghijklmnopqrstuvwxyz98765");
-		
-		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_eof), &upload_eof_s, true, 5000);
-		fprintf(stderr, "%s:%s send upload eof request(%d)\n", Time().c_str(), name.c_str(), result);
-		
-		UPLOAD_EOF_RESP_STRU upload_eof_resp_s;
-		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_eof_resp), (void *)&upload_eof_resp_s, 5000);
-		fprintf(stderr, "%s:%s -----------------------------wait for upload eof response(%d) result = %d\n"
-				, Time().c_str(), name.c_str(), result, upload_eof_resp_s.result);
-	}///UPLOAD_EOF_STRU
-	usleep(10*1000);
-	{
-		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::logout), NULL, true, 5000);
-		fprintf(stderr, "%s:%s logout result = %d\n", Time().c_str(), name.c_str(), result);
-		LOGOUT_RESP_STRU logout_resp_s;
-		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::logout_resp), (void *)&logout_resp_s, 5000);
-		fprintf(stderr, "%s:%s -----------------------------wait for logout response(%d), result = %d\n", Time().c_str(), name.c_str(), result, logout_resp_s.result);
-	}///LOGOUT_
-//	usleep(10*1000);
-	{
-//		struct timeval tv;
-//		struct timezone tz;
-//		gettimeofday(&tv,&tz);
-//
-//		GPS_INFO_STRU gps_info_s;
-//		memset(&gps_info_s, 0, sizeof(GPS_INFO_STRU));
-//		gps_info_s.longitude = 123.456789;
-//		gps_info_s.latitude = 23.456789;
-//		gps_info_s.altitude = 123.4;
-//		gps_info_s.speed = 123.4;
-//		gps_info_s.heading = 123.45;
-//		gps_info_s.ts_sec = tv.tv_sec;
-//		gps_info_s.ts_usec = tv.tv_usec;
-//
-//		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::gps_info), &gps_info_s, true, 5000);
-//		fprintf(stderr, "%s:%s GPS result = %d\n", Time().c_str(), name.c_str(), result);
-//
-//		GPS_INFO_RESP_STRU gps_info_resp_s;
-//		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::gps_info_resp), (void *)&gps_info_resp_s, 5000);
-//		fprintf(stderr, "%s:%s -----------------------------wait for GPS response(%d) result = %d\n"
-//				, Time().c_str(), name.c_str(), result, gps_info_resp_s.result);
-	}///GPS_INFO_STRU
-//	sleep(1);
-	{
-//		struct timeval tv;
-//		struct timezone tz;
-//		gettimeofday(&tv,&tz);
-//
-//		STATUS_INFO_STRU status_info_s;
-//		memset(&status_info_s, 0, sizeof(STATUS_INFO_STRU));
-//		status_info_s.power_mode = 1;
-//		status_info_s.files_letf = 23;
-//		status_info_s.temperature = 123.4;
-//		status_info_s.disk_space = 432.1;
-//		status_info_s.ts_sec = tv.tv_sec;
-//		status_info_s.ts_usec = tv.tv_usec;
-//
-//		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::status_info), &status_info_s, true, 5000);
-//		fprintf(stderr, "%s:%s status result = %d\n", Time().c_str(), name.c_str(), result);
-//
-//		STATUS_INFO_RESP_STRU status_info_resp_s;
-//		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::status_info_resp), (void *)&status_info_resp_s, 5000);
-//		fprintf(stderr, "%s:%s -----------------------------wait for status response(%d) result = %d\n"
-//				, Time().c_str(), name.c_str(), result, status_info_resp_s.result);
-	}///STATUS_INFO_STRU
-//	usleep(10*1000);
-	{
-//		struct timeval tv;
-//		struct timezone tz;
-//		gettimeofday(&tv,&tz);
-//
-//		REPORT_EVENT_STRU event_s;
-//		memset(&event_s, 0, sizeof(REPORT_EVENT_STRU));
-//		event_s.event_code = 0x4100;
-//		event_s.module = 2;
-//		event_s.ts_sec = tv.tv_sec;
-//		event_s.ts_usec = tv.tv_usec;
-//
-//		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::report_event), &event_s, true, 5000);
-//		fprintf(stderr, "%s:%s report event result = %d\n", Time().c_str(), name.c_str(), result);
-//
-//		REPORT_EVENT_RESP_STRU event_resp_s;
-//		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::report_event_resp), (void *)&event_resp_s, 5000);
-//		fprintf(stderr, "%s:%s -----------------------------wait for event response(%d) result = %d\n"
-//				, Time().c_str(), name.c_str(), result, event_resp_s.result);
-	}///REPORT_EVENT_STRU
-//	usleep(10*1000);
-	{
-//		struct timeval tv;
-//		struct timezone tz;
-//		gettimeofday(&tv,&tz);
-//
-//		ALARM_STRU alarm_s;
-//		memset(&alarm_s, 0, sizeof(ALARM_STRU));
-//		alarm_s.module = 2;
-//		alarm_s.seq = 1;
-//		alarm_s.alarm_code = 0x4100;
-//		alarm_s.reason_code = 0x4101;
-//		alarm_s.ts_sec = tv.tv_sec;
-//		alarm_s.ts_usec = tv.tv_usec;
-//
-//		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::alarm), &alarm_s, true, 5000);
-//		fprintf(stderr, "%s:%s alarm result = %d\n", Time().c_str(), name.c_str(), result);
-//
-//		ALARM_RESP_STRU alarm_resp_s;
-//		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::alarm_resp), (void *)&alarm_resp_s, 5000);
-//		fprintf(stderr, "%s:%s -----------------------------wait for alarm response(%d) result = %d\n"
-//				, Time().c_str(), name.c_str(), result, alarm_resp_s.result);
-	}///ALARM_STRU
-//	usleep(10*1000);
-	{
-//		struct timeval tv;
-//		struct timezone tz;
-//		gettimeofday(&tv,&tz);
-//
-//		ALARM_CLEAR_STRU alarm_clear_s;
-//		memset(&alarm_clear_s, 0, sizeof(ALARM_CLEAR_STRU));
-//		alarm_clear_s.module = 2;
-//		alarm_clear_s.seq = 1;
-//		alarm_clear_s.alarm_code = 0x4100;
-//		alarm_clear_s.ts_sec = tv.tv_sec;
-//		alarm_clear_s.ts_usec = tv.tv_usec;
-//
-//		result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::alarm_clear), &alarm_clear_s, true, 5000);
-//		fprintf(stderr, "%s:%s alarm clear result = %d\n", Time().c_str(), name.c_str(), result);
-//
-//		ALARM_CLEAR_RESP_STRU alarm_clear_resp_s;
-//		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::alarm_clear_resp), (void *)&alarm_clear_resp_s, 5000);
-//		fprintf(stderr, "%s:%s -----------------------------wait for alarm clear response(%d) result = %d\n"
-//				, Time().c_str(), name.c_str(), result, alarm_clear_resp_s.result);
-	}///ALARM_CLEAR_STRU
-	
-	sleep(5);
 	fprintf(stderr, "%s:%s end!\n", Time().c_str(), name.c_str());
 	
 	lib_release();
 }
+void LibAmtpcaTest::LoginTest ()
+{
+	char manufacturer_pwd[64] = {0};
+	printf("please input manufacturer pwd: ");
+	scanf("%s", manufacturer_pwd);
+
+	LOGIN_STRU login_s;
+	memset(&login_s, 0, sizeof(LOGIN_STRU));
+	strcpy(login_s.manufacturer_pwd, manufacturer_pwd);
+
+	int result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::login), &login_s, true, 5000);
+	fprintf(stderr, "%s:%s login result = %d\n", Time().c_str(), name.c_str(), result);
+	LOGIN_RESP_STRU login_resp_s;
+	result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::login_resp), (void *)&login_resp_s, 5000);
+	fprintf(stderr, "%s:%s -----------------------------wait for login response(%d) result = %d, manufacturer = %s\n", Time().c_str(), name.c_str(), result, login_resp_s.result, login_resp_s.manufacturer);
+}
+void LibAmtpcaTest::ModuleConfigTest ()
+{
+	static int module_num = 0;
+	MODULE_CONF_STRU module_conf_s;
+	memset(&module_conf_s, 0, sizeof(MODULE_CONF_STRU));
+	module_conf_s.module_num = ++module_num;
+	module_conf_s.module_type = AMTP_MODULE_TYPE_ENUM::NR;
+	module_conf_s.chip_manufacturer = AMTP_CHIP_MANUFACTURER_ENUM::Qualcomm;
+	strcpy(module_conf_s.chip_type, "Snapdragon 865");
+	strcpy(module_conf_s.icd_version, "96-V3708-1");
+	strcpy(module_conf_s.imei, "355672052457519");
+	strcpy(module_conf_s.imsi, "460001357924680");
+	strcpy(module_conf_s.module_system, "android");
+	strcpy(module_conf_s.module_factory, "huawei");
+	strcpy(module_conf_s.phone_number, "13488828654");
+	strcpy(module_conf_s.network_operator, "CMCC");
+
+	int result_s = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::module_conf), &module_conf_s, false, 5000);
+	fprintf(stderr, "%s:%s module conf report result = %d\n", Time().c_str(), name.c_str(), result_s);
+	MODULE_CONF_RESP_STRU module_conf_resp_s;
+	int result_w = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::module_conf_resp), (void *)&module_conf_resp_s, 5000);
+	fprintf(stderr, "%s:%s -----------------------------wait for module conf report response(%d) result = %d\n", Time().c_str(), name.c_str(), result_w, module_conf_resp_s.result);
+}
+
+void LibAmtpcaTest::ConfigTest ()
+{
+	struct timeval tv;
+	struct timezone tz;
+	gettimeofday(&tv, &tz);
+
+	CONFIG_STRU config_s;
+	memset(&config_s, 0, sizeof(CONFIG_STRU));
+	//		config_s.version = 100;
+	sprintf(config_s.atuid_version, "a1b2c3d4e5_123");
+
+	int result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::config), &config_s, true, 5000);
+	fprintf(stderr, "%s:%s config result = %d\n", Time().c_str(), name.c_str(), result);
+
+	CONFIG_RESP_STRU config_resp_s;
+	result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::config_resp), (void *)&config_resp_s, 5000);
+	fprintf(stderr, "%s:%s -----------------------------wait for config response(%d) atuid_version = %s, result = %d, update = %d, packet_count = %d, md5 = %s\n", Time().c_str(), name.c_str(), result, config_resp_s.atuid_version, config_resp_s.result, config_resp_s.update, config_resp_s.packet_count, config_resp_s.md5);
+	sleep(3);
+}
+void LibAmtpcaTest::UploadFileRequestTest()
+{
+	UPLOAD_FILE_STRU upload_file_s;
+	memset(&upload_file_s, 0, sizeof(UPLOAD_FILE_STRU));
+	sprintf(upload_file_s.file_name, "9177700220190103104005ms1.lte");
+	upload_file_s.retransmit = false;
+	upload_file_s.module = 2;
+
+	int result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file), &upload_file_s, true, 5000);
+	fprintf(stderr, "%s:%s send upload file request(%d)\n", Time().c_str(), name.c_str(), result);
+
+	UPLOAD_FILE_RESP_STRU upload_file_resp_s;
+	result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_resp), (void *)&upload_file_resp_s, 5000);
+	fprintf(stderr, "%s:%s -----------------------------wait for upload file response(%d) result = %d\n", Time().c_str(), name.c_str(), result, upload_file_resp_s.result);
+}
+void LibAmtpcaTest::UploadFileDataTest()
+{
+	int max_packet_size = 1024 * 1024;
+	FILE *dtlog_f = fopen("688k.txt", "rb");
+	size_t file_size = 0;
+	fseek(dtlog_f, 0L, SEEK_END);
+	file_size = ftell(dtlog_f);
+
+	int packet_count = ((int)file_size / max_packet_size) + (((int)(file_size % max_packet_size) == 0) ? 0 : 1);
+
+	for (int packet_no = 1; packet_no <= packet_count; packet_no++)
+	{
+		//			SendFileData(x);
+		int read_len = 0;
+		if (packet_no == packet_count)
+		{
+			read_len = (int)file_size - (packet_no - 1) * max_packet_size;
+		}
+		else
+		{
+			read_len = max_packet_size;
+		}
+
+		fseek(dtlog_f, (packet_no - 1) * max_packet_size, SEEK_SET);
+		unique_ptr<unsigned char[]> buf(new unsigned char[read_len]());
+		fread(buf.get(), 1, read_len, dtlog_f);
+		//			fclose(config_f);
+
+		UPLOAD_FILE_DATA_STRU upload_file_data_s;
+		memset(&upload_file_data_s, 0, sizeof(UPLOAD_FILE_DATA_STRU));
+		upload_file_data_s.file_id = 123;
+		upload_file_data_s.packet_no = packet_no;
+		upload_file_data_s.data_len = read_len;
+		upload_file_data_s.data = buf.get();
+
+		int result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_data), &upload_file_data_s, true, 5000);
+		fprintf(stderr, "%s:%s Upload file data result = %d\n", Time().c_str(), name.c_str(), result);
+
+		UPLOAD_FILE_DATA_RESP_STRU upload_file_data_resp_s;
+		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_data_resp), (void *)&upload_file_data_resp_s, 5000);
+		fprintf(stderr, "%s:%s -----------------------------wait for upload file data response(%d) result = %d, file_id = %d, packet_no = %d\n", Time().c_str(), name.c_str(), result, upload_file_data_resp_s.result, upload_file_data_resp_s.file_id, upload_file_data_resp_s.packet_no);
+		usleep(10 * 1000);
+	}
+	fclose(dtlog_f);
+}
+void LibAmtpcaTest::UploadFileEofTest()
+{
+	UPLOAD_EOF_STRU upload_eof_s;
+	memset(&upload_eof_s, 0, sizeof(UPLOAD_EOF_STRU));
+	sprintf(upload_eof_s.file_name, "9177700220190103104005ms1.lte");
+	upload_eof_s.file_id = 12345;
+	upload_eof_s.packet_count = 3;
+	upload_eof_s.total_size = 67890;
+	upload_eof_s.module = 3;
+	sprintf(upload_eof_s.md5, "abcdefghijklmnopqrstuvwxyz98765");
+
+	int result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_eof), &upload_eof_s, true, 5000);
+	fprintf(stderr, "%s:%s send upload eof request(%d)\n", Time().c_str(), name.c_str(), result);
+
+	UPLOAD_EOF_RESP_STRU upload_eof_resp_s;
+	result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_eof_resp), (void *)&upload_eof_resp_s, 5000);
+	fprintf(stderr, "%s:%s -----------------------------wait for upload eof response(%d) result = %d\n", Time().c_str(), name.c_str(), result, upload_eof_resp_s.result);
+	sleep(3);
+}
+void LibAmtpcaTest::LogoutTest()
+{
+	int result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::logout), NULL, true, 5000);
+	fprintf(stderr, "%s:%s logout result = %d\n", Time().c_str(), name.c_str(), result);
+	LOGOUT_RESP_STRU logout_resp_s;
+	result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::logout_resp), (void *)&logout_resp_s, 5000);
+	fprintf(stderr, "%s:%s -----------------------------wait for logout response(%d), result = %d\n", Time().c_str(), name.c_str(), result, logout_resp_s.result);
+	sleep(3);
+}
+void LibAmtpcaTest::PerformanceTest()
+{
+	MODULE_CONF_STRU module_conf_s;
+	memset(&module_conf_s, 0, sizeof(MODULE_CONF_STRU));
+	module_conf_s.module_type = AMTP_MODULE_TYPE_ENUM::NR;
+	module_conf_s.chip_manufacturer = AMTP_CHIP_MANUFACTURER_ENUM::Qualcomm;
+	strcpy(module_conf_s.chip_type, "Snapdragon 865");
+	strcpy(module_conf_s.icd_version, "96-V3708-1");
+	strcpy(module_conf_s.imei, "355672052457519");
+	strcpy(module_conf_s.phone_number, "13488828654");
+	strcpy(module_conf_s.network_operator, "CMCC");
+
+	struct timeval tv_s;
+	char buf_s[32] = {0};
+	char time_buf_s[64] = {0};
+	struct timeval tv_e;
+	char buf_e[32] = {0};
+	char time_buf_e[64] = {0};
+
+	gettimeofday(&tv_s, NULL);
+	strftime(buf_s, sizeof(buf_s) - 1, "%Y-%m-%d %H:%M:%S", localtime(&tv_s.tv_sec));
+	sprintf(time_buf_s, "%s.%06ld", buf_s, tv_s.tv_usec);
+
+	int loop = 100000;
+	int send_s_count = 0;
+	int send_f_count = 0;
+	int recv_s_count = 0;
+	int recv_f_count = 0;
+	while (loop--)
+	{
+		int result = lib_sendcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::module_conf), &module_conf_s, false, 5000);
+		if (result == 0)
+		{
+			send_s_count++;
+		}
+		else
+		{
+			send_f_count++;
+		}
+
+		MODULE_CONF_RESP_STRU module_conf_resp_s;
+		result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::module_conf_resp), (void *)&module_conf_resp_s, 5000);
+		if (result == 0)
+		{
+			recv_s_count++;
+		}
+		else
+		{
+			recv_f_count++;
+		}
+	}
+	gettimeofday(&tv_e, NULL);
+	strftime(buf_e, sizeof(buf_e) - 1, "%Y-%m-%d %H:%M:%S", localtime(&tv_e.tv_sec));
+	sprintf(time_buf_e, "%s.%06ld", buf_e, tv_e.tv_usec);
+
+	fprintf(stderr, "%s:%s -----------------------------Performance test result\n", Time().c_str(), name.c_str());
+	fprintf(stderr, "begin time: %s, %ld.%06ld sec\n", time_buf_s, tv_s.tv_sec, tv_s.tv_usec);
+	fprintf(stderr, "end time: %s, %ld.%06ld sec\n", time_buf_e, tv_e.tv_sec, tv_e.tv_usec);
+	int cost_time = (tv_e.tv_sec - tv_s.tv_sec) * 1000000 + tv_e.tv_usec - tv_s.tv_usec;
+	fprintf(stderr, "cost time: %d ms\n", cost_time);
+	fprintf(stderr, "send package: %d\n", send_s_count + send_f_count);
+	fprintf(stderr, "send success: %d\n", send_s_count);
+	fprintf(stderr, "send failed: %d\n", send_f_count);
+	fprintf(stderr, "recv package: %d\n", recv_s_count + recv_f_count);
+	fprintf(stderr, "recv success: %d\n", recv_s_count);
+	fprintf(stderr, "recv failed: %d\n", recv_f_count);
+	int send_app_bytes = (send_s_count + send_f_count) * 84;
+	int recv_app_bytes = (recv_s_count + recv_f_count) * 17;
+	fprintf(stderr, "send app bytes: %d\n", send_app_bytes);
+	fprintf(stderr, "recv app bytes: %d\n", recv_app_bytes);
+	fprintf(stderr, "send app capacity: %f Bps\n", (float)send_app_bytes / ((float)cost_time / 1000000.0));
+	fprintf(stderr, "recv app capacity: %f Bps\n", (float)recv_app_bytes / ((float)cost_time / 1000000));
+}
 void LibAmtpcaTest::LibamtpcaCmdRecvCbfun(AMTP_CMD_ENUM cmd, void * cmd_s, void* reserve)
 {
-	fprintf(stderr, "%s:%s LibamtpcaCmdRecvCbfun recv cmd:0x%08X!\n", Time().c_str(), name.c_str(), static_cast<uint32_t>(cmd));
+	// fprintf(stderr, "%s:%s LibamtpcaCmdRecvCbfun recv cmd:0x%08X!\n", Time().c_str(), name.c_str(), static_cast<uint32_t>(cmd));
 	if(cmd == AMTP_CMD_ENUM::login_resp)
 	{
 		LOGIN_RESP_STRU resp_s;
@@ -1614,8 +1660,7 @@ void LibAmtpcaTest::LibamtpcaCmdRecvCbfun(AMTP_CMD_ENUM cmd, void * cmd_s, void*
 	{
 		MODULE_CONF_RESP_STRU resp_s;
 		memcpy(&resp_s, cmd_s, sizeof(MODULE_CONF_RESP_STRU));
-		fprintf(stderr, "%s:%s Callback recv module conf report response, result = %d\n"
-				, Time().c_str(), proc_id, resp_s.result);
+		// fprintf(stderr, "%s:%s Callback recv module conf report response, result = %d\n", Time().c_str(), proc_id, resp_s.result);
 	}
 	if(cmd == AMTP_CMD_ENUM::config_resp)
 	{
