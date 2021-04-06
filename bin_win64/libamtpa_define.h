@@ -110,15 +110,20 @@ using LOGIN_RESP_STRU = struct login_resp_stru
 
 using MODULE_CONF_STRU = struct module_conf_stru
 {
-//	uint32_t						channel_num;
+	uint32_t 						module_num;
 	AMTP_MODULE_TYPE_ENUM			module_type;
 	AMTP_CHIP_MANUFACTURER_ENUM		chip_manufacturer;
 	char							chip_type[32];
 	char							icd_version[32];
-	char							imei[32];
+	char 							imei[32];
+	char 							imsi[32];
+	char 							module_system[32];
+	char 							module_factory[32];
 	char							phone_number[16];
 	char							network_operator[16];
 };
+
+
 using MODULE_CONF_RESP_STRU = struct module_conf_resp_stru
 {
 	int32_t		result;
