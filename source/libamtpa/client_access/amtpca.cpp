@@ -11,6 +11,7 @@
 #include "../../jlog/jLog.h"
 #if defined(_WIN32)
 #include <memory>
+#include <windows.h>
 #include "../../libjwumq/libjwumq.hpp"
 #else
 #include <dlfcn.h>
