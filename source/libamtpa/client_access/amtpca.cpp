@@ -225,10 +225,21 @@ int Amtpca::Init(const char * license_path, const char * log_path, LIBAMTPCA_CMD
 	string str = "router trace";
 	unique_ptr<JwumqMessage> msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_data, (void*)str.c_str(), (int)str.length()));
 	jwumq_send(data_handle, msg.get());
+	jwumq_send(cmd_handle, msg.get());
+
+	alive_thread_loop = 1;
+	alive_thread = thread(&Amtpca::AliveThread, this);
+
 	return LIB_JWUMQ_SUCCESS;
 }
 void Amtpca::Release()
 {
+	alive_thread_loop = 0;
+	if (alive_thread.joinable())
+	{
+		alive_thread.join();
+	}
+
 #if defined(_WIN32)
 	JLOG(INFO) << "libjwumq release cmd_handle = " << reinterpret_cast<unsigned long long>(cmd_handle);
 	JLOG(INFO) << "libjwumq release data_handle = " << reinterpret_cast<unsigned long long>(data_handle);
@@ -265,6 +276,34 @@ void Amtpca::Release()
 		JLog::Close();
 	}
 	cmd_sn = 0;
+}
+
+void Amtpca::AliveThread()
+{
+	JLOG(INFO) << "libamtpca AliveThread start!";
+
+	int index = 0;
+	while (alive_thread_loop > 0)
+	{
+		if (index % 600 == 0)
+		{
+			JLOG(INFO) << "libamtpca send alive packet: " << index/600;
+			string str = "alive " + to_string(index / 600);
+			unique_ptr<JwumqMessage> cmd_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, cmd_mq_id, "", (void *)str.c_str(), (int)str.length()));
+			jwumq_send(cmd_handle, cmd_msg.get());
+
+			unique_ptr<JwumqMessage> data_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, data_mq_id, "", (void *)str.c_str(), (int)str.length()));
+			jwumq_send(data_handle, data_msg.get());
+		}
+		index++;
+#if defined(_WIN32)
+		Sleep(100);
+#else
+		usleep(100 * 1000);
+#endif
+	}
+	
+	JLOG(INFO) << "libamtpca AliveThread end!";
 }
 
 int Amtpca::RecvDataCallback(void * msg)
@@ -311,13 +350,17 @@ int Amtpca::RecvDataCallback(void * msg)
 		JLOG(INFO) << "Data mq recv msg ack, sn = " << ack_sn;
 		return 0;
 	}
+	else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::private_alive_resp))
+	{
+		JLOG(INFO) << "Data recv alive ack";
+		return 0;
+	}
 	return 0;
 }
 
 int Amtpca::RecvCmdCallback(void * msg)
 {
 	JwumqMessage * recv_msg = new JwumqMessage((JwumqMessage *)msg);
-	
 	if(recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data))
 	{
 		uint32_t msg_sn = recv_msg->body.sn();
@@ -440,7 +483,12 @@ int Amtpca::RecvCmdCallback(void * msg)
 		JLOG(INFO) << "Command mq recv msg ack, sn = " << ack_sn;
 		return 0;
 	}
-	
+	else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::private_alive_resp))
+	{
+		JLOG(INFO) << "Cmd recv alive ack";
+		return 0;
+	}
+
 	return 0;
 }
 
@@ -781,9 +829,9 @@ void Amtpca::RecvLogoutResp(JwumqMessage * recv_msg)
 	}
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
-	JLOG(INFO) << "Recv logout response " 
-				<< ", token = " << token
-				<< ", result = " << login_resp_tmp_s.result;
+	JLOG(INFO) << "Recv logout response "
+			   << ", token = " << token
+			   << ", result = " << logout_resp_tmp_s.result;
 }
 int Amtpca::SendModuleConf(MODULE_CONF_STRU * s, bool sync, uint32_t timeout)
 {
@@ -825,8 +873,8 @@ void Amtpca::RecvModuleConfResp(JwumqMessage * recv_msg)
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
 	JLOG(INFO) << "Recv module conf response "
-				<< ", token = " << token
-				<< ", result = " << login_resp_tmp_s.result;
+			   << ", token = " << token
+			   << ", result = " << module_conf_resp_tmp_s.result;
 }
 int Amtpca::SendEvent(REPORT_EVENT_STRU * s, bool sync, uint32_t timeout)
 {
@@ -868,8 +916,8 @@ void Amtpca::RecvEventResp(JwumqMessage * recv_msg)
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
 	JLOG(INFO) << "Recv event response "
-				<< ", token = " << token
-				<< ", result = " << login_resp_tmp_s.result;
+			   << ", token = " << token
+			   << ", result = " << report_event_resp_tmp_s.result;
 }
 int Amtpca::SendAlarm(ALARM_STRU * s, bool sync, uint32_t timeout)
 {
@@ -1092,7 +1140,7 @@ void Amtpca::RecvConfigData(JwumqMessage * recv_msg)
 {
 	amtp_config_data req;
 	CONFIG_DATA_STRU config_data_tmp_s;
-	memset(&status_info_resp_tmp_s, 0, sizeof(STATUS_INFO_RESP_STRU));
+	memset(&config_data_tmp_s, 0, sizeof(CONFIG_DATA_STRU));
 	bool result = req.data(recv_msg, &config_data_tmp_s);
 	if(!result)
 	{

@@ -36,7 +36,7 @@ LOGIN_RESP_STRU amtp_login_resp::data(JwumqMessage * msg)
 	memcpy(_token, resp.token().c_str(), token_len);
 	
 	int manufacturer_len = (resp.manufactor().length() < sizeof(s.manufacturer))?(int)resp.manufactor().length():sizeof(s.manufacturer);
-	memset(_token, 0, TOKEN_BUFFER_SIZE);
+	memset(s.manufacturer, 0, sizeof(s.manufacturer));
 	memcpy(s.manufacturer, resp.manufactor().c_str(), manufacturer_len);
 	
 	return s;

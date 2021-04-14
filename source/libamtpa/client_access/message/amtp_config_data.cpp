@@ -35,7 +35,7 @@ bool amtp_config_data::data(JwumqMessage * msg, CONFIG_DATA_STRU *s)
 	s->packet_no = req.packet_no();
 	s->data_length = req.data_length();
 
-	if(s->data_length > 1024 * 10 || s->data_length <= 0)
+	if(s->data_length > 1024 * 1024 || s->data_length <= 0)
 	{
 		return false;
 	}

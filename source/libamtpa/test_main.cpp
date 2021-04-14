@@ -500,6 +500,8 @@ void LibAmtpsaTest::TestThread(string name)
 	}
 	lib_setlimit(sa_handle, 100);
 
+	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
+	strcpy(token, "cmdi_test");
 	int index = 0;
 	while(index < 100000000)
 	{
@@ -1294,7 +1296,8 @@ private:
 private:
 	string name;
 	int type;
-	LIB_AMTPCA_VERSION lib_version ;
+	uint32_t upload_file_id;
+	LIB_AMTPCA_VERSION lib_version;
 	LIB_AMTPCA_INIT lib_init;
 	LIB_AMTPCA_SENDCMD lib_sendcmd;
 	LIB_AMTPSA_WAITFORCMD lib_waitforcmd;
@@ -1481,8 +1484,9 @@ void LibAmtpcaTest::ConfigTest ()
 	fprintf(stderr, "%s:%s config result = %d\n", Time().c_str(), name.c_str(), result);
 
 	CONFIG_RESP_STRU config_resp_s;
+	memset(&config_resp_s, 0, sizeof(CONFIG_RESP_STRU));
 	result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::config_resp), (void *)&config_resp_s, 5000);
-	fprintf(stderr, "%s:%s -----------------------------wait for config response(%d) atuid_version = %s, result = %d, update = %d, packet_count = %d, md5 = %s\n", Time().c_str(), name.c_str(), result, config_resp_s.atuid_version, config_resp_s.result, config_resp_s.update, config_resp_s.packet_count, config_resp_s.md5);
+	fprintf(stderr, "%s:%s -----------------------------wait for config response(%d) atuid_version = %s, result = %d, update = %d, packet_count = %d, md5 = %.*s\n", Time().c_str(), name.c_str(), result, config_resp_s.atuid_version, config_resp_s.result, config_resp_s.update, config_resp_s.packet_count, 32, config_resp_s.md5);
 	sleep(3);
 }
 void LibAmtpcaTest::UploadFileRequestTest()
@@ -1498,7 +1502,8 @@ void LibAmtpcaTest::UploadFileRequestTest()
 
 	UPLOAD_FILE_RESP_STRU upload_file_resp_s;
 	result = lib_waitforcmd(static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_resp), (void *)&upload_file_resp_s, 5000);
-	fprintf(stderr, "%s:%s -----------------------------wait for upload file response(%d) result = %d\n", Time().c_str(), name.c_str(), result, upload_file_resp_s.result);
+	upload_file_id = upload_file_resp_s.file_id;
+	fprintf(stderr, "%s:%s -----------------------------wait for upload file response(%d) result = %d, file_id = %d\n", Time().c_str(), name.c_str(), result, upload_file_resp_s.result, upload_file_id);
 }
 void LibAmtpcaTest::UploadFileDataTest()
 {
@@ -1530,7 +1535,7 @@ void LibAmtpcaTest::UploadFileDataTest()
 
 		UPLOAD_FILE_DATA_STRU upload_file_data_s;
 		memset(&upload_file_data_s, 0, sizeof(UPLOAD_FILE_DATA_STRU));
-		upload_file_data_s.file_id = 123;
+		upload_file_data_s.file_id = upload_file_id;
 		upload_file_data_s.packet_no = packet_no;
 		upload_file_data_s.data_len = read_len;
 		upload_file_data_s.data = buf.get();
@@ -1550,7 +1555,7 @@ void LibAmtpcaTest::UploadFileEofTest()
 	UPLOAD_EOF_STRU upload_eof_s;
 	memset(&upload_eof_s, 0, sizeof(UPLOAD_EOF_STRU));
 	sprintf(upload_eof_s.file_name, "9177700220190103104005ms1.lte");
-	upload_eof_s.file_id = 12345;
+	upload_eof_s.file_id = upload_file_id;
 	upload_eof_s.packet_count = 3;
 	upload_eof_s.total_size = 67890;
 	upload_eof_s.module = 3;

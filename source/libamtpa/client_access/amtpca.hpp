@@ -13,6 +13,7 @@
 #include <condition_variable>
 #include <memory>
 #include <map>
+#include <thread>
 #include "amtpca_define.h"
 #include "../libamtpa_define.h"
 #include "../../jwumq/jwumq_define.h"
@@ -47,6 +48,8 @@ public:
 	int WaitForCmd(uint32_t cmd, void * s, uint32_t timeout);
 
 private:
+	void AliveThread();
+
 	int RecvCmdCallback(void * msg);
 	int RecvDataCallback(void * msg);
 	///////int InitLog(const char * log_path);
@@ -93,13 +96,16 @@ private:
 	void * data_handle;
 	string cmd_mq_id;
 	string data_mq_id;
+
+	thread alive_thread;
+	int alive_thread_loop;
 	/*LIB_JWUMQ_VERSION lib_version;
 	LIB_JWUMQ_DEALER_LOAD lib_jwumq_dealer_load;
 	LIB_JWUMQ_SETUP lib_jwumq_setup;
 	LIB_JWUMQ_SEND lib_jwumq_send;
 	LIB_JWUMQ_RELEASE lib_jwumq_release;*/
 	//////////////////////////////////////////For cross platform redefinition
-	
+
 #if defined(_WIN32)
 
 #else
@@ -110,7 +116,7 @@ private:
 	LIB_JWUMQ_RELEASE jwumq_release;
 
 #endif
-	
+
 	bool blog;
 	LIBAMTPCA_CMD_RECV_CBFUN cmd_recv_callback;
 	

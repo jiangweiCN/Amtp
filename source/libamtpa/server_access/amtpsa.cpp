@@ -124,6 +124,7 @@ int Amtpsa::ReadCmd(char * src_id, void * data, int data_len)
 }
 int Amtpsa::WaitForCmd(int * msg_len, int timeout)
 {
+	*msg_len = -1;
 	std::unique_lock<std::mutex> lock(queue_mutex);
 	if(msg_q.size() <= 0)
 	{
@@ -133,18 +134,26 @@ int Amtpsa::WaitForCmd(int * msg_len, int timeout)
 		}
 		if(empty.wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
 		{
-			*msg_len = -1;
 			return LIB_AMTPA_TIMEOUT;
 		}
 	}
 	JwumqMessage *msg = (JwumqMessage*)msg_q.front();
 	if(msg == nullptr)
 	{
-		*msg_len = -1;
 		return LIB_AMTPA_MSG_IS_NULL;
 	}
-	*msg_len = msg->RawDataLen();
-	return static_cast<int>(msg_q.size());
+	if (msg->RawDataLen() > 0)
+	{
+		*msg_len = msg->RawDataLen();
+		return static_cast<int>(msg_q.size());
+	}
+	msg_q.pop();
+	if (msg != nullptr)
+	{
+		delete msg;
+		msg = nullptr;
+	}
+	return LIB_AMTPA_MSG_LEN_ERROR;
 }
 
 int Amtpsa::RecvDataCallback(void * msg)
@@ -168,7 +177,7 @@ int Amtpsa::RecvDataCallback(void * msg)
 		if(data_delear != nullptr)
 		{
 			data_delear->Send(ack_msg.get());
-			fprintf(stderr, "Send msg ack, sn = %d!\n", msg_sn);
+			fprintf(stderr, "Send msg ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
 		}
 
 		std::unique_lock<std::mutex> lock(queue_mutex);
@@ -182,7 +191,19 @@ int Amtpsa::RecvDataCallback(void * msg)
 		fprintf(stderr, "Recv msg ack, sn = %d!\n", ack_sn);
 		return 0;
 	}
-	
+	else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::private_alive_req))
+	{
+		uint32_t msg_sn = recv_msg->body.sn();
+		unique_ptr<JwumqMessage> ack_msg = make_unique<JwumqMessage>(JWUMQ_COMMAND_ENUM::private_alive_resp, mq_id, recv_msg->body.src_id(), &msg_sn, sizeof(msg_sn));
+
+		if (data_delear != nullptr)
+		{
+			data_delear->Send(ack_msg.get());
+			fprintf(stderr, "Send data alive req ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
+		}
+		return 0;
+	}
+
 	return 0;
 }
 int Amtpsa::RecvCmdCallback(void * msg)
@@ -206,7 +227,7 @@ int Amtpsa::RecvCmdCallback(void * msg)
 		if(cmd_delear != nullptr)
 		{
 			cmd_delear->Send(ack_msg.get());
-			fprintf(stderr, "Send msg ack, sn = %d!\n", msg_sn);
+			fprintf(stderr, "Send msg ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
 		}
 
 		std::unique_lock<std::mutex> lock(queue_mutex);
@@ -220,7 +241,19 @@ int Amtpsa::RecvCmdCallback(void * msg)
 		fprintf(stderr, "Recv msg ack, sn = %d!\n", ack_sn);
 		return 0;
 	}
-	
+	else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::private_alive_req))
+	{
+		uint32_t msg_sn = recv_msg->body.sn();
+		unique_ptr<JwumqMessage> ack_msg = make_unique<JwumqMessage>(JWUMQ_COMMAND_ENUM::private_alive_resp, "", recv_msg->body.src_id(), &msg_sn, sizeof(msg_sn));
+
+		if (cmd_delear != nullptr)
+		{
+			cmd_delear->Send(ack_msg.get());
+			fprintf(stderr, "Send cmd alive req ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
+		}
+		return 0;
+	}
+
 	return 0;
 }
 
