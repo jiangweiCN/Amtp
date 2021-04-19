@@ -13,8 +13,7 @@
 #include <string>
 #include <memory>
 #include "../config/proxy_config.hpp"
-#include "../jwumq/jwumq_proxy.hpp"
-
+#include "../jwumq_external/jwumq_proxy.hpp"
 
 using namespace std;
 

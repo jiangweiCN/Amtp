@@ -206,7 +206,7 @@ func (p *JwumqBytesMessage) SetCmd(cmd uint32) {
 
 ////////////////////////////////返回函数
 func NewAmtpsa(id string, cmdAddr string, dataAddr string) interface{}{
-	handle := C.LibamtpsaLoad(C.CString("./libamtpsa.so"))
+	handle := C.LibamtpsaLoad(C.CString("libamtpsa.so"))
 	if handle == nil {
 		fmt.Println("dlopen error, ", C.GoString(C.Dlerror()))
 		return nil

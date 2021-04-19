@@ -1,5 +1,5 @@
 #!/bin/bash
-lines=26
+lines=23
 install_path="/usr/local/amtpsa"
 install_tar="amtpsa_64_install.tar.gz"
 tail -n +$lines $0 > $install_tar
@@ -17,9 +17,6 @@ cp $install_path/libstdc++.so.6.0.25 /usr/lib64/
 ln -snf /usr/lib64/libstdc++.so.6.0.25 /usr/lib64/libstdc++.so.6
 cp $install_path/libglog.so.0.0.0 /usr/lib64/
 ln -snf /usr/lib64/libglog.so.0.0.0 /usr/lib64/libglog.so.0
-cp $install_path/libjwumq.so.1.0.3 /usr/lib64
-ln -snf /usr/lib64/libjwumq.so.1.0.3  /usr/lib64/libjwumq.so
-cp $install_path/libamtpsa.so.1.0.4 /usr/lib64
-ln -snf /usr/lib64/libamtpsa.so.1.0.4  /usr/lib64/libamtpsa.so
+ln -snf $install_path/libamtpsa.so.1.0.4  /usr/lib64/libamtpsa.so
 echo "Amtpa installation package completed!"
 exit 0

@@ -7,7 +7,7 @@ SRC_CODE            = $(HOME)/source
 INCLUDE             = $(SRC_CODE)/include
 OUTPUT_PATH         = $(HOME)/bin
 MAIN                = $(SRC_CODE)/libamtpa/server_access
-JWUMQ               = $(SRC_CODE)/jwumq
+JWUMQ               = $(SRC_CODE)/jwumq_external
 
 CXX = g++
 CXX_OPTIONS = -Wall -DOS_LINUX -O2 -std=c++14 -fPIC -ldl -rdynamic -Wl,-rpath,./
@@ -19,7 +19,7 @@ SRCS = $(wildcard $(MAIN)/libamtpsa.cpp \
 					$(JWUMQ)/jwumq_base.cpp  \
 					$(JWUMQ)/jwumq_dealer.cpp\
 					$(JWUMQ)/jwumq_message.cpp \
-					$(JWUMQ)/jwumq_message.pb.cpp)
+					$(JWUMQ)/jwumq_external_message.pb.cpp)
 
 OBJS= $(SRCS:%.cpp=%.o)
 

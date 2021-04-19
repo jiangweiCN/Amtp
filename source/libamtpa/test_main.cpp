@@ -18,10 +18,10 @@
 #include <sys/time.h>
 #include <zlib.h>
 #include "/home/libdev/zmq/include/zmq.h"
-#include "../jwumq/jwumq_define.h"
+#include "../jwumq_external/jwumq_define.h"
 #include "../amtpa_protocol/amtpap_msg.pb.h"
 #include "libamtpa_define.h"
-#include "../jwumq/jwumq_message.hpp"
+#include "../jwumq_external/jwumq_message.hpp"
 
 using namespace std;
 
@@ -1297,12 +1297,13 @@ private:
 	string name;
 	int type;
 	uint32_t upload_file_id;
+	uint32_t packet_count;
+	uint32_t total_size;
 	LIB_AMTPCA_VERSION lib_version;
 	LIB_AMTPCA_INIT lib_init;
 	LIB_AMTPCA_SENDCMD lib_sendcmd;
 	LIB_AMTPSA_WAITFORCMD lib_waitforcmd;
 	LIB_AMTPCA_RELEASE lib_release;
-
 };
 void LibAmtpcaTest::Start(string name, int type)
 {
@@ -1508,14 +1509,15 @@ void LibAmtpcaTest::UploadFileRequestTest()
 void LibAmtpcaTest::UploadFileDataTest()
 {
 	int max_packet_size = 1024 * 1024;
-	FILE *dtlog_f = fopen("688k.txt", "rb");
+	FILE *dtlog_f = fopen("dtlog.txt", "rb");
 	size_t file_size = 0;
 	fseek(dtlog_f, 0L, SEEK_END);
 	file_size = ftell(dtlog_f);
+	total_size = (uint32_t)file_size;
 
-	int packet_count = ((int)file_size / max_packet_size) + (((int)(file_size % max_packet_size) == 0) ? 0 : 1);
+	packet_count = ((int)file_size / max_packet_size) + (((int)(file_size % max_packet_size) == 0) ? 0 : 1);
 
-	for (int packet_no = 1; packet_no <= packet_count; packet_no++)
+	for (uint32_t packet_no = 1; packet_no <= packet_count; packet_no++)
 	{
 		//			SendFileData(x);
 		int read_len = 0;
@@ -1556,8 +1558,8 @@ void LibAmtpcaTest::UploadFileEofTest()
 	memset(&upload_eof_s, 0, sizeof(UPLOAD_EOF_STRU));
 	sprintf(upload_eof_s.file_name, "9177700220190103104005ms1.lte");
 	upload_eof_s.file_id = upload_file_id;
-	upload_eof_s.packet_count = 3;
-	upload_eof_s.total_size = 67890;
+	upload_eof_s.packet_count = packet_count;
+	upload_eof_s.total_size = total_size;
 	upload_eof_s.module = 3;
 	sprintf(upload_eof_s.md5, "abcdefghijklmnopqrstuvwxyz98765");
 

@@ -13,8 +13,7 @@
 #include <string>
 #include <memory>
 #include "../config/router_config.hpp"
-#include "../jwumq/jwumq_router.hpp"
-
+#include "../jwumq_external/jwumq_router.hpp"
 
 using namespace std;
 

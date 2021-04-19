@@ -2,6 +2,7 @@ package main
 
 import (
 	"./jwumqa_interface"
+	"../../amtpsa_go/src/amtpsa_interface"
 	"fmt"
 	"os"
 	"plugin"
@@ -168,6 +169,45 @@ func main() {
 			close(ch)
 		}
 	}
+
+	ch1 := make(chan struct{})
+	count = 1
+	go func() {
+		fmt.Println("--------------------Load amtpsa------------------")
+		libPlugin_s, err := plugin.Open("libamtpsa_plugin.so")
+		if err != nil {
+			panic(err)
+		}
+
+		newAmtpsa, err := libPlugin_s.Lookup("NewAmtpsa")
+		if err != nil {
+			panic(err)
+		}
+
+		newAmtpsaFun, ok := newAmtpsa.(func(string, string, string) interface{})
+		if ok == false {
+			panic("func type error: NewAmtpsa.")
+		}
+		
+		//NewAmtpsa 返回空接口,把空接口转换成`AmtpsaObj`接口
+		amtpsa, ok := newAmtpsaFun("node_id", "tcp://127.0.0.1:5581", "tcp://127.0.0.1:5580").(amtpsa_interface.AmtpsaObj)
+		if ok == false {
+			panic("Type error: AmtpsaObj.")
+		}
+		//调用接口的方法
+		libamtpsaVersion := amtpsa.LibVersion()
+		fmt.Println(libamtpsaVersion)
+		fmt.Println("--------------------Load amtpsa------------------")
+		ch1 <- struct{}{} // 协程结束，发出信号
+	}()
+
+	for range ch1 {
+		count--
+		if count == 0 {
+			close(ch1)
+		}
+	}
+	
 
 	dest.DestroyPart(member.GetPointer())
 	//dest.DestroyPart(pipe.GetPointer())

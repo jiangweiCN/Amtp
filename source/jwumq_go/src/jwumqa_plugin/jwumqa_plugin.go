@@ -490,7 +490,7 @@ func (p *JwumqBytesMessage) GetSource() string{
 }
 //////////////////////////////返回函数
 func NewJwumqFactory(url string) interface{}{
-	handle := C.LibLoad(C.CString("./libjwumqa.so"))
+	handle := C.LibLoad(C.CString("libjwumqa.so"))
 	if handle == nil {
 		fmt.Println("dlopen error, ", C.GoString(C.Dlerror()))
 		return nil

@@ -8,7 +8,7 @@ OUTPUT_PATH         = $(HOME)/bin
 OUTPUT_PATH_I368    = $(HOME)/bin_i386
 MAIN                = $(SRC_CODE)/libamtpa/client_access
 LOG                 = $(SRC_CODE)/jlog
-JWUMQ               = $(SRC_CODE)/jwumq
+JWUMQ               = $(SRC_CODE)/jwumq_external
 LICENSE				= $(SRC_CODE)/license
 MESSAGE				= $(MAIN)/message
 SYSINFO				= $(MAIN)/sys_info
@@ -25,8 +25,8 @@ SRCS = $(wildcard $(MAIN)/libamtpca.cpp \
 					$(LOG)/jLog.cpp\
 					$(LICENSE)/license_msg.pb.cpp\
 					$(LICENSE)/libamtpa_license.cpp\
-					$(JWUMQ)/jwumq_message.cpp \
-					$(JWUMQ)/jwumq_message.pb.cpp \
+					$(JWUMQ)/jwumq_external_message.cpp \
+					$(JWUMQ)/jwumq_external_message.pb.cpp \
 					$(PROTOCOL)/amtpap_msg.pb.cpp\
 					$(MESSAGE)/amtp_login.cpp\
 					$(MESSAGE)/amtp_login_resp.cpp\
