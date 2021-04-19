@@ -16,9 +16,9 @@
 #include <thread>
 #include "amtpca_define.h"
 #include "../libamtpa_define.h"
-#include "../../jwumq/jwumq_define.h"
+#include "../../jwumq_external/jwumq_define.h"
 #include "../../license/libamtpa_license.hpp"
-#include "../../jwumq/jwumq_message.hpp"
+#include "../../jwumq_external/jwumq_message.hpp"
 /////////#include "sys_info/system_info.hpp"
 
 using namespace std;

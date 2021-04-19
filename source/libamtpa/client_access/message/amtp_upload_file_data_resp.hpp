@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <memory>
 #include "../amtpca_define.h"
-#include "../../../jwumq/jwumq_message.hpp"
+#include "../../../jwumq_external/jwumq_message.hpp"
 #include "../../libamtpa_define.h"
 
 

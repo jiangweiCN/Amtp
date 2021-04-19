@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <memory>
-#include "../../../jwumq/jwumq_message.hpp"
+#include "../../../jwumq_external/jwumq_message.hpp"
 #include "../../libamtpa_define.h"
 #include "../../../license/libamtpa_license.hpp"
 

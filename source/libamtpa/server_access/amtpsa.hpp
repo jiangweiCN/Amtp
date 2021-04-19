@@ -13,8 +13,8 @@
 #include <memory>
 #include <queue>
 #include "../libamtpa_define.h"
-#include "../../jwumq/jwumq_define.h"
-#include "../../jwumq/jwumq_dealer.hpp"
+#include "../../jwumq_external/jwumq_define.h"
+#include "../../jwumq_external/jwumq_dealer.hpp"
 #include <condition_variable>
 #include <atomic>
 #include <functional>

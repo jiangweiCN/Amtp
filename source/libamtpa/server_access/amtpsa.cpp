@@ -10,8 +10,7 @@
 #include <dlfcn.h>
 #include <cstring>
 #include <unistd.h>
-#include "../../jwumq/jwumq_message.hpp"
-
+#include "../../jwumq_external/jwumq_message.hpp"
 
 Amtpsa::Amtpsa()
 {
