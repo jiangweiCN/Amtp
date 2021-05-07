@@ -191,7 +191,20 @@ void * JwumqReceive(void * part, int timeout, int *type, int *msg_len)
 }
 char * JwumqGetTextMessage(void * message)
 {
-	return jwumq_get_text_message(message);
+	int len = strlen(jwumq_get_text_message(message));
+	if(len <= 0)
+	{
+		fprintf(stderr, "JwumqGetTextMessage error, length of msg text <= 0\n");
+		return NULL;
+	}
+	char* text = malloc(len + 1);
+	strcpy(text, jwumq_get_text_message(message));
+	text[len] = 0;
+	// fprintf(stderr, "JwumqGetTextMessage:%s, %s\n", jwumq_get_text_message(message), text);
+	return text;
+
+	// fprintf(stderr, "JwumqGetTextMessage:%s, %d\n", jwumq_get_text_message(message), strlen(jwumq_get_text_message(message)));
+	// return jwumq_get_text_message(message);
 }
 int JwumqGetBytesMessage(void * message, void *data, int length)
 {
@@ -201,13 +214,40 @@ int JwumqMessageSetDestination(void * message, char *des)
 {
 	jwumq_message_set_destination(message, des);
 }
+// char * JwumqMessageDestination(void * message)
+// {
+// 	fprintf(stderr, "JwumqMessageDestination:%s, %d\n", jwumq_message_destination(message), strlen(jwumq_message_destination(message)));
+// 	return jwumq_message_destination(message);
+// }
 char * JwumqMessageDestination(void * message)
 {
-	return jwumq_message_destination(message);
+	int len = strlen(jwumq_message_destination(message));
+	if(len <= 0)
+	{
+		fprintf(stderr, "JwumqMessageDestination error, length of destination id <= 0\n");
+		return NULL;
+	}
+	char* des = malloc(len + 1);
+	strcpy(des, jwumq_message_destination(message));
+	des[len] = 0;
+	// fprintf(stderr, "JwumqMessageDestination_e:%s, %s\n", jwumq_message_destination(message), des);
+	return des;
 }
 char * JwumqMessageSource(void * message)
 {
-	return jwumq_message_source(message);
+	int len = strlen(jwumq_message_source(message));
+	if(len <= 0)
+	{
+		fprintf(stderr, "JwumqMessageSource error, length of source id <= 0\n");
+		return NULL;
+	}
+	char* src = malloc(len + 1);
+	strcpy(src, jwumq_message_source(message));
+	src[len] = 0;
+	// fprintf(stderr, "JwumqMessageSource:%s, %s\n", jwumq_message_source(message), des);
+	return src;
+	// fprintf(stderr, "JwumqMessageSource:%s, %d\n", jwumq_message_source(message), strlen(jwumq_message_source(message)));
+	// return jwumq_message_source(message);
 }
 */
 import "C"
@@ -322,7 +362,7 @@ func (p *JwumqSession) CreateDestination(queueName string) interface{}{
 	dest.queueName = queueName
 	cstr := C.CString(queueName)
 	dest.pointer = C.JwumqCreateDestination(dest.session.pointer, cstr)
-	C.free(unsafe.Pointer(cstr))
+	defer C.free(unsafe.Pointer(cstr))
 	return &dest
 }
 func (p *JwumqSession) DestroyDestination(pointer unsafe.Pointer)  {
@@ -332,7 +372,7 @@ func (p *JwumqSession) CreateTextMessage(text string) interface{}{
 	msg := JwumqTextMessage{text:text}
 	cstr := C.CString(text)
 	msg.pointer = C.JwumqCreateTextMessage(p.pointer, cstr)
-	C.free(unsafe.Pointer(cstr))
+	defer C.free(unsafe.Pointer(cstr))
 	return &msg
 }
 func (p *JwumqSession) CreateBytesMessage(data []byte) interface{}{
@@ -352,7 +392,7 @@ func (p *JwumqDestination) CreatePartPipe(nodeID string) interface{}{
 	part.nodeID = nodeID
 	cstr := C.CString(nodeID)
 	part.pointer = C.JwumqCreatePartPipe(part.destination.pointer, cstr)
-	C.free(unsafe.Pointer(cstr))
+	defer C.free(unsafe.Pointer(cstr))
 	return &part
 }
 func (p *JwumqDestination) CreatePartMember(nodeID string) interface{}{
@@ -360,7 +400,7 @@ func (p *JwumqDestination) CreatePartMember(nodeID string) interface{}{
 	member.nodeID = nodeID
 	cstr := C.CString(nodeID)
 	member.pointer = C.JwumqCreatePartMember(member.destination.pointer, cstr)
-	C.free(unsafe.Pointer(cstr))
+	defer C.free(unsafe.Pointer(cstr))
 	return &member
 }
 func (p *JwumqDestination) DestroyPart(pointer unsafe.Pointer)  {
@@ -376,31 +416,53 @@ func (p *JwumqPartPipe) Send(pointer unsafe.Pointer) int{
 func (p *JwumqPartPipe) Receive(timeout int) interface{}{
 	var msgType int
 	var msgLength int
-	msg := C.JwumqReceive(p.pointer, C.int(timeout), (*C.int)(unsafe.Pointer(&msgType)), (*C.int)(unsafe.Pointer(&msgLength)))
+	recv_msg := C.JwumqReceive(p.pointer, C.int(timeout), (*C.int)(unsafe.Pointer(&msgType)), (*C.int)(unsafe.Pointer(&msgLength)))
 	if msgType == jwumqa_interface.JWUMQ_TEXT_MESSAGE{
-		text := C.GoString(C.JwumqGetTextMessage(msg))
-		destination := C.GoString(C.JwumqMessageDestination(msg))
-		source := C.GoString(C.JwumqMessageSource(msg))
-		C.JwumqDestroyMessage(p.destination.session.pointer, msg)
+		// text := C.GoString(C.JwumqGetTextMessage(recv_msg))
+		text_str := C.JwumqGetTextMessage(recv_msg)
+		text := C.GoString(text_str)
+		C.free(unsafe.Pointer(text_str))
+
+		// destination := C.GoString(C.JwumqMessageDestination(msg))
+		destination_str := C.JwumqMessageDestination(recv_msg)
+		destination := C.GoString(destination_str)
+		C.free(unsafe.Pointer(destination_str))
+
+		// source := C.GoString(C.JwumqMessageSource(msg))
+		source_str := C.JwumqMessageSource(recv_msg)
+		source := C.GoString(source_str)
+		C.free(unsafe.Pointer(source_str))
+
 		msg := JwumqTextMessage{text:text}
 		msg.destination = destination
 		msg.source = source
+
+		C.JwumqDestroyMessage(p.destination.session.pointer, recv_msg)
 		return &msg
 	}else if msgType == jwumqa_interface.JWUMQ_BYTES_MESSAGE{
 		data := make([]byte, msgLength)
-		res := int(C.JwumqGetBytesMessage(msg, unsafe.Pointer(&data[0]), C.int(msgLength)))
-		destination := C.GoString(C.JwumqMessageDestination(msg))
-		source := C.GoString(C.JwumqMessageSource(msg))
-		C.JwumqDestroyMessage(p.destination.session.pointer, msg)
+		res := int(C.JwumqGetBytesMessage(recv_msg, unsafe.Pointer(&data[0]), C.int(msgLength)))
+		// destination := C.GoString(C.JwumqMessageDestination(msg))
+		destination_str := C.JwumqMessageDestination(recv_msg)
+		destination := C.GoString(destination_str)
+		C.free(unsafe.Pointer(destination_str))
+
+		// source := C.GoString(C.JwumqMessageSource(msg))
+		source_str := C.JwumqMessageSource(recv_msg)
+		source := C.GoString(source_str)
+		C.free(unsafe.Pointer(source_str))
+
 		if res <= 0{
 			return nil
 		}
 		msg := JwumqBytesMessage{data:data}
 		msg.destination = destination
 		msg.source = source
+
+		C.JwumqDestroyMessage(p.destination.session.pointer, recv_msg)
 		return &msg
 	}
-	C.JwumqDestroyMessage(p.destination.session.pointer, msg)
+	C.JwumqDestroyMessage(p.destination.session.pointer, recv_msg)
 	return nil
 }
 ///////////////////////////////////////////////////////////////////JwumqPartMember 方法的实现
@@ -413,31 +475,54 @@ func (p *JwumqPartMember) Send(pointer unsafe.Pointer) int{
 func (p *JwumqPartMember) Receive(timeout int) interface{}{
 	var msgType int
 	var msgLength int
-	msg := C.JwumqReceive(p.pointer, C.int(timeout), (*C.int)(unsafe.Pointer(&msgType)), (*C.int)(unsafe.Pointer(&msgLength)))
+	recv_msg := C.JwumqReceive(p.pointer, C.int(timeout), (*C.int)(unsafe.Pointer(&msgType)), (*C.int)(unsafe.Pointer(&msgLength)))
 	if msgType == jwumqa_interface.JWUMQ_TEXT_MESSAGE{
-		text := C.GoString(C.JwumqGetTextMessage(msg))
-		destination := C.GoString(C.JwumqMessageDestination(msg))
-		source := C.GoString(C.JwumqMessageSource(msg))
-		C.JwumqDestroyMessage(p.destination.session.pointer, msg)
+		// text := C.GoString(C.JwumqGetTextMessage(recv_msg))
+		text_str := C.JwumqGetTextMessage(recv_msg)
+		text := C.GoString(text_str)
+		C.free(unsafe.Pointer(text_str))
+		
+		// destination := C.GoString(C.JwumqMessageDestination(recv_msg))
+		destination_str := C.JwumqMessageDestination(recv_msg)
+		destination := C.GoString(destination_str)
+		C.free(unsafe.Pointer(destination_str))
+
+		// source := C.GoString(C.JwumqMessageSource(recv_msg))
+		source_str := C.JwumqMessageSource(recv_msg)
+		source := C.GoString(source_str)
+		C.free(unsafe.Pointer(source_str))
+
+		// fmt.Println("plugin, src:", source, ", destination:", destination, ", d2:", d2, ", text:", text)
 		msg := JwumqTextMessage{text:text}
 		msg.destination = destination
 		msg.source = source
+		// fmt.Println("plugin, src:", msg.source, ", destination:", msg.destination, ", text:", msg.text)
+		C.JwumqDestroyMessage(p.destination.session.pointer, recv_msg)
 		return &msg
 	}else if msgType == jwumqa_interface.JWUMQ_BYTES_MESSAGE{
 		data := make([]byte, msgLength)
-		res := int(C.JwumqGetBytesMessage(msg, unsafe.Pointer(&data[0]), C.int(msgLength)))
-		destination := C.GoString(C.JwumqMessageDestination(msg))
-		source := C.GoString(C.JwumqMessageSource(msg))
-		C.JwumqDestroyMessage(p.destination.session.pointer, msg)
+		res := int(C.JwumqGetBytesMessage(recv_msg, unsafe.Pointer(&data[0]), C.int(msgLength)))
 		if res <= 0{
 			return nil
 		}
+		destination_str := C.JwumqMessageDestination(recv_msg)
+		destination := C.GoString(destination_str)
+		C.free(unsafe.Pointer(destination_str))
+
+		// source := C.GoString(C.JwumqMessageSource(recv_msg))
+		source_str := C.JwumqMessageSource(recv_msg)
+		source := C.GoString(source_str)
+		C.free(unsafe.Pointer(source_str))
+
+		// fmt.Println("plugin, src:", source, ", destination:", destination, ", d2:", d2)
 		msg := JwumqBytesMessage{data:data}
 		msg.destination = destination
 		msg.source = source
+		// fmt.Println("plugin, src:", msg.source, ", destination:", msg.destination)
+		C.JwumqDestroyMessage(p.destination.session.pointer, recv_msg)
 		return &msg
 	}
-	C.JwumqDestroyMessage(p.destination.session.pointer, msg)
+	C.JwumqDestroyMessage(p.destination.session.pointer, recv_msg)
 	return nil
 }
 ///////////////////////////////////////////////////////////////////JwumqTextMessage 方法的实现
@@ -454,7 +539,7 @@ func (p *JwumqTextMessage) SetDestination(destination string) {
 	p.destination = destination
 	cstr := C.CString(destination)
 	C.JwumqMessageSetDestination(p.pointer, cstr)
-	C.free(unsafe.Pointer(cstr))
+	defer C.free(unsafe.Pointer(cstr))
 }
 func (p *JwumqTextMessage) GetDestination() string {
 	return p.destination
@@ -480,7 +565,7 @@ func (p *JwumqBytesMessage) SetDestination(destination string) {
 	p.destination = destination
 	cstr := C.CString(destination)
 	C.JwumqMessageSetDestination(p.pointer, cstr)
-	C.free(unsafe.Pointer(cstr))
+	defer C.free(unsafe.Pointer(cstr))
 }
 func (p *JwumqBytesMessage) GetDestination() string {
 	return p.destination

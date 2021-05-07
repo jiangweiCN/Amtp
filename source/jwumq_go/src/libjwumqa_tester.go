@@ -121,7 +121,7 @@ func main() {
 	count := 2 // count 表示活动的协程个数
 	go func() {
 		time.Sleep(3 * time.Second)
-		for i := 0; i < 3; i++ {
+		for i := 0; i < 10; i++ {
 			text := nodeId + "_" + strconv.Itoa(i)
 			textMsg := session.CreateTextMessage(text).(jwumqa_interface.JwumqTextMessageObj)
 			textMsg.SetDestination(destination)
@@ -141,7 +141,7 @@ func main() {
 	}()
 	go func() {
 		//time.Sleep(3 * time.Second)
-		for i := 0; i < 6; i++ {
+		for i := 0; i < 20; i++ {
 			recvMsg := member.Receive(5000)
 			switch t := recvMsg.(type) {
 			case jwumqa_interface.JwumqTextMessageObj:
