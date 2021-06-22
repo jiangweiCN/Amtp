@@ -214,7 +214,7 @@ int main(int argc, char * argv[])
 		for(int x = 1; x <= count; x++)
 		{
 			char box[256] = {0};
-			sprintf(box, "%s_%04d", box_id.c_str(), x);
+			sprintf(box, "%s%02d", box_id.c_str(), x);
 			conf.box_id = box;
 			conf.jwumq_id = box;
 			conf.pwd = box;

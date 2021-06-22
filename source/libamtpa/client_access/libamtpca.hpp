@@ -28,7 +28,8 @@ AMTPCA_DLL const char* _cdecl amtpca_version();
 AMTPCA_DLL int _cdecl amtpca_init(const char* license_path, const char* log_path, LIBAMTPCA_CMD_RECV_CBFUN call_back);
 AMTPCA_DLL void _cdecl amtpca_release();
 AMTPCA_DLL int _cdecl amtpca_sendcmd(uint32_t cmd, void* cmd_s, bool sync, uint32_t timeout);
-AMTPCA_DLL int _cdecl amtpca_waitforcmd(uint32_t cmd, void* s, uint32_t timeout);
+// AMTPCA_DLL int _cdecl amtpca_waitforcmd(uint32_t cmd, void *s, uint32_t timeout);
+AMTPCA_DLL int _cdecl amtpca_waitforcmd(int handle, uint32_t cmd, void *s, uint32_t timeout);
 #endif
 
 #else
@@ -38,7 +39,7 @@ extern "C"
 	int amtpca_init(const char* license_path, const char* log_path, LIBAMTPCA_CMD_RECV_CBFUN call_back);
 	void amtpca_release();
 	int amtpca_sendcmd(uint32_t cmd, void* cmd_s, bool sync, uint32_t timeout);
-	int amtpca_waitforcmd(uint32_t cmd, void* s, uint32_t timeout);
+	int amtpca_waitforcmd(int handle, uint32_t cmd, void *s, uint32_t timeout);
 }
 #endif /* defined(_WIN32) */
 

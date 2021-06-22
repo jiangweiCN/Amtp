@@ -24,10 +24,10 @@ class amtp_upload_file_data_resp
 public:
 	amtp_upload_file_data_resp();
 	~amtp_upload_file_data_resp(void);
-	
-	UPLOAD_FILE_DATA_RESP_STRU data(JwumqMessage * msg);
+
+	void data(JwumqMessage *msg, UPLOAD_FILE_DATA_RESP_STRU &s);
 	void token(unsigned char *token_buf);
-	
+
 private:
 	
 public:

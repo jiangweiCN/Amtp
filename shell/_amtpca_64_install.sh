@@ -19,7 +19,7 @@ cp $install_path/libglog.so.0.0.0 /usr/lib64/
 ln -snf /usr/lib64/libglog.so.0.0.0 /usr/lib64/libglog.so.0
 cp $install_path/libjwumq.so.1.0.3 /usr/lib64
 ln -snf /usr/lib64/libjwumq.so.1.0.3  /usr/lib64/libjwumq.so
-cp $install_path/libamtpca.so.1.0.1 /usr/lib64
-ln -snf /usr/lib64/libamtpca.so.1.0.1  /usr/lib64/libamtpca.so
+cp $install_path/libamtpca.so.1.1.1 /usr/lib64
+ln -snf /usr/lib64/libamtpca.so.1.1.1  /usr/lib64/libamtpca.so
 echo "Amtpca_64 installation package completed!"
 exit 0

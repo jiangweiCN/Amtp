@@ -24,8 +24,8 @@ class amtp_upload_eof_resp
 public:
 	amtp_upload_eof_resp();
 	~amtp_upload_eof_resp(void);
-	
-	UPLOAD_EOF_RESP_STRU data(JwumqMessage * msg);
+
+	void data(JwumqMessage *msg, UPLOAD_EOF_RESP_STRU &s);
 	void token(unsigned char *token_buf);
 	
 private:

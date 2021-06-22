@@ -14,19 +14,21 @@ MESSAGE				= $(MAIN)/message
 SYSINFO				= $(MAIN)/sys_info
 PROTOCOL			= $(SRC_CODE)/amtpa_protocol
 
-CXX = g++
-CXX_OPTIONS = -Wall -DOS_LINUX -O2 -std=c++14 -fPIC -ldl -rdynamic -Wl,-rpath,./
-CXX_LDOPTIONS = -shared -Wl,-lz -lm -lpthread -ldl
+CXX = ccache g++
+CXX_OPTIONS = -g -Wall -Wno-unknown-pragmas -DOS_LINUX -O2 -std=c++14 -fPIC -ldl -rdynamic -Wl,-rpath,./ 
+CXX_LDOPTIONS = -shared -Wl,-lz -lm -lpthread -ldl 
 LIBS = -lprotobuf -lglog 
 
 
 SRCS = $(wildcard $(MAIN)/libamtpca.cpp \
 					$(MAIN)/amtpca.cpp \
+					$(MAIN)/msg_event_objects.cpp \
 					$(LOG)/jLog.cpp\
 					$(LICENSE)/license_msg.pb.cpp\
 					$(LICENSE)/libamtpa_license.cpp\
 					$(JWUMQ)/jwumq_external_message.cpp \
 					$(JWUMQ)/jwumq_external_message.pb.cpp \
+					$(JWUMQ)/jwumq_queue.cpp \
 					$(PROTOCOL)/amtpap_msg.pb.cpp\
 					$(MESSAGE)/amtp_login.cpp\
 					$(MESSAGE)/amtp_login_resp.cpp\
@@ -34,24 +36,12 @@ SRCS = $(wildcard $(MAIN)/libamtpca.cpp \
 					$(MESSAGE)/amtp_logout_resp.cpp\
 					$(MESSAGE)/amtp_module_conf.cpp\
 					$(MESSAGE)/amtp_module_conf_resp.cpp\
-					$(MESSAGE)/amtp_event.cpp\
-					$(MESSAGE)/amtp_event_resp.cpp\
-					$(MESSAGE)/amtp_alarm.cpp\
-					$(MESSAGE)/amtp_alarm_resp.cpp\
-					$(MESSAGE)/amtp_alarm_clear.cpp\
-					$(MESSAGE)/amtp_alarm_clear_resp.cpp\
 					$(MESSAGE)/amtp_config.cpp\
 					$(MESSAGE)/amtp_config_resp.cpp\
-					$(MESSAGE)/amtp_gps_info.cpp\
-					$(MESSAGE)/amtp_gps_info_resp.cpp\
-					$(MESSAGE)/amtp_status_info.cpp\
-					$(MESSAGE)/amtp_status_info_resp.cpp\
 					$(MESSAGE)/amtp_config_data.cpp\
 					$(MESSAGE)/amtp_config_data_resp.cpp\
 					$(MESSAGE)/amtp_config_notify.cpp\
 					$(MESSAGE)/amtp_config_notify_resp.cpp\
-					$(MESSAGE)/amtp_restart_cmd.cpp\
-					$(MESSAGE)/amtp_restart_cmd_resp.cpp\
 					$(MESSAGE)/amtp_upload_file.cpp\
 					$(MESSAGE)/amtp_upload_file_resp.cpp\
 					$(MESSAGE)/amtp_upload_eof.cpp\
@@ -63,9 +53,9 @@ SRCS = $(wildcard $(MAIN)/libamtpca.cpp \
 
 OBJS= $(SRCS:%.cpp=%.o)
 
-EXES= $(OUTPUT_PATH)/libamtpca.so.1.0.1
+EXES= $(OUTPUT_PATH)/libamtpca.so.1.1.1
 
-EXES_I368= $(OUTPUT_PATH_I368)/libamtpca.so.1.0.1
+EXES_I368= $(OUTPUT_PATH_I368)/libamtpca.so.1.1.1
 
 
 all:$(OBJS)

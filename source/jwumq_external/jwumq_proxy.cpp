@@ -23,8 +23,8 @@ JwumqProxy::~JwumqProxy()
 int JwumqProxy::Setup(JWUMQ_SETUP_CONF_T * setup_conf, JWUMQ_RECV_CALLBACK callback)
 {
 	memcpy(conf_p.get(), setup_conf, sizeof(PROXY_CONF_T));
-	memcpy(this->identity, conf_p->identity, sizeof(this->identity));
-	
+	memcpy(this->identity, conf_p->identity, MAX_IDENTITY_BUF_SIZE);
+
 	recv_callback = callback;
 	this->context = zmq_ctx_new ();
 

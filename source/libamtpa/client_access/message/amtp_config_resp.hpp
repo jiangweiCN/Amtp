@@ -24,8 +24,8 @@ class amtp_config_resp
 public:
 	amtp_config_resp();
 	~amtp_config_resp(void);
-	
-	CONFIG_RESP_STRU data(JwumqMessage * msg);
+
+	void data(JwumqMessage *msg, CONFIG_RESP_STRU &s);
 	void token(unsigned char *token_buf);
 	
 private:

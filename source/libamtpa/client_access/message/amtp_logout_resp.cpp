@@ -20,7 +20,7 @@ amtp_logout_resp::~amtp_logout_resp()
 	
 }
 
-LOGOUT_RESP_STRU amtp_logout_resp::data(JwumqMessage * msg)
+void amtp_logout_resp::data(JwumqMessage *msg, LOGOUT_RESP_STRU &s)
 {
 	amtpap::CmdPrimitive cmdprimitive;
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
@@ -28,13 +28,13 @@ LOGOUT_RESP_STRU amtp_logout_resp::data(JwumqMessage * msg)
 	amtpap::LogoutRespV1 resp;
 	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
 	
-	LOGOUT_RESP_STRU s;
+	// LOGOUT_RESP_STRU s;
 	memset(&s, 0, sizeof(LOGOUT_RESP_STRU));
 	s.result = resp.result();
 	int token_len = (TOKEN_BUFFER_SIZE >= resp.token().length()) ? resp.token().length() : TOKEN_BUFFER_SIZE;
 	memset(_token, 0, TOKEN_BUFFER_SIZE);
 	memcpy(_token, resp.token().c_str(), token_len);
-	return s;
+	// return s;
 }
 void amtp_logout_resp::token(unsigned char *token_buf)
 {

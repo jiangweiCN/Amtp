@@ -25,7 +25,7 @@ public:
 	amtp_module_conf_resp();
 	~amtp_module_conf_resp(void);
 	
-	MODULE_CONF_RESP_STRU data(JwumqMessage * msg);
+	void data(JwumqMessage * msg, MODULE_CONF_RESP_STRU &s);
 	void token(unsigned char *token_buf);
 
 	

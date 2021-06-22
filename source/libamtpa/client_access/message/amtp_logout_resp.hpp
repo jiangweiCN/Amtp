@@ -24,8 +24,8 @@ class amtp_logout_resp
 public:
 	amtp_logout_resp();
 	~amtp_logout_resp(void);
-	
-	LOGOUT_RESP_STRU data(JwumqMessage * msg);
+
+	void data(JwumqMessage *msg, LOGOUT_RESP_STRU &s);
 	void token(unsigned char *token_buf);
 	
 private:

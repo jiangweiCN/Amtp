@@ -19,7 +19,7 @@ amtp_config_resp::~amtp_config_resp()
 	
 }
 
-CONFIG_RESP_STRU amtp_config_resp::data(JwumqMessage * msg)
+void amtp_config_resp::data(JwumqMessage *msg, CONFIG_RESP_STRU &s)
 {
 	amtpap::CmdPrimitive cmdprimitive;
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
@@ -27,7 +27,7 @@ CONFIG_RESP_STRU amtp_config_resp::data(JwumqMessage * msg)
 	amtpap::ConfigRespV1 resp;
 	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
 	
-	CONFIG_RESP_STRU s;
+	// CONFIG_RESP_STRU s;
 	memset(&s, 0, sizeof(CONFIG_RESP_STRU));
 //	s.version = resp.version();
 	int atuid_version_length = (resp.atuid_version().length() >= sizeof(s.atuid_version)) ? (int)sizeof(s.atuid_version) : (int)resp.atuid_version().length();
@@ -41,7 +41,7 @@ CONFIG_RESP_STRU amtp_config_resp::data(JwumqMessage * msg)
 	int token_len = (TOKEN_BUFFER_SIZE >= resp.token().length()) ? (int)resp.token().length() : TOKEN_BUFFER_SIZE;
 	memset(_token, 0, TOKEN_BUFFER_SIZE);
 	memcpy(_token, resp.token().c_str(), token_len);
-	return s;
+	// return s;
 }
 void amtp_config_resp::token(unsigned char *token_buf)
 {

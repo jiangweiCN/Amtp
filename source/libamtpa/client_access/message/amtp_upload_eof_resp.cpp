@@ -19,7 +19,7 @@ amtp_upload_eof_resp::~amtp_upload_eof_resp()
 	
 }
 
-UPLOAD_EOF_RESP_STRU amtp_upload_eof_resp::data(JwumqMessage * msg)
+void amtp_upload_eof_resp::data(JwumqMessage *msg, UPLOAD_EOF_RESP_STRU &s)
 {
 	amtpap::CmdPrimitive cmdprimitive;
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
@@ -27,7 +27,7 @@ UPLOAD_EOF_RESP_STRU amtp_upload_eof_resp::data(JwumqMessage * msg)
 	amtpap::UploadEofRespV1 resp;
 	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
 	
-	UPLOAD_EOF_RESP_STRU s;
+	// UPLOAD_EOF_RESP_STRU s;
 	memset(&s, 0, sizeof(UPLOAD_EOF_RESP_STRU));
 	int length = ((int)resp.file_name().length() >= FILENAME_LENGTH) ? FILENAME_LENGTH : (int)resp.file_name().length();
 	memcpy(s.file_name, resp.file_name().c_str(), length);
@@ -39,7 +39,7 @@ UPLOAD_EOF_RESP_STRU amtp_upload_eof_resp::data(JwumqMessage * msg)
 	int token_len = (int)(TOKEN_BUFFER_SIZE >= resp.token().length()) ? (int)resp.token().length() : TOKEN_BUFFER_SIZE;
 	memset(_token, 0, TOKEN_BUFFER_SIZE);
 	memcpy(_token, resp.token().c_str(), token_len);
-	return s;
+	// return s;
 }
 void amtp_upload_eof_resp::token(unsigned char *token_buf)
 {

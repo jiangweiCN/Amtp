@@ -18,7 +18,7 @@
 
 
 constexpr int MAX_PART_PIPE_COUNT = 2;
-constexpr int MAX_PART_MEMBER_COUNT = 20;
+constexpr int MAX_PART_MEMBER_COUNT = 1000;
 enum class JWUMQ_PART_TYPE_ENUM : uint16_t
 {
 	pipe = 0x01,

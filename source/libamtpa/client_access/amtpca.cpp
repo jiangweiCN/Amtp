@@ -10,7 +10,7 @@
 //#include <dlfcn.h>
 #include "../../jlog/jLog.h"
 #if defined(_WIN32)
-#include <memory>
+// #include <memory>
 #include <windows.h>
 #include "../../libjwumq/libjwumq.hpp"
 #else
@@ -23,24 +23,12 @@
 #include "message/amtp_login_resp.hpp"
 #include "message/amtp_logout.hpp"
 #include "message/amtp_logout_resp.hpp"
-#include "message/amtp_event.hpp"
-#include "message/amtp_event_resp.hpp"
-#include "message/amtp_alarm.hpp"
-#include "message/amtp_alarm_resp.hpp"
-#include "message/amtp_alarm_clear.hpp"
-#include "message/amtp_alarm_clear_resp.hpp"
 #include "message/amtp_config.hpp"
 #include "message/amtp_config_resp.hpp"
-#include "message/amtp_gps_info.hpp"
-#include "message/amtp_gps_info_resp.hpp"
-#include "message/amtp_status_info.hpp"
-#include "message/amtp_status_info_resp.hpp"
 #include "message/amtp_config_data.hpp"
 #include "message/amtp_config_data_resp.hpp"
 #include "message/amtp_config_notify.hpp"
 #include "message/amtp_config_notify_resp.hpp"
-#include "message/amtp_restart_cmd.hpp"
-#include "message/amtp_restart_cmd_resp.hpp"
 #include "message/amtp_upload_file.hpp"
 #include "message/amtp_upload_file_resp.hpp"
 #include "message/amtp_upload_eof.hpp"
@@ -51,7 +39,6 @@
 #include "message/amtp_upload_file_data_resp.hpp"
 #include "message/amtp_module_conf.hpp"
 #include "message/amtp_module_conf_resp.hpp"
-
 
 Amtpca::Amtpca()
 {
@@ -66,47 +53,23 @@ Amtpca::Amtpca()
 #endif
 	cmd_handle = nullptr;
 	data_handle = nullptr;
-	
+
 	blog = false;
 	cmd_recv_callback = nullptr;
 	cmd_sn = 0;
-	data_sn = 0;
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
-	
-	recv_mutex_map[AMTP_CMD_ENUM::login_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::login_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::logout_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::logout_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::report_event_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::report_event_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::alarm_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::alarm_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::config_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::config_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::alarm_clear_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::alarm_clear_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::gps_info_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::gps_info_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::status_info_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::status_info_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::upload_file_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::upload_file_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::upload_eof_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::upload_eof_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::upload_file_data_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::upload_file_data_resp] = make_unique<condition_variable>();
-	recv_mutex_map[AMTP_CMD_ENUM::module_conf_resp] = make_unique<mutex>();
-	recv_cv_map[AMTP_CMD_ENUM::module_conf_resp] = make_unique<condition_variable>();
-}
- 
-Amtpca::~Amtpca()
-{
-	
+
+	native_event_objects = make_unique<msg_event_objects>();
+	ack_objects = make_unique<msg_event_objects>();
 }
 
-int Amtpca::Init(const char * license_path, const char * log_path, LIBAMTPCA_CMD_RECV_CBFUN call_back)
+Amtpca::~Amtpca()
 {
-	if(log_path != nullptr)
+}
+
+int Amtpca::Init(const char *license_path, const char *log_path, LIBAMTPCA_CMD_RECV_CBFUN call_back)
+{
+	if (log_path != nullptr)
 	{
 		string path = log_path;
 		path.append("/libamtpca");
@@ -115,21 +78,20 @@ int Amtpca::Init(const char * license_path, const char * log_path, LIBAMTPCA_CMD
 	}
 	JLOG(INFO) << "**********************libamtpca begin!************************";
 	cmd_recv_callback = call_back;
-	if(cmd_recv_callback == nullptr)
+	if (cmd_recv_callback == nullptr)
 	{
-//		cmd_recv_callback(AMTP_CMD_ENUM::reserve, nullptr, nullptr);
 		JLOG(INFO) << "The command callback is disable.";
 	}
-	
-	if(amtp_license.Load(license_path, amtp_conf) < 0)
+
+	if (amtp_license.Load(license_path, amtp_conf) < 0)
 	{
 		JLOG(ERROR) << "License load failed." << license_path;
 		return LIB_AMTPA_LICENSE_ERROR;
 	}
 	JLOG(INFO) << "License load OK.";
-	
+
 #if defined(_WIN32)
-	
+
 #else
 	lib_handle = dlopen("libjwumq.so", RTLD_NOW);
 	if (lib_handle == nullptr)
@@ -149,9 +111,9 @@ int Amtpca::Init(const char * license_path, const char * log_path, LIBAMTPCA_CMD
 		JLOG(ERROR) << "lib_version failed.";
 		return LIB_AMTPA_VERSION_FAILED;
 	}
-	
+
 #endif
-	
+
 	JLOG(INFO) << "libjwumq version = " << jwumq_version();
 	cmd_handle = jwumq_dealer_load();
 	data_handle = jwumq_dealer_load();
@@ -171,22 +133,21 @@ int Amtpca::Init(const char * license_path, const char * log_path, LIBAMTPCA_CMD
 #else
 	sprintf(cmd_conf_t.address, "tcp://%s:%d", amtp_conf.cmd_ip.c_str(), amtp_conf.cmd_port);
 #endif
-	cmd_mq_id = amtp_conf.jwumq_id + "_cmd";
+	cmd_mq_id = amtp_conf.jwumq_id + "_c";
 	memcpy(cmd_conf_t.identity, cmd_mq_id.c_str(), cmd_mq_id.length());
 	cmd_conf_t.type = JWUMQ_TYPE_ENUM::dealer;
 	cmd_conf_t.linger = 0;
 #if defined(_WIN32)
-	cmd_conf_t.read_timeout = 100;
+	cmd_conf_t.read_timeout = 1000;
 #else
-	cmd_conf_t.read_timeout = 5000;
+	cmd_conf_t.read_timeout = 3000;
 #endif
 	cmd_conf_t.bind = false;
 
 	JLOG(INFO) << "libjwumq command address = " << cmd_conf_t.address << ", command identity = "
-		<< cmd_conf_t.identity << ".";
+			   << cmd_conf_t.identity << ".";
 
-	int result = jwumq_setup(cmd_handle, &cmd_conf_t, std::bind(&Amtpca::RecvCmdCallback, this
-		, std::placeholders::_1));
+	int result = jwumq_setup(cmd_handle, &cmd_conf_t, std::bind(&Amtpca::RecvCmdCallback, this, std::placeholders::_1));
 	JLOG(INFO) << "Command mq lib_jwumq_setup = " << result;
 	if (result != LIB_JWUMQ_SUCCESS)
 	{
@@ -201,22 +162,22 @@ int Amtpca::Init(const char * license_path, const char * log_path, LIBAMTPCA_CMD
 #else
 	sprintf(data_conf_t.address, "tcp://%s:%d", amtp_conf.data_ip.c_str(), amtp_conf.data_port);
 #endif
-	data_mq_id = amtp_conf.jwumq_id + "_data";
+	// data_mq_id = amtp_conf.jwumq_id + "_data";
+	data_mq_id = amtp_conf.jwumq_id;
 	memcpy(data_conf_t.identity, data_mq_id.c_str(), data_mq_id.length());
 	data_conf_t.type = JWUMQ_TYPE_ENUM::dealer;
 	data_conf_t.linger = 0;
 #if defined(_WIN32)
-	data_conf_t.read_timeout = 100;
+	data_conf_t.read_timeout = 1000;
 #else
-	data_conf_t.read_timeout = 5000;
+	data_conf_t.read_timeout = 3000;
 #endif
 	data_conf_t.bind = false;
 
 	JLOG(INFO) << "libjwumq data address = " << data_conf_t.address << ", data identity = "
-		<< data_conf_t.identity << ".";
+			   << data_conf_t.identity << ".";
 
-	result = jwumq_setup(data_handle, &data_conf_t, std::bind(&Amtpca::RecvDataCallback, this
-		, std::placeholders::_1));
+	result = jwumq_setup(data_handle, &data_conf_t, std::bind(&Amtpca::RecvDataCallback, this, std::placeholders::_1));
 	JLOG(INFO) << "Data mq lib_jwumq_setup = " << result;
 	if (result != LIB_JWUMQ_SUCCESS)
 	{
@@ -224,23 +185,53 @@ int Amtpca::Init(const char * license_path, const char * log_path, LIBAMTPCA_CMD
 		return result;
 	}
 	string str = "router trace";
-	unique_ptr<JwumqMessage> msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_data, (void*)str.c_str(), (int)str.length()));
+	unique_ptr<JwumqMessage> msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_data, (void *)str.c_str(), (int)str.length()));
 	jwumq_send(data_handle, msg.get());
 	jwumq_send(cmd_handle, msg.get());
 
-	alive_thread_loop = 1;
-	alive_thread = thread(&Amtpca::AliveThread, this);
+	SetupInprocMq(amtp_conf.jwumq_id.c_str());
 
 	return LIB_JWUMQ_SUCCESS;
 }
+
+void Amtpca::SetupInprocMq(const char *mq_id)
+{
+	sprintf(inproc_send_id, "%s_inproc_send", mq_id);
+	sprintf(inproc_recv_id, "%s_inproc_recv", mq_id);
+
+	inproc_context = zmq_ctx_new();
+
+	send_socket = zmq_socket(inproc_context, ZMQ_DEALER);
+	recv_socket = zmq_socket(inproc_context, ZMQ_DEALER);
+	zmq_setsockopt(send_socket, ZMQ_IDENTITY, inproc_send_id, strlen(inproc_send_id));
+	zmq_setsockopt(recv_socket, ZMQ_IDENTITY, inproc_recv_id, strlen(inproc_recv_id));
+#if defined(_WIN32)
+	int timeout = 1000;
+	zmq_setsockopt(send_socket, ZMQ_SNDTIMEO, &timeout, timeout);
+	zmq_setsockopt(recv_socket, ZMQ_SNDTIMEO, &timeout, timeout);
+#else
+#endif
+	memset(inproc_address, 0, MAX_ADDRESS_BUF_SIZE);
+	sprintf(inproc_address, "inproc://%s", mq_id);
+	zmq_bind(recv_socket, inproc_address);
+	zmq_connect(send_socket, inproc_address);
+
+	thread_loop = 1;
+	data_handler_thread = thread(&Amtpca::DataHandlerThread, this);
+	cmd_handler_thread = thread(&Amtpca::CmdHandlerThread, this);
+}
+
 void Amtpca::Release()
 {
-	alive_thread_loop = 0;
-	if (alive_thread.joinable())
+	thread_loop = 0;
+	if (data_handler_thread.joinable())
 	{
-		alive_thread.join();
+		data_handler_thread.join();
 	}
-
+	if (cmd_handler_thread.joinable())
+	{
+		cmd_handler_thread.join();
+	}
 #if defined(_WIN32)
 	JLOG(INFO) << "libjwumq release cmd_handle = " << reinterpret_cast<unsigned long long>(cmd_handle);
 	JLOG(INFO) << "libjwumq release data_handle = " << reinterpret_cast<unsigned long long>(data_handle);
@@ -271,7 +262,7 @@ void Amtpca::Release()
 	}
 #endif
 	JLOG(INFO) << "libamtpca end!";
-	if(blog)
+	if (blog)
 	{
 		blog = false;
 		JLog::Close();
@@ -279,374 +270,208 @@ void Amtpca::Release()
 	cmd_sn = 0;
 }
 
-void Amtpca::AliveThread()
+void Amtpca::DataHandlerThread()
 {
-	JLOG(INFO) << "libamtpca AliveThread start!";
+	JLOG(INFO) << "libamtpca DataHandlerThread start!";
 
 	int index = 0;
-	while (alive_thread_loop > 0)
+	while (thread_loop > 0)
 	{
-		if (index % 600 == 0)
-		{
-			JLOG(INFO) << "libamtpca send alive packet: " << index/600;
-			string str = "alive " + to_string(index / 600);
-			unique_ptr<JwumqMessage> cmd_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, cmd_mq_id, "", (void *)str.c_str(), (int)str.length()));
-			jwumq_send(cmd_handle, cmd_msg.get());
-
-			unique_ptr<JwumqMessage> data_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, data_mq_id, "", (void *)str.c_str(), (int)str.length()));
-			jwumq_send(data_handle, data_msg.get());
-		}
+		struct timeval tv = {60, 0};
+		select(0, NULL, NULL, NULL, &tv);
+		JLOG(INFO) << "libamtpca data channel send alive packet: " << index;
+		string str = "alive " + to_string(index);
+		unique_ptr<JwumqMessage> data_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, data_mq_id, "", (void *)str.c_str(), (int)str.length()));
+		jwumq_send(data_handle, data_msg.get());
 		index++;
-#if defined(_WIN32)
-		Sleep(100);
-#else
-		usleep(100 * 1000);
-#endif
 	}
-	
-	JLOG(INFO) << "libamtpca AliveThread end!";
+
+	JLOG(INFO) << "libamtpca DataHandlerThread end!";
 }
 
-int Amtpca::RecvDataCallback(void * msg)
+int Amtpca::RecvDataCallback(void *msg)
 {
-	JwumqMessage * recv_msg = new JwumqMessage((JwumqMessage *)msg);
-	
-	if(recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data))
-	{
-		uint32_t msg_sn = recv_msg->body.sn();
-		unique_ptr<JwumqMessage> ack_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::public_data_ack, &msg_sn, sizeof(msg_sn)));
-		if(data_handle != nullptr)
-		{
-			jwumq_send(data_handle, ack_msg.get());
-			JLOG(INFO) << "Send Cmd ack, sn = " << msg_sn;
-		}
-			
-		amtpap::CmdPrimitive resp;
-		resp.ParseFromArray(recv_msg->RawData(),recv_msg->RawDataLen());
+	JwumqMessage *recv_msg = new JwumqMessage((JwumqMessage *)msg);
+	zmq_msg_t z_msg;
+	zmq_msg_init_size(&z_msg, sizeof(recv_msg));
+	memcpy(zmq_msg_data(&z_msg), &recv_msg, sizeof(recv_msg));
+	zmq_msg_send(&z_msg, send_socket, ZMQ_DONTWAIT);
+	zmq_msg_close(&z_msg);
+	// fprintf(stderr, "+++++++++++++++++++++++++++++++RecvDataCallback sn = %d !\n", recv_msg->body.sn());
+	return 0;
+}
 
-		JLOG(INFO) << "Recv Cmd, sn = " << resp.serial_number();
-			
-		if(resp.msg_id() == amtpap::MsgID::UPLOAD_FILE_DATA_RESP_V1)
+void Amtpca::CmdHandlerThread()
+{
+	JLOG(INFO) << "libamtpca CmdHandlerThread start!";
+	int index = 0;
+
+	zmq_pollitem_t items[] = {{recv_socket, 0, ZMQ_POLLIN, 0}};
+
+	while (thread_loop > 0)
+	{
+		if (index % 20 == 0)
 		{
-			RecvUploadFileDataResp(recv_msg);
-			if (recv_mutex_map.find(AMTP_CMD_ENUM::upload_file_data_resp) != recv_mutex_map.end()
-					&& recv_cv_map.find(AMTP_CMD_ENUM::upload_file_data_resp) != recv_cv_map.end())
+			JLOG(INFO) << "libamtpca cmd channel send alive packet: " << index / 20;
+			string str = "alive " + to_string(index / 20);
+			unique_ptr<JwumqMessage> cmd_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, cmd_mq_id, "", (void *)str.c_str(), (int)str.length()));
+			jwumq_send(cmd_handle, cmd_msg.get());
+		}
+		index++;
+
+		zmq_poll(items, 1, 3000);
+		if (items[0].revents & ZMQ_POLLIN)
+		{
+			zmq_msg_t recv_msg_t;
+			zmq_msg_init(&recv_msg_t);
+			int recv_len = zmq_msg_recv(&recv_msg_t, recv_socket, 0);
+			if (recv_len <= 0)
 			{
-				std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::upload_file_data_resp]);
-				recv_cv_map[AMTP_CMD_ENUM::upload_file_data_resp]->notify_all();
+				zmq_msg_close(&recv_msg_t);
+#if defined(_WIN32)
+				Sleep(1);
+#else
+				usleep(1000);
+#endif
+				continue;
+			}
+
+			JwumqMessage *recv_msg = nullptr;
+			memcpy(&recv_msg, zmq_msg_data(&recv_msg_t), recv_len);
+			zmq_msg_close(&recv_msg_t);
+			if (recv_msg != nullptr)
+			{
+				index = 1;
+				if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data))
+				{
+					uint32_t msg_sn = recv_msg->body.sn();
+					unique_ptr<JwumqMessage> ack_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::public_data_ack, &msg_sn, sizeof(msg_sn)));
+					if (cmd_handle != nullptr)
+					{
+						jwumq_send(cmd_handle, ack_msg.get());
+						JLOG(INFO) << "Send Cmd ack, sn = " << msg_sn;
+					}
+
+					unique_ptr<amtpap::CmdPrimitive> resp(new amtpap::CmdPrimitive());
+					resp->ParseFromArray(recv_msg->RawData(), recv_msg->RawDataLen());
+
+					uint32_t serial_number = resp->serial_number();
+					uint32_t cmd = resp->msg_id();
+					JLOG(INFO) << "Recv Cmd, cmd = " << cmd << ", sn = " << serial_number;
+
+					EVENT_OBJECT_S *obj = native_event_objects->get(serial_number);
+
+					if (cmd == amtpap::MsgID::LOGIN_RESP_V1 && obj != nullptr)
+					{
+						RecvLoginResp(recv_msg, obj);
+					}
+					else if (cmd == amtpap::MsgID::MODULE_CONF_RESP_V1 && obj != nullptr)
+					{
+						RecvModuleConfResp(recv_msg, obj);
+					}
+					else if (cmd == amtpap::MsgID::CONFIG_RESP_V1 && obj != nullptr)
+					{
+						RecvConfigResp(recv_msg, obj);
+					}
+					else if (cmd == amtpap::MsgID::CONFIG_DATA_V1)
+					{
+						RecvConfigData(recv_msg);
+					}
+					else if (cmd == amtpap::MsgID::CONFIG_NOTIFY_V1)
+					{
+						RecvConfigNotify(recv_msg);
+					}
+					else if (cmd == amtpap::MsgID::UPLOAD_FILE_RESP_V1 && obj != nullptr)
+					{
+						RecvUploadFileResp(recv_msg, obj);
+					}
+					else if (cmd == amtpap::MsgID::UPLOAD_EOF_RESP_V1 && obj != nullptr)
+					{
+						RecvUploadEofResp(recv_msg, obj);
+					}
+					else if (cmd == amtpap::MsgID::QUERY_DATA_V1)
+					{
+						RecvQueryData(recv_msg);
+					}
+					else if (cmd == amtpap::MsgID::LOGOUT_RESP_V1 && obj != nullptr)
+					{
+						RecvLogoutResp(recv_msg, obj);
+					}
+					else if (cmd == amtpap::MsgID::UPLOAD_FILE_DATA_RESP_V1)
+					{
+						RecvUploadFileDataResp(recv_msg, obj);
+					}
+				}
+				else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data_ack))
+				{
+					uint32_t ack_sn = 0;
+					memcpy(&ack_sn, recv_msg->RawData(), sizeof(ack_sn));
+
+					JLOG(INFO) << "Command mq recv msg ack, sn = " << ack_sn;
+					EVENT_OBJECT_S *obj = ack_objects->get(ack_sn);
+					if (obj != nullptr)
+					{
+						obj->cv.notify_all();
+					}
+				}
+				else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::private_alive_resp))
+				{
+					JLOG(INFO) << "Cmd recv alive ack";
+				}
+				delete recv_msg;
 			}
 		}
 		else
 		{
-				
+#if defined(_WIN32)
+			Sleep(1);
+#else
+			usleep(1000);
+#endif
+			continue;
 		}
 	}
-	else if(recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data_ack))
-	{
-		std::unique_lock<std::mutex> ack_lock(ack_mutex);
-		uint32_t ack_sn = 0;
-		memcpy(&ack_sn, recv_msg->RawData(), sizeof(ack_sn));
-			ack_cv.notify_all();
-			
-		JLOG(INFO) << "Data mq recv msg ack, sn = " << ack_sn;
-		return 0;
-	}
-	else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::private_alive_resp))
-	{
-		JLOG(INFO) << "Data recv alive ack";
-		return 0;
-	}
+
+	JLOG(INFO) << "libamtpca CmdHandlerThread end!";
+}
+int Amtpca::RecvCmdCallback(void *msg)
+{
+	JwumqMessage *recv_msg = new JwumqMessage((JwumqMessage *)msg);
+	zmq_msg_t z_msg;
+	zmq_msg_init_size(&z_msg, sizeof(recv_msg));
+	memcpy(zmq_msg_data(&z_msg), &recv_msg, sizeof(recv_msg));
+	zmq_msg_send(&z_msg, send_socket, ZMQ_DONTWAIT);
+	zmq_msg_close(&z_msg);
+	// fprintf(stderr, "+++++++++++++++++++++++++++++++RecvCmdCallback sn = %d !\n", recv_msg->body.sn());
 	return 0;
 }
 
-int Amtpca::RecvCmdCallback(void * msg)
+int Amtpca::WaitForCmd(int handle, uint32_t cmd, void *msg_stru, uint32_t timeout)
 {
-	JwumqMessage * recv_msg = new JwumqMessage((JwumqMessage *)msg);
-	if(recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data))
+	JLOG(INFO) << "WaitForCmd, cmd = " << cmd << ", handle = " << handle;
+	int result = LIB_AMTPA_WAITFORCMD_ERROR;
+	if (msg_stru == nullptr)
 	{
-		uint32_t msg_sn = recv_msg->body.sn();
-		unique_ptr<JwumqMessage> ack_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::public_data_ack, &msg_sn, sizeof(msg_sn)));
-		if(cmd_handle != nullptr)
-		{
-			jwumq_send(cmd_handle, ack_msg.get());
-			JLOG(INFO) << "Send Cmd ack, sn = " << msg_sn;
-		}
-		
-		amtpap::CmdPrimitive resp;
-		resp.ParseFromArray(recv_msg->RawData(),recv_msg->RawDataLen());
-
-		JLOG(INFO) << "Recv Cmd, sn = " << resp.serial_number();
-		
-		AMTP_CMD_ENUM cmd = AMTP_CMD_ENUM::reserve;
-		
-		if(resp.msg_id() == amtpap::MsgID::LOGIN_RESP_V1)
-		{
-			RecvLoginResp(recv_msg);
-			/*if (recv_mutex_map.find(AMTP_CMD_ENUM::login_resp) != recv_mutex_map.end()
-				&& recv_cv_map.find(AMTP_CMD_ENUM::login_resp) != recv_cv_map.end())
-			{
-				std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::login_resp]);
-				recv_cv_map[AMTP_CMD_ENUM::login_resp]->notify_all();
-			}*/
-			cmd = AMTP_CMD_ENUM::login_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::LOGOUT_RESP_V1)
-		{
-			RecvLogoutResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::logout_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::CONFIG_RESP_V1)
-		{
-			RecvConfigResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::config_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::MODULE_CONF_RESP_V1)
-		{
-			RecvModuleConfResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::module_conf_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::REPORT_EVENT_RESP_V1)
-		{
-			RecvEventResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::report_event_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::ALARM_RESP_V1)
-		{
-			RecvAlarmResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::alarm_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::ALARM_CLEAR_RESP_V1)
-		{
-			RecvAlarmClearResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::alarm_clear_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::GPS_INFO_RESP_V1)
-		{
-			RecvGpsInfoResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::gps_info_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::STATUS_INFO_RESP_V1)
-		{
-			RecvStatusInfoResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::status_info_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::CONFIG_DATA_V1)
-		{
-			RecvConfigData(recv_msg);
-//			if (recv_mutex_map.find(AMTP_CMD_ENUM::status_info_resp) != recv_mutex_map.end()
-//				&& recv_cv_map.find(AMTP_CMD_ENUM::status_info_resp) != recv_cv_map.end())
-//			{
-//				std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::status_info_resp]);
-//				recv_cv_map[AMTP_CMD_ENUM::status_info_resp]->notify_all();
-//			}
-		}
-		else if(resp.msg_id() == amtpap::MsgID::CONFIG_NOTIFY_V1)
-		{
-			RecvConfigNotify(recv_msg);
-		}
-		else if(resp.msg_id() == amtpap::MsgID::RESTART_CMD_V1)
-		{
-			RecvRestartCmd(recv_msg);
-		}
-		else if(resp.msg_id() == amtpap::MsgID::UPLOAD_FILE_RESP_V1)
-		{
-			RecvUploadFileResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::upload_file_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::UPLOAD_EOF_RESP_V1)
-		{
-			RecvUploadEofResp(recv_msg);
-			cmd = AMTP_CMD_ENUM::upload_eof_resp;
-		}
-		else if(resp.msg_id() == amtpap::MsgID::QUERY_DATA_V1)
-		{
-			RecvQueryData(recv_msg);
-		}
-		else
-		{
-			
-		}
-		
-		if (recv_mutex_map.find(cmd) != recv_mutex_map.end()
-			&& recv_cv_map.find(cmd) != recv_cv_map.end())
-		{
-			std::unique_lock<std::mutex> lock(*recv_mutex_map[cmd]);
-			recv_cv_map[cmd]->notify_all();
-		}
+		return result;
 	}
-	else if(recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data_ack))
+	EVENT_OBJECT_S *obj_s = native_event_objects->add(handle, cmd);
+	if (obj_s == nullptr)
 	{
-		std::unique_lock<std::mutex> ack_lock(ack_mutex);
-		uint32_t ack_sn = 0;
-		memcpy(&ack_sn, recv_msg->RawData(), sizeof(ack_sn));
-		ack_cv.notify_all();
-		
-		JLOG(INFO) << "Command mq recv msg ack, sn = " << ack_sn;
-		return 0;
+		fprintf(stderr, "Add EVENT_OBJECT_S failed\n");
+		return result;
 	}
-	else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::private_alive_resp))
+	result = LIB_AMTPA_SUCCESS;
+	unique_lock<std::mutex> lock(obj_s->mtx);
+	if (obj_s->cv.wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
 	{
-		JLOG(INFO) << "Cmd recv alive ack";
-		return 0;
+		result = LIB_AMTPA_TIMEOUT;
 	}
-
-	return 0;
+	memcpy(msg_stru, obj_s->msg_stru_data, obj_s->msg_stru_data_len);
+	native_event_objects->remove(handle);
+	return result;
 }
 
-int Amtpca::WaitForCmd(uint32_t cmd, void * s, uint32_t timeout)
-{
-	JLOG(INFO) << "WaitForCmd, cmd = " << cmd;
-	std::unique_lock<std::mutex> wait_lock(wait_mutex);
-	if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::login_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::login_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::login_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::login_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::login_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &login_resp_tmp_s, sizeof(LOGIN_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::logout_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::logout_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::logout_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::logout_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::logout_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			JLOG(INFO) << "LIB_AMTPA_TIMEOUT";
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &logout_resp_tmp_s, sizeof(LOGOUT_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::module_conf_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::module_conf_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::module_conf_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::module_conf_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::module_conf_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &module_conf_resp_tmp_s, sizeof(MODULE_CONF_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::report_event_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::report_event_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::report_event_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::report_event_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::report_event_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &report_event_resp_tmp_s, sizeof(REPORT_EVENT_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::alarm_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::alarm_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::alarm_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::alarm_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::alarm_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &alarm_resp_tmp_s, sizeof(ALARM_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::alarm_clear_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::alarm_clear_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::alarm_clear_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::alarm_clear_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::alarm_clear_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &alarm_clear_resp_tmp_s, sizeof(ALARM_CLEAR_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::config_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::config_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::config_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::config_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::config_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &config_resp_tmp_s, sizeof(CONFIG_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::gps_info_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::gps_info_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::gps_info_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::gps_info_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::gps_info_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &gps_info_resp_tmp_s, sizeof(GPS_INFO_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::status_info_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::status_info_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::status_info_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::status_info_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::status_info_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &status_info_resp_tmp_s, sizeof(STATUS_INFO_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::upload_file_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::upload_file_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::upload_file_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::upload_file_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &upload_file_resp_tmp_s, sizeof(UPLOAD_FILE_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::upload_eof_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::upload_eof_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::upload_eof_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::upload_eof_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::upload_eof_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &upload_eof_resp_tmp_s, sizeof(UPLOAD_EOF_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-	else if(cmd == static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_data_resp)
-	   && recv_mutex_map.find(AMTP_CMD_ENUM::upload_file_data_resp) != recv_mutex_map.end()
-	   && recv_cv_map.find(AMTP_CMD_ENUM::upload_file_data_resp) != recv_cv_map.end())
-	{
-		std::unique_lock<std::mutex> lock(*recv_mutex_map[AMTP_CMD_ENUM::upload_file_data_resp]);
-		if(recv_cv_map[AMTP_CMD_ENUM::upload_file_data_resp]->wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-		{
-			return LIB_AMTPA_TIMEOUT;
-		}
-		memcpy(s, &upload_file_data_resp_tmp_s, sizeof(UPLOAD_FILE_DATA_RESP_STRU));
-		return LIB_AMTPA_SUCCESS;
-	}
-			
-	return LIB_AMTPA_WAITFORCMD_ERROR;
-}
-
-int Amtpca::SendCmd(uint32_t cmd, void * cmd_s, bool sync, uint32_t timeout)
+int Amtpca::SendCmd(uint32_t cmd, void *cmd_s, bool sync, uint32_t timeout)
 {
 #if defined(_WIN32)
 #else
@@ -655,862 +480,690 @@ int Amtpca::SendCmd(uint32_t cmd, void * cmd_s, bool sync, uint32_t timeout)
 		return LIB_AMTPA_NO_INIT;
 	}
 #endif
-	//JLOG(INFO) << "Debug Amtpca::SendCmd, cmd = " << cmd;
 	switch (cmd)
 	{
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::login):
-		{
-			return SendLogin((LOGIN_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::logout):
-		{
-			return SendLogout(sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::module_conf):
-		{
-			return SendModuleConf((MODULE_CONF_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::report_event):
-		{
-			return SendEvent((REPORT_EVENT_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::alarm):
-		{
-			return SendAlarm((ALARM_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::alarm_clear):
-		{
-			return SendAlarmClear((ALARM_CLEAR_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::config):
-		{
-			return SendConfig((CONFIG_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::gps_info):
-		{
-			return SendGpsInfo((GPS_INFO_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::status_info):
-		{
-			return SendStatusInfo((STATUS_INFO_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::config_data_resp):
-		{
-			return SendConfigDataResp((CONFIG_DATA_RESP_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::config_notify_resp):
-		{
-			return SendConfigNotifyResp((CONFIG_NOTIFY_RESP_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::restart_cmd_resp):
-		{
-			return SendRestartCmdResp((RESTART_CMD_RESP_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file):
-		{
-			return SendUploadFile((UPLOAD_FILE_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::upload_eof):
-		{
-			return SendUploadEof((UPLOAD_EOF_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::query_data_resp):
-		{
-			return SendQueryDataResp((QUERY_DATA_RESP_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		case static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_data):
-		{
-			return SendUploadFileData((UPLOAD_FILE_DATA_STRU *)cmd_s, sync, timeout);
-			break;
-		}
-		default:
-			break;
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::login):
+	{
+		return SendLogin((LOGIN_STRU *)cmd_s, sync, timeout);
+		break;
+	}
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::module_conf):
+	{
+		return SendModuleConf((MODULE_CONF_STRU *)cmd_s, sync, timeout);
+		break;
+	}
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::config):
+	{
+		return SendConfig((CONFIG_STRU *)cmd_s, sync, timeout);
+		break;
+	}
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::config_data_resp):
+	{
+		return SendConfigDataResp((CONFIG_DATA_RESP_STRU *)cmd_s, sync, timeout);
+		break;
+	}
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::config_notify_resp):
+	{
+		return SendConfigNotifyResp((CONFIG_NOTIFY_RESP_STRU *)cmd_s, sync, timeout);
+		break;
+	}
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::query_data_resp):
+	{
+		return SendQueryDataResp((QUERY_DATA_RESP_STRU *)cmd_s, sync, timeout);
+		break;
+	}
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file):
+	{
+		return SendUploadFile((UPLOAD_FILE_STRU *)cmd_s, sync, timeout);
+		break;
+	}
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::upload_file_data):
+	{
+		return SendUploadFileData((UPLOAD_FILE_DATA_STRU *)cmd_s, sync, timeout);
+		break;
+	}
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::upload_eof):
+	{
+		return SendUploadEof((UPLOAD_EOF_STRU *)cmd_s, sync, timeout);
+		break;
+	}
+	case static_cast<uint32_t>(AMTP_CMD_ENUM::logout):
+	{
+		return SendLogout(sync, timeout);
+		break;
+	}
+
+	default:
+		break;
 	}
 	return LIB_AMTPA_SEND_ERROR;
 }
 
-int Amtpca::SendLogin(LOGIN_STRU * s, bool sync, uint32_t timeout)
+int Amtpca::SendLogin(LOGIN_STRU *s, bool sync, uint32_t timeout)
 {
-	if(s == nullptr ||cmd_handle == nullptr)
+	if (s == nullptr || cmd_handle == nullptr)
 	{
 		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
-	
+
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_login login;
+	int handle = cmd_sn;
 	msg = login.data((LOGIN_STRU *)s, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
-	//JLOG(INFO) << "Debug Amtpca::SendLogin.";
 	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
+	if (result != 0)
 	{
 		return result;
 	}
-	//JLOG(INFO) << "Debug Amtpca::SendLogin finish.";
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	if (!sync)
 	{
-		JLOG(INFO) << "Amtpca::SendLogin ack_cv.wait_for timeout.";
+		return handle;
+	}
+
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send login msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
+	{
+		JLOG(INFO) << "Jwumq send login msg, ack_cv.wait_for timeout.";
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send login msg, sn = " << msg->body.sn() ;
-	
-//	SYS_INFO_T info = GetSysInfo();
-	return result;
+	JLOG(INFO) << "Jwumq send login msg, get ack " << msg->body.sn();
+
+	return handle;
 }
-void Amtpca::RecvLoginResp(JwumqMessage * recv_msg)
+void Amtpca::RecvLoginResp(JwumqMessage *recv_msg, EVENT_OBJECT_S *obj)
 {
 	amtp_login_resp resp;
-	memset(&login_resp_tmp_s, 0, sizeof(LOGIN_RESP_STRU));
-	login_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::login_resp, &login_resp_tmp_s, nullptr);
-	}
+	LOGIN_RESP_STRU login_resp_tmp;
+	resp.data(recv_msg, login_resp_tmp);
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
-	JLOG(INFO) << "Recv login response, manufacturer = " << login_resp_tmp_s.manufacturer
-				<< ", token = " << token
-				<< ", result = " << login_resp_tmp_s.result;
+	if (obj != nullptr)
+	{
+		if (obj->msg_stru_data != nullptr)
+		{
+			delete[] obj->msg_stru_data;
+		}
+		obj->msg_stru_data = new uint8_t[sizeof(LOGIN_RESP_STRU)];
+		obj->msg_stru_data_len = sizeof(LOGIN_RESP_STRU);
+		memcpy(obj->msg_stru_data, &login_resp_tmp, obj->msg_stru_data_len);
+		obj->cv.notify_all();
+	}
+	if (cmd_recv_callback != nullptr)
+	{
+		cmd_recv_callback(AMTP_CMD_ENUM::login_resp, &login_resp_tmp, nullptr);
+	}
+	JLOG(INFO) << "Recv login response, manufacturer = " << login_resp_tmp.manufacturer
+			   << ", token = " << token
+			   << ", result = " << login_resp_tmp.result;
 }
 int Amtpca::SendLogout(bool sync, uint32_t timeout)
 {
-	if(cmd_handle == nullptr)
+	if (cmd_handle == nullptr)
 	{
 		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_logout logout;
+	int handle = cmd_sn;
 	msg = logout.data(token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
 	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
+	if (result != 0)
 	{
 		return result;
 	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	if (!sync)
 	{
+		return handle;
+	}
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send logout msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
+	{
+		JLOG(INFO) << "Jwumq send logout msg, ack_cv.wait_for timeout.";
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send logout msg, sn = " << msg->body.sn() ;
-	return result;
+	JLOG(INFO) << "Jwumq send logout msg, get ack " << msg->body.sn();
+	return handle;
 }
-void Amtpca::RecvLogoutResp(JwumqMessage * recv_msg)
+void Amtpca::RecvLogoutResp(JwumqMessage *recv_msg, EVENT_OBJECT_S *obj)
 {
 	amtp_logout_resp resp;
-	memset(&logout_resp_tmp_s, 0, sizeof(LOGOUT_RESP_STRU));
-	logout_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::logout_resp, &logout_resp_tmp_s, nullptr);
-	}
+	LOGOUT_RESP_STRU logout_resp_stru;
+	resp.data(recv_msg, logout_resp_stru);
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
+	if (obj != nullptr)
+	{
+		if (obj->msg_stru_data != nullptr)
+		{
+			delete[] obj->msg_stru_data;
+		}
+		obj->msg_stru_data = new uint8_t[sizeof(LOGOUT_RESP_STRU)];
+		obj->msg_stru_data_len = sizeof(LOGOUT_RESP_STRU);
+		memcpy(obj->msg_stru_data, &logout_resp_stru, obj->msg_stru_data_len);
+		obj->cv.notify_all();
+	}
+	if (cmd_recv_callback != nullptr)
+	{
+		cmd_recv_callback(AMTP_CMD_ENUM::logout_resp, &logout_resp_stru, nullptr);
+	}
 	JLOG(INFO) << "Recv logout response "
 			   << ", token = " << token
-			   << ", result = " << logout_resp_tmp_s.result;
+			   << ", result = " << logout_resp_stru.result;
 }
-int Amtpca::SendModuleConf(MODULE_CONF_STRU * s, bool sync, uint32_t timeout)
+int Amtpca::SendModuleConf(MODULE_CONF_STRU *s, bool sync, uint32_t timeout)
 {
-	if(s == nullptr || cmd_handle == nullptr)
+	if (s == nullptr || cmd_handle == nullptr)
 	{
 		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
-	
+
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_module_conf conf;
+	int handle = cmd_sn;
 	msg = conf.data(s, token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
 	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
+	if (result != 0)
 	{
 		return result;
 	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	if (!sync)
 	{
+		return handle;
+	}
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send module config msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
+	{
+		JLOG(INFO) << "Jwumq send module config msg, ack_cv.wait_for timeout.";
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send module cong msg, sn = " << msg->body.sn() ;
-	return result;
+	JLOG(INFO) << "Jwumq send module config msg, get ack " << msg->body.sn();
+	return handle;
 }
-void Amtpca::RecvModuleConfResp(JwumqMessage * recv_msg)
+void Amtpca::RecvModuleConfResp(JwumqMessage *recv_msg, EVENT_OBJECT_S *obj)
 {
 	amtp_module_conf_resp resp;
-	memset(&module_conf_resp_tmp_s, 0, sizeof(MODULE_CONF_RESP_STRU));
-	module_conf_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::module_conf_resp, &module_conf_resp_tmp_s, nullptr);
-	}
+	MODULE_CONF_RESP_STRU module_conf_resp_stru;
+	resp.data(recv_msg, module_conf_resp_stru);
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
+	if (obj != nullptr)
+	{
+		if (obj->msg_stru_data != nullptr)
+		{
+			delete[] obj->msg_stru_data;
+		}
+		obj->msg_stru_data = new uint8_t[sizeof(MODULE_CONF_RESP_STRU)];
+		obj->msg_stru_data_len = sizeof(MODULE_CONF_RESP_STRU);
+		memcpy(obj->msg_stru_data, &module_conf_resp_stru, obj->msg_stru_data_len);
+		obj->cv.notify_all();
+	}
+	if (cmd_recv_callback != nullptr)
+	{
+		cmd_recv_callback(AMTP_CMD_ENUM::module_conf_resp, &module_conf_resp_stru, nullptr);
+	}
 	JLOG(INFO) << "Recv module conf response "
 			   << ", token = " << token
-			   << ", result = " << module_conf_resp_tmp_s.result;
+			   << ", result = " << module_conf_resp_stru.result;
 }
-int Amtpca::SendEvent(REPORT_EVENT_STRU * s, bool sync, uint32_t timeout)
+int Amtpca::SendConfig(CONFIG_STRU *s, bool sync, uint32_t timeout)
 {
-	if(s == nullptr || cmd_handle == nullptr)
+	if (s == nullptr || cmd_handle == nullptr)
 	{
 		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
-	
-	std::unique_lock<std::mutex> send_lock(send_mutex);
-	unique_ptr<JwumqMessage> msg = nullptr;
-	amtp_event event;
-	msg = event.data(s, token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
-	{
-		return LIB_AMTPA_UNKNOWN_MSG;
-	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
-	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
-	{
-		return result;
-	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-	{
-		return LIB_AMTPA_TIMEOUT;
-	}
-	JLOG(INFO) << "Jwumq send event msg, sn = " << msg->body.sn() ;
-	return result;
-}
-void Amtpca::RecvEventResp(JwumqMessage * recv_msg)
-{
-	amtp_event_resp resp;
-	memset(&report_event_resp_tmp_s, 0, sizeof(REPORT_EVENT_RESP_STRU));
-	report_event_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::report_event_resp, &report_event_resp_tmp_s, nullptr);
-	}
-	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
-	resp.token(token);
-	JLOG(INFO) << "Recv event response "
-			   << ", token = " << token
-			   << ", result = " << report_event_resp_tmp_s.result;
-}
-int Amtpca::SendAlarm(ALARM_STRU * s, bool sync, uint32_t timeout)
-{
-	if(s == nullptr || cmd_handle == nullptr)
-	{
-		return LIB_AMTPA_SEND_PARA_ERROR;
-	}
-	
-	std::unique_lock<std::mutex> send_lock(send_mutex);
-	unique_ptr<JwumqMessage> msg = nullptr;
-	amtp_alarm alarm;
-	msg = alarm.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
-	{
-		return LIB_AMTPA_UNKNOWN_MSG;
-	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
-	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
-	{
-		return result;
-	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-	{
-		return LIB_AMTPA_TIMEOUT;
-	}
-	JLOG(INFO) << "Jwumq send alarm msg, sn = " << msg->body.sn() ;
-	return result;
-}
-void Amtpca::RecvAlarmResp(JwumqMessage * recv_msg)
-{
-	amtp_alarm_resp resp;
-	memset(&alarm_resp_tmp_s, 0, sizeof(ALARM_RESP_STRU));
-	alarm_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::alarm_resp, &alarm_resp_tmp_s, nullptr);
-	}
-	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
-	resp.token(token);
-	JLOG(INFO) << "Recv alarm response "
-				<< ", token = " << token
-				<< ", result = " << alarm_resp_tmp_s.result;
-}
-int Amtpca::SendAlarmClear(ALARM_CLEAR_STRU * s, bool sync, uint32_t timeout)
-{
-	if(s == nullptr || cmd_handle == nullptr)
-	{
-		return LIB_AMTPA_SEND_PARA_ERROR;
-	}
-	
-	std::unique_lock<std::mutex> send_lock(send_mutex);
-	unique_ptr<JwumqMessage> msg = nullptr;
-	amtp_alarm_clear alarm_clear;
-	msg = alarm_clear.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
-	{
-		return LIB_AMTPA_UNKNOWN_MSG;
-	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
-	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
-	{
-		return result;
-	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-	{
-		return LIB_AMTPA_TIMEOUT;
-	}
-	JLOG(INFO) << "Jwumq send alarm clear msg, sn = " << msg->body.sn() ;
-	return result;
-}
-void Amtpca::RecvAlarmClearResp(JwumqMessage * recv_msg)
-{
-	amtp_alarm_clear_resp resp;
-	memset(&alarm_clear_resp_tmp_s, 0, sizeof(ALARM_CLEAR_RESP_STRU));
-	alarm_clear_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::alarm_clear_resp, &alarm_clear_resp_tmp_s, nullptr);
-	}
-	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
-	resp.token(token);
-	JLOG(INFO) << "Recv alarm clear response "
-				<< ", token = " << token
-				<< ", result = " << alarm_clear_resp_tmp_s.result;
-}
-int Amtpca::SendConfig(CONFIG_STRU * s, bool sync, uint32_t timeout)
-{
-	if(s == nullptr || cmd_handle == nullptr)
-	{
-		return LIB_AMTPA_SEND_PARA_ERROR;
-	}
-	
+
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_config config;
+	int handle = cmd_sn;
 	msg = config.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
 	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
+	if (result != 0)
 	{
 		return result;
 	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	if (!sync)
 	{
+		return handle;
+	}
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send config conig msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
+	{
+		JLOG(INFO) << "Jwumq send config msg, ack_cv.wait_for timeout.";
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send conig msg, sn = " << msg->body.sn() ;
-	return result;
+	JLOG(INFO) << "Jwumq send config msg, get ack " << msg->body.sn();
+	return handle;
 }
-void Amtpca::RecvConfigResp(JwumqMessage * recv_msg)
+void Amtpca::RecvConfigResp(JwumqMessage *recv_msg, EVENT_OBJECT_S *obj)
 {
 	amtp_config_resp resp;
-	memset(&config_resp_tmp_s, 0, sizeof(CONFIG_RESP_STRU));
-	config_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::config_resp, &config_resp_tmp_s, nullptr);
-	}
+	CONFIG_RESP_STRU config_resp_stru;
+	resp.data(recv_msg, config_resp_stru);
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
+	if (obj != nullptr)
+	{
+		if (obj->msg_stru_data != nullptr)
+		{
+			delete[] obj->msg_stru_data;
+		}
+		obj->msg_stru_data = new uint8_t[sizeof(CONFIG_RESP_STRU)];
+		obj->msg_stru_data_len = sizeof(CONFIG_RESP_STRU);
+		memcpy(obj->msg_stru_data, &config_resp_stru, obj->msg_stru_data_len);
+		obj->cv.notify_all();
+	}
+	if (cmd_recv_callback != nullptr)
+	{
+		cmd_recv_callback(AMTP_CMD_ENUM::config_resp, &config_resp_stru, nullptr);
+	}
 	JLOG(INFO) << "Recv config response "
-				<< ", token = " << token
-				<< ", atuid_version = " << config_resp_tmp_s.atuid_version
-				<< ", md5 = " << config_resp_tmp_s.md5
-				<< ", result = " << config_resp_tmp_s.result;
+			   << ", token = " << token
+			   << ", atuid_version = " << config_resp_stru.atuid_version
+			   << ", md5 = " << config_resp_stru.md5
+			   << ", result = " << config_resp_stru.result;
 }
-int Amtpca::SendGpsInfo(GPS_INFO_STRU * s, bool sync, uint32_t timeout)
-{
-	if(s == nullptr || cmd_handle == nullptr)
-	{
-		return LIB_AMTPA_SEND_PARA_ERROR;
-	}
-	
-	std::unique_lock<std::mutex> send_lock(send_mutex);
-	unique_ptr<JwumqMessage> msg = nullptr;
-	amtp_gps_info gps_info;
-	msg = gps_info.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
-	{
-		return LIB_AMTPA_UNKNOWN_MSG;
-	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
-	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
-	{
-		return result;
-	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-	{
-		return LIB_AMTPA_TIMEOUT;
-	}
-	JLOG(INFO) << "Jwumq send gps info msg, sn = " << msg->body.sn() ;
-	return result;
-}
-void Amtpca::RecvGpsInfoResp(JwumqMessage * recv_msg)
-{
-	amtp_gps_info_resp resp;
-	memset(&gps_info_resp_tmp_s, 0, sizeof(GPS_INFO_RESP_STRU));
-	gps_info_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::gps_info_resp, &gps_info_resp_tmp_s, nullptr);
-	}
-	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
-	resp.token(token);
-	JLOG(INFO) << "Recv gps info response "
-				<< ", token = " << token
-				<< ", result = " << config_resp_tmp_s.result;
-}
-int Amtpca::SendStatusInfo(STATUS_INFO_STRU * s, bool sync, uint32_t timeout)
-{
-	if(s == nullptr || cmd_handle == nullptr)
-	{
-		return LIB_AMTPA_SEND_PARA_ERROR;
-	}
-	
-	std::unique_lock<std::mutex> send_lock(send_mutex);
-	unique_ptr<JwumqMessage> msg = nullptr;
-	amtp_status_info status_info;
-	msg = status_info.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
-	{
-		return LIB_AMTPA_UNKNOWN_MSG;
-	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
-	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
-	{
-		return result;
-	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-	{
-		return LIB_AMTPA_TIMEOUT;
-	}
-	JLOG(INFO) << "Jwumq send status info msg, sn = " << msg->body.sn() ;
-	return result;
-}
-void Amtpca::RecvStatusInfoResp(JwumqMessage * recv_msg)
-{
-	amtp_status_info_resp resp;
-	memset(&status_info_resp_tmp_s, 0, sizeof(STATUS_INFO_RESP_STRU));
-	status_info_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::status_info_resp, &status_info_resp_tmp_s, nullptr);
-	}
-	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
-	resp.token(token);
-	JLOG(INFO) << "Recv status info response "
-				<< ", token = " << token
-				<< ", result = " << config_resp_tmp_s.result;
-}
-void Amtpca::RecvConfigData(JwumqMessage * recv_msg)
+void Amtpca::RecvConfigData(JwumqMessage *recv_msg)
 {
 	amtp_config_data req;
 	CONFIG_DATA_STRU config_data_tmp_s;
 	memset(&config_data_tmp_s, 0, sizeof(CONFIG_DATA_STRU));
 	bool result = req.data(recv_msg, &config_data_tmp_s);
-	if(!result)
+	if (!result)
 	{
 		JLOG(INFO) << "Recv config data request, but data format error ";
-		return ;
+		return;
 	}
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	req.token(token);
-	
-	if(cmd_recv_callback != nullptr)
+
+	if (cmd_recv_callback != nullptr)
 	{
 		cmd_recv_callback(AMTP_CMD_ENUM::config_data, &config_data_tmp_s, nullptr);
 	}
-	if(config_data_tmp_s.config_data != nullptr)
+	if (config_data_tmp_s.config_data != nullptr)
 	{
 		delete[] config_data_tmp_s.config_data;
 	}
 
 	JLOG(INFO) << "Recv config data request "
-				<< ", token = " << token
-				<< ", atuid_version = " << config_data_tmp_s.atuid_version
-				<< ", packet_count = " << config_data_tmp_s.packet_count
-				<< ", packet_no = " << config_data_tmp_s.packet_no
-				<< ", data_length = " << config_data_tmp_s.data_length;
+			   << ", token = " << token
+			   << ", atuid_version = " << config_data_tmp_s.atuid_version
+			   << ", packet_count = " << config_data_tmp_s.packet_count
+			   << ", packet_no = " << config_data_tmp_s.packet_no
+			   << ", data_length = " << config_data_tmp_s.data_length;
 }
-int Amtpca::SendConfigDataResp(CONFIG_DATA_RESP_STRU * s, bool sync, uint32_t timeout)
+int Amtpca::SendConfigDataResp(CONFIG_DATA_RESP_STRU *s, bool sync, uint32_t timeout)
 {
-	if(s == nullptr || cmd_handle == nullptr)
+	if (s == nullptr || cmd_handle == nullptr)
 	{
 		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
-	
+
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_config_data_resp config_data_resp;
 	msg = config_data_resp.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
 	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
+	if (!sync)
 	{
 		return result;
 	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send config config data resp msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
 	{
+		JLOG(INFO) << "Jwumq send config config data resp msg, ack_cv.wait_for timeout.";
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send config data resp msg, sn = " << msg->body.sn() ;
+	JLOG(INFO) << "Jwumq send config config data resp msg, get ack " << msg->body.sn();
 	return result;
 }
-void Amtpca::RecvConfigNotify(JwumqMessage * recv_msg)
+void Amtpca::RecvConfigNotify(JwumqMessage *recv_msg)
 {
 	amtp_config_notify req;
 	CONFIG_NOTIFY_STRU config_notify_tmp_s;
 	memset(&config_notify_tmp_s, 0, sizeof(CONFIG_NOTIFY_STRU));
 	bool result = req.data(recv_msg, &config_notify_tmp_s);
-	if(!result)
+	if (!result)
 	{
 		JLOG(INFO) << "Recv config notify request, but data format error ";
-		return ;
+		return;
 	}
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	req.token(token);
-	
-	if(cmd_recv_callback != nullptr)
+
+	if (cmd_recv_callback != nullptr)
 	{
 		cmd_recv_callback(AMTP_CMD_ENUM::config_notify, &config_notify_tmp_s, nullptr);
 	}
 
 	JLOG(INFO) << "Recv config notify request "
-				<< ", token = " << token
-				<< ", atuid_version = " << config_notify_tmp_s.atuid_version
-				<< ", packet_count = " << config_notify_tmp_s.packet_count;
+			   << ", token = " << token
+			   << ", atuid_version = " << config_notify_tmp_s.atuid_version
+			   << ", packet_count = " << config_notify_tmp_s.packet_count;
 }
-int Amtpca::SendConfigNotifyResp(CONFIG_NOTIFY_RESP_STRU * s, bool sync, uint32_t timeout)
+int Amtpca::SendConfigNotifyResp(CONFIG_NOTIFY_RESP_STRU *s, bool sync, uint32_t timeout)
 {
-	if(s == nullptr || cmd_handle == nullptr)
+	if (s == nullptr || cmd_handle == nullptr)
 	{
 		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
-	
+
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_config_notify_resp config_notify_resp;
 	msg = config_notify_resp.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
 	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
+	if (!sync)
 	{
 		return result;
 	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send config nofity resp msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
 	{
+		JLOG(INFO) << "Jwumq send config nofity resp msg, ack_cv.wait_for timeout.";
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send config nofity resp msg, sn = " << msg->body.sn() ;
+	JLOG(INFO) << "Jwumq send config nofity resp msg, get ack " << msg->body.sn();
 	return result;
 }
-void Amtpca::RecvRestartCmd(JwumqMessage * recv_msg)
+int Amtpca::SendUploadFile(UPLOAD_FILE_STRU *s, bool sync, uint32_t timeout)
 {
-	amtp_restart_cmd req;
-	RESTART_CMD_STRU restart_cmd_tmp_s;
-	memset(&restart_cmd_tmp_s, 0, sizeof(RESTART_CMD_STRU));
-	bool result = req.data(recv_msg, &restart_cmd_tmp_s);
-	if(!result)
+	if (s == nullptr || cmd_handle == nullptr)
 	{
-		JLOG(INFO) << "Recv restart request, but data format error ";
-		return ;
-	}
-	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
-	req.token(token);
-	
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::restart_cmd, &restart_cmd_tmp_s, nullptr);
+		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
 
-	JLOG(INFO) << "Recv restart request "
-				<< ", token = " << token
-				<< ", ts_sec = " << restart_cmd_tmp_s.ts_sec
-				<< ", ts_usec = " << restart_cmd_tmp_s.ts_usec;
-}
-int Amtpca::SendRestartCmdResp(RESTART_CMD_RESP_STRU * s, bool sync, uint32_t timeout)
-{
-	if(s == nullptr || cmd_handle == nullptr)
-	{
-		return LIB_AMTPA_SEND_PARA_ERROR;
-	}
-	
-	std::unique_lock<std::mutex> send_lock(send_mutex);
-	unique_ptr<JwumqMessage> msg = nullptr;
-	amtp_restart_cmd_resp resp;
-	msg = resp.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
-	{
-		return LIB_AMTPA_UNKNOWN_MSG;
-	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
-	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
-	{
-		return result;
-	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
-	{
-		return LIB_AMTPA_TIMEOUT;
-	}
-	JLOG(INFO) << "Jwumq send config nofity resp msg, sn = " << msg->body.sn() ;
-	return result;
-}
-int Amtpca::SendUploadFile(UPLOAD_FILE_STRU * s, bool sync, uint32_t timeout)
-{
-	if(s == nullptr || cmd_handle == nullptr)
-	{
-		return LIB_AMTPA_SEND_PARA_ERROR;
-	}
-	
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_upload_file upload_file;
+	int handle = cmd_sn;
 	msg = upload_file.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
 	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
+	if (result != 0)
 	{
 		return result;
 	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	if (!sync)
 	{
+		return handle;
+	}
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send upload file msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
+	{
+		JLOG(INFO) << "Jwumq send upload file msg, ack_cv.wait_for timeout.";
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send upload file msg, sn = " << msg->body.sn() ;
-	return result;
+	JLOG(INFO) << "Jwumq send upload file msg, get ack " << msg->body.sn();
+	return handle;
 }
-void Amtpca::RecvUploadFileResp(JwumqMessage * recv_msg)
+void Amtpca::RecvUploadFileResp(JwumqMessage *recv_msg, EVENT_OBJECT_S *obj)
 {
 	amtp_upload_file_resp resp;
-	memset(&upload_file_resp_tmp_s, 0, sizeof(UPLOAD_FILE_RESP_STRU));
-	upload_file_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::upload_file_resp, &upload_file_resp_tmp_s, nullptr);
-	}
+	UPLOAD_FILE_RESP_STRU upload_file_resp;
+
+	resp.data(recv_msg, upload_file_resp);
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
+	if (obj != nullptr)
+	{
+		if (obj->msg_stru_data != nullptr)
+		{
+			delete[] obj->msg_stru_data;
+		}
+		obj->msg_stru_data = new uint8_t[sizeof(UPLOAD_FILE_RESP_STRU)];
+		obj->msg_stru_data_len = sizeof(UPLOAD_FILE_RESP_STRU);
+		memcpy(obj->msg_stru_data, &upload_file_resp, obj->msg_stru_data_len);
+		obj->cv.notify_all();
+		JLOG(INFO) << "notify_all upload file msg, sn " << obj->handle;
+	}
+	if (cmd_recv_callback != nullptr)
+	{
+		cmd_recv_callback(AMTP_CMD_ENUM::upload_file_resp, &upload_file_resp, nullptr);
+	}
 	JLOG(INFO) << "Recv upload file response "
-				<< ", token = " << token
-				<< ", file_name = " << upload_file_resp_tmp_s.file_name
-				<< ", file_id = " << upload_file_resp_tmp_s.file_id
-				<< ", file_size = " << upload_file_resp_tmp_s.file_size
-				<< ", module = " << upload_file_resp_tmp_s.module
-				<< ", result = " << upload_file_resp_tmp_s.result;
+			   << ", token = " << token
+			   << ", file_name = " << upload_file_resp.file_name
+			   << ", file_id = " << upload_file_resp.file_id
+			   << ", file_size = " << upload_file_resp.file_size
+			   << ", module = " << upload_file_resp.module
+			   << ", result = " << upload_file_resp.result;
 }
-int Amtpca::SendUploadEof(UPLOAD_EOF_STRU * s, bool sync, uint32_t timeout)
+int Amtpca::SendUploadEof(UPLOAD_EOF_STRU *s, bool sync, uint32_t timeout)
 {
-	if(s == nullptr || cmd_handle == nullptr)
+	if (s == nullptr || cmd_handle == nullptr)
 	{
 		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
-	
+
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_upload_eof upload_eof;
+	int handle = cmd_sn;
 	msg = upload_eof.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
 	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
+	if (result != 0)
 	{
 		return result;
 	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	if (!sync)
 	{
+		return handle;
+	}
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send upload eof msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
+	{
+		JLOG(INFO) << "Jwumq send upload eof msg, ack_cv.wait_for timeout.";
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send upload eof msg, sn = " << msg->body.sn() ;
-	return result;
+	JLOG(INFO) << "Jwumq send upload eof msg, get ack " << msg->body.sn();
+	return handle;
 }
-void Amtpca::RecvUploadEofResp(JwumqMessage * recv_msg)
+void Amtpca::RecvUploadEofResp(JwumqMessage *recv_msg, EVENT_OBJECT_S *obj)
 {
 	amtp_upload_eof_resp resp;
-	memset(&upload_eof_resp_tmp_s, 0, sizeof(UPLOAD_EOF_RESP_STRU));
-	upload_eof_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::upload_eof_resp, &upload_eof_resp_tmp_s, nullptr);
-	}
+	UPLOAD_EOF_RESP_STRU upload_eof_resp_stru;
+	resp.data(recv_msg, upload_eof_resp_stru);
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
+	if (obj != nullptr)
+	{
+		if (obj->msg_stru_data != nullptr)
+		{
+			delete[] obj->msg_stru_data;
+		}
+		obj->msg_stru_data = new uint8_t[sizeof(UPLOAD_EOF_RESP_STRU)];
+		obj->msg_stru_data_len = sizeof(UPLOAD_EOF_RESP_STRU);
+		memcpy(obj->msg_stru_data, &upload_eof_resp_stru, obj->msg_stru_data_len);
+		obj->cv.notify_all();
+	}
+	if (cmd_recv_callback != nullptr)
+	{
+		cmd_recv_callback(AMTP_CMD_ENUM::upload_eof_resp, &upload_eof_resp_stru, nullptr);
+	}
 	JLOG(INFO) << "Recv upload eof response "
-				<< ", token = " << token
-				<< ", file_name = " << upload_eof_resp_tmp_s.file_name
-				<< ", file_id = " << upload_eof_resp_tmp_s.file_id
-				<< ", packet_count = " << upload_eof_resp_tmp_s.packet_count
-				<< ", module = " << upload_eof_resp_tmp_s.module
-				<< ", result = " << upload_eof_resp_tmp_s.result;
+			   << ", token = " << token
+			   << ", file_name = " << upload_eof_resp_stru.file_name
+			   << ", file_id = " << upload_eof_resp_stru.file_id
+			   << ", packet_count = " << upload_eof_resp_stru.packet_count
+			   << ", module = " << upload_eof_resp_stru.module
+			   << ", result = " << upload_eof_resp_stru.result;
 }
-void Amtpca::RecvQueryData(JwumqMessage * recv_msg)
+void Amtpca::RecvQueryData(JwumqMessage *recv_msg)
 {
 	amtp_query_data req;
 	QUERY_DATA_STRU query_data_tmp_s;
 	memset(&query_data_tmp_s, 0, sizeof(QUERY_DATA_STRU));
 	bool result = req.data(recv_msg, &query_data_tmp_s);
-	if(!result)
+	if (!result)
 	{
 		JLOG(INFO) << "Recv query data request, but data format error ";
-		return ;
+		return;
 	}
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	req.token(token);
-	
-	if(cmd_recv_callback != nullptr)
+
+	if (cmd_recv_callback != nullptr)
 	{
 		cmd_recv_callback(AMTP_CMD_ENUM::query_data, &query_data_tmp_s, nullptr);
 	}
 
 	JLOG(INFO) << "Recv query data "
-				<< ", token = " << token
-				<< ", file_name = " << query_data_tmp_s.file_name
-				<< ", file_id = " << query_data_tmp_s.file_id
-				<< ", packet_no = " << query_data_tmp_s.packet_no;
+			   << ", token = " << token
+			   << ", file_name = " << query_data_tmp_s.file_name
+			   << ", file_id = " << query_data_tmp_s.file_id
+			   << ", packet_no = " << query_data_tmp_s.packet_no;
 }
-int Amtpca::SendQueryDataResp(QUERY_DATA_RESP_STRU * s, bool sync, uint32_t timeout)
+int Amtpca::SendQueryDataResp(QUERY_DATA_RESP_STRU *s, bool sync, uint32_t timeout)
 {
-	if(s == nullptr || cmd_handle == nullptr)
+	if (s == nullptr || cmd_handle == nullptr)
 	{
 		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
-	
+
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_query_data_resp resp;
 	msg = resp.data(s, this->token, amtp_conf, cmd_sn++, cmd_mq_id, "");
-	if(msg == nullptr)
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
 	int result = jwumq_send(cmd_handle, msg.get());
-	if(!sync)
+	if (!sync)
 	{
 		return result;
 	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send query data resp msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
 	{
+		JLOG(INFO) << "Jwumq send query data resp msg, ack_cv.wait_for timeout.";
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send query data resp msg, sn = " << msg->body.sn() ;
+	JLOG(INFO) << "Jwumq send query data resp msg, get ack " << msg->body.sn();
 	return result;
 }
-int Amtpca::SendUploadFileData(UPLOAD_FILE_DATA_STRU * s, bool sync, uint32_t timeout)
+int Amtpca::SendUploadFileData(UPLOAD_FILE_DATA_STRU *s, bool sync, uint32_t timeout)
 {
-	if(s == nullptr || data_handle == nullptr)
+	if (s == nullptr || data_handle == nullptr)
 	{
 		return LIB_AMTPA_SEND_PARA_ERROR;
 	}
-	
+
 	std::unique_lock<std::mutex> send_lock(send_mutex);
 	unique_ptr<JwumqMessage> msg = nullptr;
 	amtp_upload_file_data upload_file_data;
-	msg = upload_file_data.data(s, token, amtp_conf, data_sn++, data_mq_id, "");
-	if(msg == nullptr)
+	int handle = cmd_sn;
+	msg = upload_file_data.data(s, token, amtp_conf, cmd_sn++, data_mq_id, "");
+	if (msg == nullptr)
 	{
 		return LIB_AMTPA_UNKNOWN_MSG;
 	}
-	std::unique_lock<std::mutex> ack_lock(ack_mutex);
 	int result = jwumq_send(data_handle, msg.get());
-	if(!sync)
+	if (result != 0)
 	{
 		return result;
 	}
-	if(ack_cv.wait_for(ack_lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	if (!sync)
 	{
+		return handle;
+	}
+	uint32_t sn = msg->body.sn();
+	JLOG(INFO) << "Jwumq send upload file data msg, sn = " << sn;
+	if (WaitForAck(sn, timeout) < 0)
+	{
+		JLOG(INFO) << "Jwumq send upload file data msg, ack_cv.wait_for timeout, sn = " << sn;
 		return LIB_AMTPA_TIMEOUT;
 	}
-	JLOG(INFO) << "Jwumq send upload file data msg, sn = " << msg->body.sn() ;
-	return result;
+	JLOG(INFO) << "Jwumq send upload file data msg, get ack " << sn;
+	return handle;
 }
-void Amtpca::RecvUploadFileDataResp(JwumqMessage * recv_msg)
+void Amtpca::RecvUploadFileDataResp(JwumqMessage *recv_msg, EVENT_OBJECT_S *obj)
 {
 	amtp_upload_file_data_resp resp;
-	memset(&upload_file_data_resp_tmp_s, 0, sizeof(UPLOAD_FILE_DATA_RESP_STRU));
-	upload_file_data_resp_tmp_s = resp.data(recv_msg);
-	if(cmd_recv_callback != nullptr)
-	{
-		cmd_recv_callback(AMTP_CMD_ENUM::upload_file_data_resp, &upload_file_data_resp_tmp_s, nullptr);
-	}
+	UPLOAD_FILE_DATA_RESP_STRU upload_file_data_resp_stru;
+	resp.data(recv_msg, upload_file_data_resp_stru);
 	memset(token, 0, sizeof(TOKEN_BUFFER_SIZE));
 	resp.token(token);
+	if (obj != nullptr)
+	{
+		if (obj->msg_stru_data != nullptr)
+		{
+			delete[] obj->msg_stru_data;
+		}
+		obj->msg_stru_data = new uint8_t[sizeof(UPLOAD_FILE_DATA_RESP_STRU)];
+		obj->msg_stru_data_len = sizeof(UPLOAD_FILE_DATA_RESP_STRU);
+		memcpy(obj->msg_stru_data, &upload_file_data_resp_stru, obj->msg_stru_data_len);
+		obj->cv.notify_all();
+	}
+
+	if (cmd_recv_callback != nullptr)
+	{
+		cmd_recv_callback(AMTP_CMD_ENUM::upload_file_data_resp, &upload_file_data_resp_stru, nullptr);
+	}
 	JLOG(INFO) << "Recv upload file data response "
-				<< ", token = " << token
-				<< ", file_id = " << upload_file_data_resp_tmp_s.file_id
-				<< ", packet_no = " << upload_file_data_resp_tmp_s.packet_no
-				<< ", result = " << upload_file_data_resp_tmp_s.result;
+			   << ", token = " << token
+			   << ", file_id = " << upload_file_data_resp_stru.file_id
+			   << ", packet_no = " << upload_file_data_resp_stru.packet_no
+			   << ", result = " << upload_file_data_resp_stru.result;
 }
-////
-////SYS_INFO_T Amtpca::GetSysInfo()
-////{
-////	SYS_INFO_T info_s;
-////	unique_ptr<SysInfo> info = nullptr;
-////	info = make_unique<LinuxInfo>();
-////
-////	#if (defined _WIN32 || defined _WIN64)
-////	info = make_unique<WinInfo>();
-////	fprintf(stderr, "_WIN32 || defined _WIN64!\n");
-////	#else
-////	info = make_unique<LinuxInfo>();
-////	fprintf(stderr, "__linux__!\n");
-////	#endif
-////	if(info != nullptr)
-////	{
-////		info_s = info->Get();
-//////		fprintf(stderr, "GetSysInfo, system:%s, cpu_id:%s, hard_disk:%s!\n"
-//////				, info_s.system.c_str(), info_s.cpu_id.c_str(), info_s.hard_disk.c_str());
-////	}
-////
-////	return info_s;
-////}
+int Amtpca::WaitForAck(uint32_t handle, int timeout)
+{
+	int result = 1;
+	// EVENT_OBJECT_S *ack_obj = ack_objects->add(handle, static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data_ack));
+	// if (ack_obj == nullptr)
+	// {
+	// 	return 0;
+	// }
+	// unique_lock<std::mutex> lock(ack_obj->mtx);
+	// if (ack_obj->cv.wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+	// {
+	// 	result = -1;
+	// }
+	// ack_objects->remove(handle);
+	return result;
+}

@@ -73,7 +73,11 @@ void * JwumqQueue::Pop(int timeout)
 		}
 		else
 		{
-			_empty.wait(lock);
+			// _empty.wait(lock);
+			if (_empty.wait_for(lock, std::chrono::milliseconds(timeout)) == std::cv_status::timeout)
+			{
+				return nullptr;
+			}
 		}
 	}
 	return nullptr;
@@ -102,7 +106,7 @@ bool JwumqQueue::Push(void* msg)
 	std::unique_lock<std::mutex> lock(m);
 	while (!_quit && !_finished)
 	{
-		if (q.size() < max_size)
+		if ((int)q.size() < max_size)
 		{
 //			q.push(std::move(data));
 			q.push(msg);

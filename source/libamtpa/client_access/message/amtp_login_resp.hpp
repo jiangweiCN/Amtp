@@ -24,8 +24,8 @@ class amtp_login_resp
 public:
 	amtp_login_resp();
 	~amtp_login_resp(void);
-	
-	LOGIN_RESP_STRU data(JwumqMessage * msg);
+
+	void data(JwumqMessage *msg, LOGIN_RESP_STRU &s);
 	void token(unsigned char *token_buf);
 	
 private:

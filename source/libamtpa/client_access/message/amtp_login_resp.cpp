@@ -20,7 +20,7 @@ amtp_login_resp::~amtp_login_resp()
 	
 }
 
-LOGIN_RESP_STRU amtp_login_resp::data(JwumqMessage * msg)
+void amtp_login_resp::data(JwumqMessage *msg, LOGIN_RESP_STRU &s)
 {
 	amtpap::CmdPrimitive cmdprimitive;
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
@@ -28,7 +28,6 @@ LOGIN_RESP_STRU amtp_login_resp::data(JwumqMessage * msg)
 	amtpap::LoginRespV1 resp;
 	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
 	
-	LOGIN_RESP_STRU s;
 	memset(&s, 0, sizeof(LOGIN_RESP_STRU));
 	s.result = resp.result();
 	int token_len = (int)resp.token().length();
@@ -38,8 +37,6 @@ LOGIN_RESP_STRU amtp_login_resp::data(JwumqMessage * msg)
 	int manufacturer_len = (resp.manufactor().length() < sizeof(s.manufacturer))?(int)resp.manufactor().length():sizeof(s.manufacturer);
 	memset(s.manufacturer, 0, sizeof(s.manufacturer));
 	memcpy(s.manufacturer, resp.manufactor().c_str(), manufacturer_len);
-	
-	return s;
 }
 void amtp_login_resp::token(unsigned char *token_buf)
 {

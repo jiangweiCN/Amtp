@@ -86,12 +86,12 @@ int amtpca_sendcmd(uint32_t cmd, void * cmd_s, bool sync, uint32_t timeout)
 
 #if defined(_WIN32)
 #if defined(_WIN64)
-int __stdcall amtpca_waitforcmd(uint32_t cmd, void* s, uint32_t timeout)
+int __stdcall amtpca_waitforcmd(int handle, uint32_t cmd, void *s, uint32_t timeout)
 #else // _WIN32
-int _cdecl amtpca_waitforcmd(uint32_t cmd, void* s, uint32_t timeout)
+int _cdecl amtpca_waitforcmd(int handle, uint32_t cmd, void *s, uint32_t timeout)
 #endif
 #else
-int amtpca_waitforcmd(uint32_t cmd, void * s, uint32_t timeout)
+int amtpca_waitforcmd(int handle, uint32_t cmd, void *s, uint32_t timeout)
 #endif
 {
 	if(amtpca_p == nullptr)
@@ -102,7 +102,7 @@ int amtpca_waitforcmd(uint32_t cmd, void * s, uint32_t timeout)
 	{
 		return LIB_AMTPA_PARA_ERROR;
 	}
-	return amtpca_p->WaitForCmd(cmd, s, timeout);
+	return amtpca_p->WaitForCmd(handle, cmd, s, timeout);
 }
 
 

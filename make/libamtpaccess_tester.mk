@@ -11,8 +11,8 @@ MAIN                = $(SRC_CODE)/libamtpa
 MSG                 = $(SRC_CODE)/amtpa_protocol
 JWUMQ               = $(SRC_CODE)/jwumq
 
-CXX = g++
-CXX_OPTIONS = -Wall -DOS_LINUX -O2 -std=c++14 -fPIC -ldl -rdynamic -Wl,-rpath,./
+CXX = ccache g++
+CXX_OPTIONS = -Wall -Wno-unknown-pragmas -DOS_LINUX -O2 -std=c++14 -fPIC -ldl -rdynamic -Wl,-rpath,./
 CXX_LDOPTIONS =  -Wl,-lz -lm -lpthread
 LIBS = -lzmq -L$(ZMQLIB) -lprotobuf 
 

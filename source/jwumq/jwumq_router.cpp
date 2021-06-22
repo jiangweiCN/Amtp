@@ -12,7 +12,7 @@
 JwumqRouter::JwumqRouter()
 {
 	conf_p = make_unique<ROUTER_CONF_T>();
-	memset(identity, 0, sizeof(identity));
+	memset(identity, 0, MAX_IDENTITY_BUF_SIZE);
 	loop = 0;
 }
 

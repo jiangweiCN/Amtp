@@ -2,7 +2,7 @@
 
 time=$(date "+%Y%m%d%H%M%S")
 installPath="../install"
-runFile="amtpca_64_install_1.0.1.$time.run"
+runFile="amtpca_64_install_1.1.1.$time.run"
 runFilePath="$installPath/$runFile"
 tarFile="$installPath/amtpca_64_install.tar.bz2"
 binPath="$installPath/amtpca_64_bin/"

@@ -19,7 +19,7 @@ cp $install_path/libglog.so.0.0.0 /usr/lib/
 ln -snf /usr/lib/libglog.so.0.0.0 /usr/lib/libglog.so.0
 cp $install_path/libjwumq.so.1.0.3 /usr/lib
 ln -snf /usr/lib/libjwumq.so.1.0.3  /usr/lib/libjwumq.so
-cp $install_path/libamtpca.so.1.0.1 /usr/lib
-ln -snf /usr/lib/libamtpca.so.1.0.1  /usr/lib/libamtpca.so
+cp $install_path/libamtpca.so.1.1.1 /usr/lib
+ln -snf /usr/lib/libamtpca.so.1.1.1  /usr/lib/libamtpca.so
 echo "Amtpca_32 installation package completed!"
 exit 0
