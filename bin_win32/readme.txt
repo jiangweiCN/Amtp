@@ -8,4 +8,3 @@ AmtpConsoleTester.cpp，Windows平台32位C++测试程序源码
 AmtpConsoleTester.exe， Windows平台32位C++测试程序
 libamtpa_define.h， 接口库C++数据结构定义
 libamtpca.hpp， 接口库方法定义
-688k.txt，  Windows平台32位C++测试程序，数据上传功能运行所需数据文件
