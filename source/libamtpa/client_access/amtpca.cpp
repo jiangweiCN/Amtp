@@ -277,13 +277,13 @@ void Amtpca::DataHandlerThread()
 	int index = 0;
 	while (thread_loop > 0)
 	{
-		struct timeval tv = {60, 0};
-		select(0, NULL, NULL, NULL, &tv);
 		JLOG(INFO) << "libamtpca data channel send alive packet: " << index;
 		string str = "alive " + to_string(index);
 		unique_ptr<JwumqMessage> data_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, data_mq_id, "", (void *)str.c_str(), (int)str.length()));
 		jwumq_send(data_handle, data_msg.get());
 		index++;
+		struct timeval tv = {60, 0};
+		select(0, NULL, NULL, NULL, &tv);
 	}
 
 	JLOG(INFO) << "libamtpca DataHandlerThread end!";
@@ -344,13 +344,13 @@ void Amtpca::CmdHandlerThread()
 				index = 1;
 				if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data))
 				{
-					uint32_t msg_sn = recv_msg->body.sn();
-					unique_ptr<JwumqMessage> ack_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::public_data_ack, &msg_sn, sizeof(msg_sn)));
-					if (cmd_handle != nullptr)
-					{
-						jwumq_send(cmd_handle, ack_msg.get());
-						JLOG(INFO) << "Send Cmd ack, sn = " << msg_sn;
-					}
+					// uint32_t msg_sn = recv_msg->body.sn();
+					// unique_ptr<JwumqMessage> ack_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::public_data_ack, &msg_sn, sizeof(msg_sn)));
+					// if (cmd_handle != nullptr)
+					// {
+					// 	jwumq_send(cmd_handle, ack_msg.get());
+					// 	JLOG(INFO) << "Send Cmd ack, sn = " << msg_sn;
+					// }
 
 					unique_ptr<amtpap::CmdPrimitive> resp(new amtpap::CmdPrimitive());
 					resp->ParseFromArray(recv_msg->RawData(), recv_msg->RawDataLen());

@@ -47,6 +47,10 @@ int JwumqDealer::Setup(JWUMQ_SETUP_CONF_T * setup_conf)
     }
 //	int const linger = conf_p->linger;
 //	zmq_setsockopt(this->socket, ZMQ_LINGER, &linger, sizeof(linger));
+	int tcp_keep_alive = 1;
+	zmq_setsockopt(this->socket, ZMQ_TCP_KEEPALIVE, &tcp_keep_alive, sizeof(tcp_keep_alive));
+	int tcp_keep_idle = 120;
+	zmq_setsockopt(this->socket, ZMQ_TCP_KEEPALIVE_IDLE, &tcp_keep_idle, sizeof(tcp_keep_idle));
 	zmq_setsockopt(this->socket, ZMQ_IDENTITY, identity, strlen(identity));
 #if defined(_WIN32)
 	int timeout = 1000;
@@ -54,17 +58,6 @@ int JwumqDealer::Setup(JWUMQ_SETUP_CONF_T * setup_conf)
 #else
 #endif
 	
-//	char monitor_addr [MAX_ADDRESS_BUF_SIZE + 32] = {0};
-//	sprintf (monitor_addr, "inproc://%s_monitor", identity);
-//	if(zmq_socket_monitor(socket, monitor_addr, ZMQ_EVENT_ALL) < 0)
-//	{
-//		JLOG(ERROR) << "Socket monitor error " << strerror(errno);
-//	}
-//	else
-//	{
-//		monitor_thread = thread(&JwumqDealer::SocketMonitorThread, this, identity, context, this->socket, monitor_addr, true);
-//	}
-
 	if(conf_p->bind)
 	{
 		int res = 0;
@@ -90,6 +83,7 @@ int JwumqDealer::Setup(JWUMQ_SETUP_CONF_T * setup_conf)
 		}
 	}
 	loop = 1;
+	SetupInprocMq(this->identity);
 	recv_thread = thread(&JwumqDealer::RecvThread, this);
 	return LIB_JWUMQ_SUCCESS;
 }
@@ -111,6 +105,29 @@ void JwumqDealer::Release()
 	
 	
 }
+
+void JwumqDealer::SetupInprocMq(const char *mq_id)
+{
+	sprintf(inproc_send_id, "%s_inproc_send", mq_id);
+	sprintf(inproc_recv_id, "%s_inproc_recv", mq_id);
+
+	inproc_send_socket = zmq_socket(this->context, ZMQ_DEALER);
+	inproc_recv_socket = zmq_socket(this->context, ZMQ_DEALER);
+	zmq_setsockopt(inproc_send_socket, ZMQ_IDENTITY, inproc_send_id, strlen(inproc_send_id));
+	zmq_setsockopt(inproc_recv_socket, ZMQ_IDENTITY, inproc_recv_id, strlen(inproc_recv_id));
+#if defined(_WIN32)
+	int timeout = 1000;
+	zmq_setsockopt(send_socket, ZMQ_SNDTIMEO, &timeout, timeout);
+	zmq_setsockopt(recv_socket, ZMQ_SNDTIMEO, &timeout, timeout);
+#else
+#endif
+	memset(inproc_address, 0, MAX_ADDRESS_BUF_SIZE);
+	sprintf(inproc_address, "inproc://%s_dealer", mq_id);
+	zmq_bind(inproc_recv_socket, inproc_address);
+	zmq_connect(inproc_send_socket, inproc_address);
+
+}
+
 int JwumqDealer::Send(int command, char * from, char * to, void * data, int data_len)
 {
 	unique_ptr<JwumqMessage> msg(new JwumqMessage(static_cast<JWUMQ_COMMAND_ENUM>(command), from, to, data, data_len));
@@ -120,13 +137,11 @@ int JwumqDealer::Send(void * msg)
 {
 	JwumqMessage *jmsg = (JwumqMessage*) msg;
 	int result = 0;
-
 	zmq_msg_t send_msg;
 	zmq_msg_init_size(&send_msg, jmsg->MsgDataLen());
 	memcpy(zmq_msg_data (&send_msg), jmsg->MsgData(), jmsg->MsgDataLen());
-	//JLOG(INFO) << "Debug JwumqDealer::Send, " << "len:" << jmsg->MsgDataLen();
-	result = zmq_msg_send (&send_msg, socket, ZMQ_DONTWAIT);
-	//JLOG(INFO) << "Debug JwumqDealer::Send finish";
+	// result = zmq_msg_send (&send_msg, socket, ZMQ_DONTWAIT);
+	result = zmq_msg_send(&send_msg, inproc_send_socket, ZMQ_DONTWAIT);
 	zmq_msg_close (&send_msg);
 	if(result < 0)
 	{
@@ -138,11 +153,11 @@ int JwumqDealer::Send(void * msg)
 
 void JwumqDealer::RecvThread()
 {
-	zmq_pollitem_t items [] = { { socket, 0, ZMQ_POLLIN, 0 } };
+	zmq_pollitem_t items[] = {{socket, 0, ZMQ_POLLIN, 0}, {inproc_recv_socket, 0, ZMQ_POLLIN, 0}};
 
 	while (loop)
 	{
-		zmq_poll (items, 1, conf_p->read_timeout);
+		zmq_poll (items, 2, conf_p->read_timeout);
 		if (items [0].revents & ZMQ_POLLIN)
 		{
 			zmq_msg_t recv_msg;
@@ -171,14 +186,27 @@ void JwumqDealer::RecvThread()
 				recv_callback_c(static_cast<int>(jmsg->body.command()), const_cast<char*>(jmsg->body.src_id().c_str()), jmsg->RawData(), jmsg->RawDataLen());
 			}
 		}
-		else
+		else if (items[1].revents & ZMQ_POLLIN)
 		{
+			zmq_msg_t recv_msg;
+			zmq_msg_init(&recv_msg);
+			int recv_len = zmq_msg_recv(&recv_msg, inproc_recv_socket, 0);
+			if (recv_len <= 0)
+			{
+				zmq_msg_close(&recv_msg);
 #if defined(_WIN32)
-			Sleep(1);
+				Sleep(1);
 #else
-			usleep(1000);
+				usleep(1000);
 #endif
-			continue;
+				continue;
+			}
+			zmq_msg_t send_msg;
+			zmq_msg_init(&send_msg);
+			zmq_msg_copy(&send_msg, &recv_msg);
+			zmq_msg_send(&send_msg, socket, ZMQ_DONTWAIT);
+			zmq_msg_close(&send_msg);
+			zmq_msg_close(&recv_msg);
 		}
 	}
 	//zmq_close(socket);

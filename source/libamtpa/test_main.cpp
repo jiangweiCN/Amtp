@@ -1885,7 +1885,7 @@ void LibAmtpcaTest::MultithreadingUploadFileThread(int thread_index, int packet_
 {
 	string thread_name = "thread " + to_string(thread_index);
 	string file_name = uplaod_file_name(thread_index);
-	fprintf(stderr, "%s:%s -----------------------strat-----------------------.\n", Time().c_str(), thread_name.c_str());
+	fprintf(stderr, "%s:%s -----------------------start-----------------------.\n", Time().c_str(), thread_name.c_str());
 
 	UPLOAD_FILE_STRU upload_file_s;
 	memset(&upload_file_s, 0, sizeof(UPLOAD_FILE_STRU));

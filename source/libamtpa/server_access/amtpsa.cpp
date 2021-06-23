@@ -252,14 +252,14 @@ int Amtpsa::RecvCmdCallback(void *msg)
 
 	if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::public_data))
 	{
-		uint32_t msg_sn = recv_msg->body.sn();
-		unique_ptr<JwumqMessage> ack_msg = make_unique<JwumqMessage>(JWUMQ_COMMAND_ENUM::public_data_ack, mq_id, recv_msg->body.src_id(), &msg_sn, sizeof(msg_sn));
+		// uint32_t msg_sn = recv_msg->body.sn();
+		// unique_ptr<JwumqMessage> ack_msg = make_unique<JwumqMessage>(JWUMQ_COMMAND_ENUM::public_data_ack, mq_id, recv_msg->body.src_id(), &msg_sn, sizeof(msg_sn));
 
-		if (cmd_delear != nullptr)
-		{
-			cmd_delear->Send(ack_msg.get());
-			// fprintf(stderr, "Send msg ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
-		}
+		// if (cmd_delear != nullptr)
+		// {
+		// 	cmd_delear->Send(ack_msg.get());
+		// 	// fprintf(stderr, "Send msg ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
+		// }
 
 		zmq_msg_t msg;
 		zmq_msg_init_size(&msg, sizeof(recv_msg));

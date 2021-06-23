@@ -13,28 +13,35 @@
 #include <thread>
 #include "jwumq_base.hpp"
 
-class JwumqDealer:public JwumqBase
+class JwumqDealer : public JwumqBase
 {
 public:
 	JwumqDealer();
 	~JwumqDealer(void);
-	
-	int Setup(JWUMQ_SETUP_CONF_T * setup_conf, JWUMQ_RECV_CALLBACK callback);
-	int Setup(JWUMQ_SETUP_CONF_T * setup_conf, JWUMQ_RECV_CALLBACK_C callback);
+
+	int Setup(JWUMQ_SETUP_CONF_T *setup_conf, JWUMQ_RECV_CALLBACK callback);
+	int Setup(JWUMQ_SETUP_CONF_T *setup_conf, JWUMQ_RECV_CALLBACK_C callback);
 	void Release();
-	int Send(void * msg);
-	int Send(int command, char * from, char * to, void * data, int data_len);
+	int Send(void *msg);
+	int Send(int command, char *from, char *to, void *data, int data_len);
+
 private:
 	void RecvThread();
-	int Setup(JWUMQ_SETUP_CONF_T * setup_conf);
+	int Setup(JWUMQ_SETUP_CONF_T *setup_conf);
 	thread monitor_thread;
+	void SetupInprocMq(const char *mq_id);
+
 public:
-	
 private:
 	unique_ptr<DEALER_CONF_T> conf_p;
 	void *socket;
 	thread recv_thread;
 	char identity[MAX_IDENTITY_BUF_SIZE];
+	void *inproc_send_socket;
+	void *inproc_recv_socket;
+	char inproc_send_id[MAX_IDENTITY_BUF_SIZE];
+	char inproc_recv_id[MAX_IDENTITY_BUF_SIZE];
+	char inproc_address[MAX_ADDRESS_BUF_SIZE];
 };
 
 #endif /* jwumq_dealer_hpp */
