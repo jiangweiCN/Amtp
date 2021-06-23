@@ -26,7 +26,7 @@ void amtp_login_resp::data(JwumqMessage *msg, LOGIN_RESP_STRU &s)
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
 	
 	amtpap::LoginRespV1 resp;
-	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
+	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), (int)cmdprimitive.payload_data().size());
 	
 	memset(&s, 0, sizeof(LOGIN_RESP_STRU));
 	s.result = resp.result();

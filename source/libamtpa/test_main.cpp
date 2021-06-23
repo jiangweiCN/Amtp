@@ -1309,7 +1309,7 @@ private:
 	LIB_AMTPCA_VERSION lib_version;
 	LIB_AMTPCA_INIT lib_init;
 	LIB_AMTPCA_SENDCMD lib_sendcmd;
-	LIB_AMTPSA_WAITFORCMD lib_waitforcmd;
+	LIB_AMTPCA_WAITFORCMD lib_waitforcmd;
 	LIB_AMTPCA_RELEASE lib_release;
 };
 void LibAmtpcaTest::Start(string name, int type)

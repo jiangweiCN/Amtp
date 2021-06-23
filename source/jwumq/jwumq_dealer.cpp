@@ -117,8 +117,8 @@ void JwumqDealer::SetupInprocMq(const char *mq_id)
 	zmq_setsockopt(inproc_recv_socket, ZMQ_IDENTITY, inproc_recv_id, strlen(inproc_recv_id));
 #if defined(_WIN32)
 	int timeout = 1000;
-	zmq_setsockopt(send_socket, ZMQ_SNDTIMEO, &timeout, timeout);
-	zmq_setsockopt(recv_socket, ZMQ_SNDTIMEO, &timeout, timeout);
+	zmq_setsockopt(inproc_send_socket, ZMQ_SNDTIMEO, &timeout, timeout);
+	zmq_setsockopt(inproc_recv_socket, ZMQ_SNDTIMEO, &timeout, timeout);
 #else
 #endif
 	memset(inproc_address, 0, MAX_ADDRESS_BUF_SIZE);

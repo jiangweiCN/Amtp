@@ -25,7 +25,7 @@ void amtp_config_resp::data(JwumqMessage *msg, CONFIG_RESP_STRU &s)
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
 	
 	amtpap::ConfigRespV1 resp;
-	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
+	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), (int)cmdprimitive.payload_data().size());
 	
 	// CONFIG_RESP_STRU s;
 	memset(&s, 0, sizeof(CONFIG_RESP_STRU));

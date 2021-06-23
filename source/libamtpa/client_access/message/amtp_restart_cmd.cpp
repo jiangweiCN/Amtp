@@ -25,13 +25,13 @@ bool amtp_restart_cmd::data(JwumqMessage * msg, RESTART_CMD_STRU *s)
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
 	
 	amtpap::ReatartCmdV1 req;
-	req.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
+	req.ParseFromArray(cmdprimitive.payload_data().c_str(), (int)cmdprimitive.payload_data().size());
 
 	memset(s, 0, sizeof(RESTART_CMD_STRU));
 	s->ts_sec = req.ts_sec();
 	s->ts_usec = req.ts_usec();
 
-	int token_len = (TOKEN_BUFFER_SIZE >= req.token().length()) ? req.token().length() : TOKEN_BUFFER_SIZE;
+	int token_len = (TOKEN_BUFFER_SIZE >= req.token().length()) ? (int)req.token().length() : TOKEN_BUFFER_SIZE;
 	memset(_token, 0, TOKEN_BUFFER_SIZE);
 	memcpy(_token, req.token().c_str(), token_len);
 	return true;

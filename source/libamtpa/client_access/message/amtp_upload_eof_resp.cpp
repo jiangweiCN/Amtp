@@ -25,7 +25,7 @@ void amtp_upload_eof_resp::data(JwumqMessage *msg, UPLOAD_EOF_RESP_STRU &s)
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
 	
 	amtpap::UploadEofRespV1 resp;
-	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
+	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), (int)cmdprimitive.payload_data().size());
 	
 	// UPLOAD_EOF_RESP_STRU s;
 	memset(&s, 0, sizeof(UPLOAD_EOF_RESP_STRU));

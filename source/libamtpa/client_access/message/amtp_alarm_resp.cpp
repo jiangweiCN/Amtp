@@ -25,12 +25,12 @@ ALARM_RESP_STRU amtp_alarm_resp::data(JwumqMessage * msg)
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
 	
 	amtpap::ReportEventRespV1 resp;
-	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
+	resp.ParseFromArray(cmdprimitive.payload_data().c_str(), (int)cmdprimitive.payload_data().size());
 	
 	ALARM_RESP_STRU s;
 	memset(&s, 0, sizeof(ALARM_RESP_STRU));
 	s.result = resp.result();
-	int token_len = (TOKEN_BUFFER_SIZE >= resp.token().length()) ? resp.token().length() : TOKEN_BUFFER_SIZE;
+	int token_len = (TOKEN_BUFFER_SIZE >= resp.token().length()) ? (int)resp.token().length() : TOKEN_BUFFER_SIZE;
 	memset(_token, 0, TOKEN_BUFFER_SIZE);
 	memcpy(_token, resp.token().c_str(), token_len);
 	return s;

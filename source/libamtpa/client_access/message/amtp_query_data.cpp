@@ -25,7 +25,7 @@ bool amtp_query_data::data(JwumqMessage * msg, QUERY_DATA_STRU *s)
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
 	
 	amtpap::QueryDataV1 req;
-	req.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
+	req.ParseFromArray(cmdprimitive.payload_data().c_str(), (int)cmdprimitive.payload_data().size());
 
 	memset(s, 0, sizeof(QUERY_DATA_STRU));
 	int length = (FILENAME_LENGTH >= req.file_name().length()) ? (int)req.file_name().length() : TOKEN_BUFFER_SIZE;

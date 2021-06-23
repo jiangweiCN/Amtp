@@ -25,7 +25,7 @@ bool amtp_config_data::data(JwumqMessage * msg, CONFIG_DATA_STRU *s)
 	cmdprimitive.ParseFromArray(msg->RawData(),msg->RawDataLen());
 	
 	amtpap::ConfigDataV1 req;
-	req.ParseFromArray(cmdprimitive.payload_data().c_str(), cmdprimitive.payload_data().size());
+	req.ParseFromArray(cmdprimitive.payload_data().c_str(), (int)cmdprimitive.payload_data().size());
 
 	memset(s, 0, sizeof(STATUS_INFO_RESP_STRU));
 //	s->version = req.version();
