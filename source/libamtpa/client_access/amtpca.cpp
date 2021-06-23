@@ -217,17 +217,17 @@ void Amtpca::SetupInprocMq(const char *mq_id)
 	zmq_connect(send_socket, inproc_address);
 
 	thread_loop = 1;
-	data_handler_thread = thread(&Amtpca::DataHandlerThread, this);
+	// data_handler_thread = thread(&Amtpca::DataHandlerThread, this);
 	cmd_handler_thread = thread(&Amtpca::CmdHandlerThread, this);
 }
 
 void Amtpca::Release()
 {
 	thread_loop = 0;
-	if (data_handler_thread.joinable())
-	{
-		data_handler_thread.join();
-	}
+	// if (data_handler_thread.joinable())
+	// {
+	// 	data_handler_thread.join();
+	// }
 	if (cmd_handler_thread.joinable())
 	{
 		cmd_handler_thread.join();
@@ -274,17 +274,16 @@ void Amtpca::DataHandlerThread()
 {
 	JLOG(INFO) << "libamtpca DataHandlerThread start!";
 
-	int index = 0;
-	while (thread_loop > 0)
-	{
-		JLOG(INFO) << "libamtpca data channel send alive packet: " << index;
-		string str = "alive " + to_string(index);
-		unique_ptr<JwumqMessage> data_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, data_mq_id, "", (void *)str.c_str(), (int)str.length()));
-		jwumq_send(data_handle, data_msg.get());
-		index++;
-		struct timeval tv = {60, 0};
-		select(0, NULL, NULL, NULL, &tv);
-	}
+	// int index = 0;
+	// while (thread_loop > 0)
+	// {
+	// 	string str = "alive " + to_string(index);
+	// 	unique_ptr<JwumqMessage> data_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, data_mq_id, "", (void *)str.c_str(), (int)str.length()));
+	// 	jwumq_send(data_handle, data_msg.get());
+	// 	index++;
+	// 	struct timeval tv = {60, 0};
+	// 	select(0, NULL, NULL, NULL, &tv);
+	// }
 
 	JLOG(INFO) << "libamtpca DataHandlerThread end!";
 }
@@ -314,8 +313,10 @@ void Amtpca::CmdHandlerThread()
 		{
 			JLOG(INFO) << "libamtpca cmd channel send alive packet: " << index / 20;
 			string str = "alive " + to_string(index / 20);
-			unique_ptr<JwumqMessage> cmd_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, cmd_mq_id, "", (void *)str.c_str(), (int)str.length()));
-			jwumq_send(cmd_handle, cmd_msg.get());
+			unique_ptr<JwumqMessage> alive_msg(new JwumqMessage(JWUMQ_COMMAND_ENUM::private_alive_req, cmd_mq_id, "", (void *)str.c_str(), (int)str.length()));
+			jwumq_send(cmd_handle, alive_msg.get());
+			JLOG(INFO) << "libamtpca data channel send alive packet: " << index;
+			jwumq_send(data_handle, alive_msg.get());
 		}
 		index++;
 

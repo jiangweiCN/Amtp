@@ -93,7 +93,7 @@ private:
 	string cmd_mq_id;
 	string data_mq_id;
 
-	thread data_handler_thread;
+	// thread data_handler_thread;
 	thread cmd_handler_thread;
 	volatile int thread_loop;
 

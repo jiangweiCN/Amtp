@@ -229,14 +229,15 @@ int Amtpsa::RecvDataCallback(void *msg)
 	}
 	else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::private_alive_req))
 	{
-		uint32_t msg_sn = recv_msg->body.sn();
-		unique_ptr<JwumqMessage> ack_msg = make_unique<JwumqMessage>(JWUMQ_COMMAND_ENUM::private_alive_resp, mq_id, recv_msg->body.src_id(), &msg_sn, sizeof(msg_sn));
+		fprintf(stderr, "Recv data alive req ack, src_id = %s!\n", recv_msg->body.src_id().c_str());
+		// uint32_t msg_sn = recv_msg->body.sn();
+		// unique_ptr<JwumqMessage> ack_msg = make_unique<JwumqMessage>(JWUMQ_COMMAND_ENUM::private_alive_resp, mq_id, recv_msg->body.src_id(), &msg_sn, sizeof(msg_sn));
 
-		if (data_delear != nullptr)
-		{
-			data_delear->Send(ack_msg.get());
-			fprintf(stderr, "Send data alive req ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
-		}
+		// if (data_delear != nullptr)
+		// {
+		// 	data_delear->Send(ack_msg.get());
+		// 	fprintf(stderr, "Send data alive req ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
+		// }
 		return 0;
 	}
 	return 0;
@@ -275,14 +276,15 @@ int Amtpsa::RecvCmdCallback(void *msg)
 	}
 	else if (recv_msg->body.command() == static_cast<uint32_t>(JWUMQ_COMMAND_ENUM::private_alive_req))
 	{
-		uint32_t msg_sn = recv_msg->body.sn();
-		unique_ptr<JwumqMessage> ack_msg = make_unique<JwumqMessage>(JWUMQ_COMMAND_ENUM::private_alive_resp, "", recv_msg->body.src_id(), &msg_sn, sizeof(msg_sn));
+		fprintf(stderr, "Recv cmd alive req ack, src_id = %s!\n", recv_msg->body.src_id().c_str());
+		// uint32_t msg_sn = recv_msg->body.sn();
+		// unique_ptr<JwumqMessage> ack_msg = make_unique<JwumqMessage>(JWUMQ_COMMAND_ENUM::private_alive_resp, "", recv_msg->body.src_id(), &msg_sn, sizeof(msg_sn));
 
-		if (cmd_delear != nullptr)
-		{
-			cmd_delear->Send(ack_msg.get());
-			fprintf(stderr, "Send cmd alive req ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
-		}
+		// if (cmd_delear != nullptr)
+		// {
+		// 	cmd_delear->Send(ack_msg.get());
+		// 	fprintf(stderr, "Send cmd alive req ack, sn = %d, src_id = %s!\n", msg_sn, recv_msg->body.src_id().c_str());
+		// }
 		return 0;
 	}
 	return 0;
