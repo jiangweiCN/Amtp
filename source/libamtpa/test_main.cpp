@@ -1279,7 +1279,7 @@ void LibAmtpsaTest::RecvUploadFileData(string src_id, string data, int len, uint
 using LIB_AMTPCA_VERSION = char* (*)();
 using LIB_AMTPCA_INIT = int (*)(const char * , const char * , LIBAMTPCA_CMD_RECV_CBFUN );
 using LIB_AMTPCA_SENDCMD = int (*)(uint32_t, void * , bool , uint32_t );
-using LIB_AMTPSA_WAITFORCMD = int (*)(int, uint32_t, void *, int);
+using LIB_AMTPCA_WAITFORCMD = int (*)(int, uint32_t, void *, int);
 using LIB_AMTPCA_RELEASE = void (*)();
 
 class LibAmtpcaTest
@@ -1360,7 +1360,7 @@ void LibAmtpcaTest::TestThread(string name)
 	lib_version = (LIB_AMTPCA_VERSION)dlsym(handle, "amtpca_version");
 	lib_init = (LIB_AMTPCA_INIT)dlsym(handle, "amtpca_init");
 	lib_sendcmd = (LIB_AMTPCA_SENDCMD)dlsym(handle, "amtpca_sendcmd");
-	lib_waitforcmd = (LIB_AMTPSA_WAITFORCMD)dlsym(handle, "amtpca_waitforcmd");
+	lib_waitforcmd = (LIB_AMTPCA_WAITFORCMD)dlsym(handle, "amtpca_waitforcmd");
 	lib_release = (LIB_AMTPCA_RELEASE)dlsym(handle, "amtpca_release");
 	
 	if(lib_version == NULL)
